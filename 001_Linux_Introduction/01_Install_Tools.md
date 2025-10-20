@@ -40,13 +40,13 @@ ifconfig
 - Sau khi gõ ifconfig, trên terminal sẽ hiển thị IP của máy Ubuntu. Chúng ta sẽ copy nó + username là ***hulatho*** để qua MobaXterm thực hiện ssh tới VitualBox.
 
 
-<img src="image.png" alt="IP Terminal" style="width:500px; height:auto;"/>
+<img src="images/image.png" alt="IP Terminal" style="width:500px; height:auto;"/>
 
 
 - Chúng ta mở MobaXterm lên và chọn 👉 Session 👉 SSH 👉 Nhập IP 👉 Username sau đó click OK.
 
 
-<img src="image-1.png" alt="SSH MobaXterm" style="width:500px; height:auto;"/>
+<img src="images/image-1.png" alt="SSH MobaXterm" style="width:500px; height:auto;"/>
 
 
 ✅ Vậy là chúng ta đã kết nối ssh từ MobaXterm đến máy Ubuntu của chúng ta. 💯

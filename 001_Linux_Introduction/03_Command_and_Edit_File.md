@@ -21,7 +21,7 @@ sudo apt install tree
         + ": wq": Chú ý dấu "Hai chấm nhé", wq nghĩa là write và quite.
         + ": q!": Chú ý dấu "Hai chấm nhé", q! thoát mà không lưu.
 
-<img src="image-9.png" alt="hello" style="width:500px; height:auto;"/>        
+<img src="images/image-9.png" alt="hello" style="width:500px; height:auto;"/>        
 
 ## 3. Các CommandLine hay dùng
 ***Gõ 2 đến 3 kí tự rồi bấm TAB là ra***
