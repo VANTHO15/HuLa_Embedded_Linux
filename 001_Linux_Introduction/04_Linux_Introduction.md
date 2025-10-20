@@ -9,15 +9,15 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
     - [1. Introduction](#1️⃣-introduction)
     - [2. Summary](#2️⃣-summary)
 - [II. Contents](#👉-contents)
-    - [1. Khái niệm freedom](#1️⃣-khai-niem-freedom)
-    - [2. OS là gì?](#2️⃣-os-la-gi?)
-    - [3. Họ Unix](#3️⃣-ho-unix)
-    - [4. Kiến trúc OS họ Unix](#4️⃣-kien-truc-os-ho-unix)
-    - [5. Phân biệt chương trình và tiến trình](#5️⃣-phan-biet-chuong-trinh-va-tien-trinh)
-    - [6. Đa nhiệm](#6️⃣-da-nhiem)
-    - [7. Các loại core Arm và công việc hay làm](#7️⃣-cac-loai-core-arm-va-cong-viec-hay-lam)
-    - [8. Bộ BSP của Embedded Linux](#8️⃣-bo-bsp-cua-embedded-linux)
-    - [9. Chạy chương trình c](#9️⃣-chay-chuong-trinh-c)
+    - [1. Khái niệm freedom](#1️⃣-khái-niệm-freedom)
+    - [2. OS là gì?](#2️⃣-os-là-gì?)
+    - [3. Họ Unix](#3️⃣-họ-unix)
+    - [4. Kiến trúc OS họ Unix](#4️⃣-kiến-trúc-os-họ-unix)
+    - [5. Phân biệt chương trình và tiến trình](#5️⃣-phân-biệt-chương-trình-và-tiến-trình)
+    - [6. Đa nhiệm](#6️⃣-đa-nhiệm)
+    - [7. Các loại core Arm và công việc hay làm](#7️⃣-các-loại-core-arm-và-công-việc-hay-làm)
+    - [8. Bộ BSP của Embedded Linux](#8️⃣-bộ-bsp-của-embedded-linux)
+    - [9. Chạy chương trình c](#9️⃣-chạy-chương-trình-c)
 - [III. Conclusion](#✔️-conclusion)
 - [IV. Exercise](#💯-exercise)
 - [V. NOTE](#📺-note)
@@ -44,7 +44,7 @@ Phần mềm máy tính có thể chia ra làm 2 loại:
 
 Mà phần quan trọng nhất của các chương trình hệ thống chính là OS. Chức năng cơ bản là kiểm soát tất cả nguồn tài nguyên, cung cấp các hàm chức năng, các dịch vụ hệ thống để trên đó các chương trình ứng dụng được viết ra sẽ sử dụng. Mô hình một máy tính như sau:
 
-<img src="1.png" alt="HuLa" style="width:500px; height:auto;"/>   
+<img src="images/1.png" alt="HuLa" style="width:500px; height:auto;"/>   
 
 Chúng ta có thể thấy trong OS sẽ là kernel, kernel hổ trợ OS thực hiện chức năng quản lí các thành phần sau đây:
 + 1.Thiết bị (devices): tạo một giao tiếp để các chương trình người dùng "nói chuyện" với thiết bị
@@ -70,7 +70,7 @@ Tóm tắt các đặc điểm chính:
     + Là đối tượng duy nhất sở hữu, quản lý và phân phối phần cứng trong hệ thống: Khi hệ thống đi vào hoạt động sẽ có rất nhiều đối tượng tồn tại trong nó – Ví dụ như các chương trình Word, Excel, Chrome, … Và hệ điều hành cũng là một đối tượng nằm trong số đó. Tuy nhiên khác với các đối tượng còn lại, hệ điều hành là đối tượng được khởi động đầu tiên trong hệ thống, nó khởi tạo toàn bộ phần cứng và chiếm luôn quyền sở hữu chúng. Sau đó nó sẽ khởi tạo các đối tượng còn lại và quản lý, phân phối phần cứng cho toàn hệ thống
     + Cung cấp môi trường hoạt động và xử lý xung đột giữa các đối tượng: Do hệ điều hành là đối tượng đầu tiên được tạo ra trong hệ thống. Sau đó tất cả các đối tượng còn lại đều được sinh ra bởi hệ điều hành, do đó nó có toàn quyền điều khiển các đối tượng còn lại. Nó có thể sinh ra một đối tượng mới, tạm dừng một đối tượng đang chạy hoặc kết thúc vòng đời của chúng. Mỗi khi trong hệ thống xuất hiện trạng thái xung đột giữa các đối tượng thì hệ điều hành sẽ đứng ra phân xử và nó sẽ trực tiếp thi hành quyết định của mình. Tất cả các đối tượng còn lại đều phải tuân theo quyết định của nó
 
-    <img src="Screenshot_34.png" alt="hello" style="width:500px; height:auto;"/>   
+    <img src="images/Screenshot_34.png" alt="hello" style="width:500px; height:auto;"/>   
 
 - Main parts
     + System call interface (SCI)​: Một layer mỏng cung cấp phương thức tương tác từ user space đến kernel space​
@@ -83,7 +83,7 @@ Tóm tắt các đặc điểm chính:
     + Device Drivers (DD)​: Tương tác với phần cứng
     + Arch: Architecture dependent code​
     
-    <img src="Screenshot_35.png" alt="hello" style="width:500px; height:auto;"/>   
+    <img src="images/Screenshot_35.png" alt="hello" style="width:500px; height:auto;"/>   
 
 ### 3️⃣ Họ Unix
 - Ngày nay hệ điều hành đã trở lên quen thuộc với tất cả chúng ta. Tuy nhiên vào những năm 50 của thế kỷ trước, khi đó OS chưa ra đời, người ta phải nạp thẳng code vào máy tính. Mỗi máy tính tại một thời điểm chỉ chạy một chương trình và một chương trình sẽ phải điều khiển toàn bộ máy tính. Với máy tính tại thời điểm đó có kiến trúc đơn giản (không có chuột, bàn phím, màn hình, loa…) nên việc người lập trình viên quản lý toàn bộ máy tính bằng code của mình là khả thi. Tuy nhiên kiến trúc máy tính và yêu cầu tính toàn càng ngày càng phức tạp, do đó người ta cần đến một hệ thống có thể quản lý được máy tính và hỗ trợ nhiều nhất có thể đối với người lập trình viên. Từ yêu cầu thực tế đó hệ điều hành được ra đời
@@ -96,13 +96,13 @@ Tóm tắt các đặc điểm chính:
 - Lớp kernel: Đây là lớp trong cùng, nó bao ngoài phần cứng, quản lý và cung cấp những chức năng cơ bản của hệ điều hành như: Lập lịch, quản lý bộ nhớ, quản lý ngắt...
 
 
-<img src="Screenshot_2.png" alt="hello" style="width:500px; height:auto;"/>    
+<img src="images/Screenshot_2.png" alt="hello" style="width:500px; height:auto;"/>    
 
-<img src="Screenshot_27.png" alt="hello" style="width:500px; height:auto;"/>   
+<img src="images/Screenshot_27.png" alt="hello" style="width:500px; height:auto;"/>   
 
-<img src="Screenshot_29.png" alt="hello" style="width:500px; height:auto;"/>  
+<img src="images/Screenshot_29.png" alt="hello" style="width:500px; height:auto;"/>  
 
-<img src="Screenshot_31.png" alt="hello" style="width:500px; height:auto;"/>   
+<img src="images/Screenshot_31.png" alt="hello" style="width:500px; height:auto;"/>   
 
 ### 5️⃣ Phân biệt chương trình và tiến trình
 - Chương trình: Là các file binary được build từ source code và nằm trên ổ cứng
@@ -151,7 +151,7 @@ Tóm tắt các đặc điểm chính:
 
 ### 8️⃣ Bộ BSP của Embedded Linux
 
-<img src="Screenshot_25.png" alt="hello" style="width:500px; height:auto;"/>  
+<img src="images/Screenshot_25.png" alt="hello" style="width:500px; height:auto;"/>  
 
 Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và triển khai bốn thành phần sau: toolchain, bootloader, kernel và root filesystem. Trong đó
 - Toolchain: Là compiler và tools khác cần thiết để tạo code cho target device.
@@ -159,7 +159,7 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
 - Kernel: Đây là trái tim của hệ thống. Kernel chứa các tiến trình và quản lý bộ nhớ, ngăn xếp mạng, trình điều khiển thiết bị và cung cấp dịch vụ cho các ứng dụng không gian người dùng.
 - Root filesystem: Chứa các thư viện và chương trình được chạy sau khi kernel hoàn tất quá trình khởi tạo
 
-<img src="Screenshot_9.png" alt="hello" style="width:500px; height:auto;"/>  
+<img src="images/Screenshot_9.png" alt="hello" style="width:500px; height:auto;"/>  
 
 ***a. Toolchain***
 - Overview:
@@ -181,13 +181,13 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
         + Ta không muốn install all development tools trên ARM
     + Khi build yocto SDK cho IMX8MM thì ta sẽ có được toolchain là file .sh, khi chạy file .sh này ta sẽ có được môi trường compile cho IMX8MM và ta sẽ dùng cái này thay vì gcc để build 1 driver, khi này sẽ chạy được trên con IMX8MM
 
-    <img src="Screenshot_10.png" alt="hello" style="width:500px; height:auto;"/>
+    <img src="images/Screenshot_10.png" alt="hello" style="width:500px; height:auto;"/>
 
-    <img src="Screenshot_11.png" alt="hello" style="width:500px; height:auto;"/>
+    <img src="images/Screenshot_11.png" alt="hello" style="width:500px; height:auto;"/>
 
 ***b. Bootloader***
 
-<img src="Screenshot_26.png" alt="hello" style="width:500px; height:auto;"/>
+<img src="images/Screenshot_26.png" alt="hello" style="width:500px; height:auto;"/>
 
 - Overview:
     + Sau khi bật nguồn hoặc reset, hệ thống ở trạng thái rất tối thiểu.
@@ -208,7 +208,7 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
 
 - ***Booting Sequence***:
 
-    <img src="Screenshot_12.png" alt="hello" style="width:900px; height:auto;"/>
+    <img src="images/Screenshot_12.png" alt="hello" style="width:900px; height:auto;"/>
 
     + Boot Rom 
         + Khi hệ thống khởi động lần đầu tiên, hoặc reset thì quyền kiểm soát hệ thống sẽ thuộc về reset vector
@@ -231,9 +231,9 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
 
         + Tóm lại: First code execute after reset, Located in a ROM on the SoC, Controls initial phase of boot process, Low level initialization, Performs different boot modes based on strap pins(RCONS settings) / fuses
 
-        <img src="Screenshot_13.png" alt="hello" style="width:500px; height:auto;"/>
+        <img src="images/Screenshot_13.png" alt="hello" style="width:500px; height:auto;"/>
 
-        <img src="Screenshot_14.png" alt="hello" style="width:500px; height:auto;"/>
+        <img src="images/Screenshot_14.png" alt="hello" style="width:500px; height:auto;"/>
 
         + Program Image - BootRom
             + IVT (Image Vector Table ) Header: Danh sách các con trỏ nằm tại một địa chỉ cố định mà ROM kiểm tra để xác định vị trí của các thành phần khác của Program Image: Entry Point (fixed offset), IVT Length, Version, Points to DCD table. Địa chỉ IVT thường nằm tại 0x1000 trong bộ nhớ QSPI Flash hoặc SD Card — nơi ROM bootloader sẽ tìm kiếm khi khởi động
@@ -244,7 +244,7 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
 
             + Secure CallBack Image: Địa chỉ tuyệt đối của Secure Callback Image. Được sử dụng để (authentication)xác thực Image.
 
-        <img src="undefined.png" alt="hello" style="width:500px; height:auto;"/>
+        <img src="images/undefined.png" alt="hello" style="width:500px; height:auto;"/>
 
 
     + MLO - Second Program Loader (SPL):
@@ -259,7 +259,7 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
             + Chức năng của SPL bị giới hạn bởi kích thước của SRAM
             + Ở cuối giai đoạn SPL này thì TPL-Uboot sẽ có mặt trong DRAM
 
-        <img src="Screenshot_16.png" alt="hello" style="width:500px; height:auto;"/>
+        <img src="images/Screenshot_16.png" alt="hello" style="width:500px; height:auto;"/>
 
         + ARM Trusted Firmware Architecture
             + BL32 is OS OpTee
@@ -267,13 +267,13 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
             + Arm trusted firmware: Chạy song song với linux mà không chết đi
             + Linux giao tiếp với BL31 qua PSCI và shared memory
 
-            <img src="undefined (1).png" alt="hello" style="width:500px; height:auto;"/>
+            <img src="images/undefined (1).png" alt="hello" style="width:500px; height:auto;"/>
 
         + SPL - chương trình tải phụ. Nhiệm vụ chính của SPL đó chính là tiếp tục setup các thành phần cần thiết như DRAM controler, eMMC vv.. Sau đó load U-boot tới địa chỉ ***CONFIG_SYS_TEXT_BASE*** của RAM.
 
         + Chức năng chính của SPL là để load được U-boot lên RAM.
 
-        <img src="Screenshot_15.png" alt="hello" style="width:500px; height:auto;"/>
+        <img src="images/Screenshot_15.png" alt="hello" style="width:500px; height:auto;"/>
 
     + U-Boot:
         + Giới thiệu uboot:
@@ -308,21 +308,21 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
             + U-Boot: runs from DRAM. Initializes some other hardware devices (network, USB, etc.). Loads the kernel image from storage or network to DRAM and starts it. Shell with commands provided.​
             + Linux Kernel: runs from DRAM. Takes over the system completely (the bootloader no longer exists).
 
-        <img src="Screenshot_20.png" alt="hello" style="width:500px; height:auto;"/>
+        <img src="images/Screenshot_20.png" alt="hello" style="width:500px; height:auto;"/>
 
-        <img src="Screenshot_21.png" alt="hello" style="width:500px; height:auto;"/>
+        <img src="images/Screenshot_21.png" alt="hello" style="width:500px; height:auto;"/>
 
         + Board configuration defines trong IMX8MM Yocto
 
-        <img src="Screenshot_22.png" alt="hello" style="width:900px; height:auto;"/>
+        <img src="images/Screenshot_22.png" alt="hello" style="width:900px; height:auto;"/>
 
         + Board Kconfig configuration ​trong IMX8MM Yocto
 
-        <img src="Screenshot_23.png" alt="hello" style="width:900px; height:auto;"/>
+        <img src="images/Screenshot_23.png" alt="hello" style="width:900px; height:auto;"/>
 
         + U-Boot command  
 
-        <img src="Screenshot_24.png" alt="hello" style="width:900px; height:auto;"/>
+        <img src="images/Screenshot_24.png" alt="hello" style="width:900px; height:auto;"/>
 
         + Sau khi được load vào RAM, u-boot sẽ thực hiện việc relocation. Di dời đến địa chỉ relocaddr của RAM (Thường là địa chỉ cuối của RAM) và nhảy đến mã của u-boot sau khi di dời.
 
@@ -330,16 +330,16 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
 
         + Bản thân uEnv.txt là một bootscript, nó định nghĩa các tham số cấu hình, kernel parameters. Các tham số này mặc định đã được cấu hình trong u-boot. Tuy nhiên chúng ta có thể thêm, sửa, xóa các cấu hình này thông qua file uEnv.txt. Việc load uEnv.txt là một sự tùy chọn (Optional), nghĩa là nó có thể có hoặc không.
 
-        <img src="Screenshot_17.png" alt="hello" style="width:500px; height:auto;"/>
+        <img src="images/Screenshot_17.png" alt="hello" style="width:500px; height:auto;"/>
 
         + Tiếp theo u-boot sẽ tiếp tục load kernel, device tree vào RAM tại các địa chỉ mà đã được cấu hình từ trước ở trong mã nguồn u-boot hoặc trong file uEnv.txt. Sau cùng nó sẽ truyền toàn bộ kernel parameters và nhường quyền thực thi lại cho kernel.
 
-        <img src="Screenshot_18.png" alt="hello" style="width:500px; height:auto;"/>
+        <img src="images/Screenshot_18.png" alt="hello" style="width:500px; height:auto;"/>
 
     + Kernel:
         + Sau khi nhận được quyền kiểm soát và các kernel parameters từ u-boot. Kernel sẽ thực hiện mount hệ thống file system (Rootfs) và cho chạy tiến trình Init trên RAM. Đây là tiến trình được chạy đầu tiên khi hệ thống khởi động thành công và chạy cho tới khi hệ thống kết thúc. Tiến trình Init sẽ khởi tạo toàn bộ các tiến trình con khác trên user space, các applications tương tác trực tiếp với người dùng. Lúc này, hệ thống của chúng ta đã hoàn toàn sẵn sàng cho việc sử dụng.
 
-        <img src="Screenshot_19.png" alt="hello" style="width:500px; height:auto;"/>
+        <img src="images/Screenshot_19.png" alt="hello" style="width:500px; height:auto;"/>
 
 
     + Tại sao phải thực hiện Relocation?
@@ -366,9 +366,9 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
 - The main interface between the kernel and user space is the set of system calls​. About 400 system calls that provide the main kernel services
 
 
-<img src="Screenshot_28.png" alt="hello" style="width:500px; height:auto;"/>
+<img src="images/Screenshot_28.png" alt="hello" style="width:500px; height:auto;"/>
 
-<img src="Screenshot_36.png" alt="hello" style="width:500px; height:auto;"/>
+<img src="images/Screenshot_36.png" alt="hello" style="width:500px; height:auto;"/>
 
 - LTP – Linux Test Project​
     + Được thiết kế để cải thiện Linux kernel bằng cách đưa automated testing vào kernel design​.
@@ -387,7 +387,7 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
         + Dễ thiết kế nhưng Khó bảo trì và mở rộng
         + Ví dụ như Linux, BSD
 
-        <img src="Screenshot_4.png" alt="hello" style="width:500px; height:auto;"/>   
+        <img src="images/Screenshot_4.png" alt="hello" style="width:500px; height:auto;"/>   
 
     + μ-kernel
         + Chia OS ra thành nhiều tiến trình (TT), mỗi TT cung cấp một tập các dịch vụ ( ví dụ các dịch vụ bộ nhớ, dịch vụ tạo TT, dịch vụ lập biểu …). Các phần mềm dịch vụ (server) chạy trong user mode thực hiện vòng lặp để tiếp nhận yêu cầu các dịch vụ của nó từ các client. Client có thể là thành phần khác của HĐH, hay là một ứng dụng, yêu cầu phục vụ bằng cách gởi một thông điệp (message) tới server. Kernel của HĐH, là phần rất nhỏ gọn (microkernel) chạy trong kernel mode phát các thông điệp tới server, server thực hiện yêu cầu, kernel trả lại kết quả cho client. Server chạy các TT trong user mode tách biệt, nên nếu có sự cố (fail) thì toàn bộ hệ thống không hề bị ảnh hưởng. Với nhiều CPU, hay nhiều máy kết hợp, các dịch vụ chạy trên các CPU, máy khác nhau, thích hợp cho các tính toán phân tán
@@ -397,13 +397,13 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
         + Nhược điểm: Hiệu năng thấp hơn do cần nhiều lần chuyển ngữ cảnh và IPC giữa các tiến trình. Phức tạp hơn khi triển khai và tối ưu
         + Ví dụ như QNX, MINIX, seL4, Symbian, Mac OS, WinNT
 
-        <img src="2.png" alt="hello" style="width:500px; height:auto;"/>  
+        <img src="images/2.png" alt="hello" style="width:500px; height:auto;"/>  
 
-    <img src="Screenshot_32.png" alt="hello" style="width:500px; height:auto;"/>
+    <img src="images/Screenshot_32.png" alt="hello" style="width:500px; height:auto;"/>
 
 - Request flow​
 
-<img src="Screenshot_33.png" alt="hello" style="width:500px; height:auto;"/>
+<img src="images/Screenshot_33.png" alt="hello" style="width:500px; height:auto;"/>
 
 ***d. Root Filesystem***
 - Root Filesystem bao gồm một hệ thống phân cấp directory và file 
@@ -423,9 +423,9 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
 
 - Folder Structure​
 
-<img src="Screenshot_5.png" alt="hello" style="width:500px; height:auto;"/>  
+<img src="images/Screenshot_5.png" alt="hello" style="width:500px; height:auto;"/>  
 
-<img src="Screenshot_30.png" alt="hello" style="width:500px; height:auto;"/>
+<img src="images/Screenshot_30.png" alt="hello" style="width:500px; height:auto;"/>
 
 ### 9️⃣ Chạy chương trình c
 ***Khi có 1 file main.c***
@@ -434,14 +434,14 @@ Câu lệnh: gcc –o name_file_output main.c
 Sau khi chạy lệnh sẽ tạo ra 1 file name_file_output.
 Chạy file đó là ra được kết quả: ./ name_file_output
 ```
-<img src="Screenshot_6.png" alt="hello" style="width:500px; height:auto;"/>  
+<img src="images/Screenshot_6.png" alt="hello" style="width:500px; height:auto;"/>  
 
 ***Khi có nhiều file***
 ```s
 Ta bỏ tất cả file .h vào folder include là được
 gcc –o file_name_output main.c tho.c –I include/
 ```
-<img src="Screenshot_7.png" alt="hello" style="width:500px; height:auto;"/>  
+<img src="images/Screenshot_7.png" alt="hello" style="width:500px; height:auto;"/>  
 
 ***Tất cả file .c và .h bỏ chung 1 folder***
 ```s
@@ -462,7 +462,7 @@ gcc –o file_name_output main.c tho.c –I. ( Dấu chấm cuối )
 	+ Giai đoạn linker
 - Mỗi một file .o là một phần của chương trình, và ta sẽ liên kết lại để tạo một file hoàn chỉnh.
 
-<img src="Screenshot_8.png" alt="hello" style="width:500px; height:auto;"/>  
+<img src="images/Screenshot_8.png" alt="hello" style="width:500px; height:auto;"/>  
 
 
 ## ✔️ Conclusion
@@ -473,7 +473,7 @@ Tất cả file .c và .h bỏ chung 1 folder, hãy viết câu lệnh để bui
 
 ## 📺 NOTE
 
-<img src="image-10.png" alt="hello" style="width:900px; height:auto;"/>
+<img src="images/image-10.png" alt="hello" style="width:900px; height:auto;"/>
 
 
 ## 📌 Reference
