@@ -2,7 +2,7 @@
 
 ## 👉 Introduction and Summary 
 ### 1️⃣ Introduction
-Sau khi các bạn đã cài đặt phần mềm, đọc các bài viết ([01_Install_Tools](./00_Template.md), [02_SFTP_VScode](./02_SFTP_VScode.md), [03_Command_and_Edit_File](./03_Command_and_Edit_File.md)) thì chúng ta cũng đã quen với giao diện và có thể thao tác cơ bản trong ubuntu rồi. Tiếp theo chúng ta sẽ đến với bài chính ***Linux Introduction*** nhé 😉. Ở bài này chúng ta sẽ làm quen với các khái niệm và phần tử chính trong lập trình linux BSP (Board Support Package).
+Sau khi các bạn đã cài đặt phần mềm, đọc các bài viết ([01_Install_Tools](./01_Install_Tools.md), [02_SFTP_VScode](./02_SFTP_VScode.md), [03_Command_and_Edit_File](./03_Command_and_Edit_File.md)) thì chúng ta cũng đã quen với giao diện và có thể thao tác cơ bản trong ubuntu rồi. Tiếp theo chúng ta sẽ đến với bài chính ***Linux Introduction*** nhé 😉. Ở bài này chúng ta sẽ làm quen với các khái niệm và phần tử chính trong lập trình linux BSP (Board Support Package).
 ### 2️⃣ Summary
 Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 - [I. Introduction and Summary](#👉-introduction-and-summary)
