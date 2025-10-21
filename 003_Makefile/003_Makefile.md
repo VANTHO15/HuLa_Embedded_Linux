@@ -235,13 +235,15 @@ $+ The names of all the dependencies separated by spaces with duplicate names in
 </p>
 
 + The Function in Makefile​: 
-    + Function Call Syntax: $(function arguments) or ${function arguments}
+```s
+    + Function Call Syntax $(function arguments) or ${function arguments}
         + $(wildcard pattern)​: 
             + eg: CSRCS= $(wildcard *.c)​
         + $(patsubst pattern,replacement,text)​: 
             + eg: OBJS+= $(patsubst  %.c,  %.o,  $(CSRCS))
         + $(shell dirname $@)​: 
             + eg: @mkdir -p $(shell dirname $@)​
+```
 
 ***Example***
 <p align="center">
