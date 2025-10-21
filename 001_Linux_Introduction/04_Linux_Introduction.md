@@ -83,7 +83,7 @@ Tóm tắt các đặc điểm chính:
     + Device Drivers (DD)​: Tương tác với phần cứng
     + Arch: Architecture dependent code​
     
-    <img src="images/Screenshot_35.png" alt="hello" style="width:500px; height:auto;"/>   
+    <img src="images/Screenshot_35.png" alt="hello" style="width:300px; height:auto;"/>   
 
 ### 3️⃣ Họ Unix
 - Ngày nay hệ điều hành đã trở lên quen thuộc với tất cả chúng ta. Tuy nhiên vào những năm 50 của thế kỷ trước, khi đó OS chưa ra đời, người ta phải nạp thẳng code vào máy tính. Mỗi máy tính tại một thời điểm chỉ chạy một chương trình và một chương trình sẽ phải điều khiển toàn bộ máy tính. Với máy tính tại thời điểm đó có kiến trúc đơn giản (không có chuột, bàn phím, màn hình, loa…) nên việc người lập trình viên quản lý toàn bộ máy tính bằng code của mình là khả thi. Tuy nhiên kiến trúc máy tính và yêu cầu tính toàn càng ngày càng phức tạp, do đó người ta cần đến một hệ thống có thể quản lý được máy tính và hỗ trợ nhiều nhất có thể đối với người lập trình viên. Từ yêu cầu thực tế đó hệ điều hành được ra đời
@@ -350,6 +350,13 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
         + Bản chất việc relocation là để đảm bảo cho u-boot, kernel-image, device tree, rootfs vv.. khi load lên RAM sẽ không bị ghi đè lên nhau. Mà được load vào một vị trí tính toán từ trước.
 
 ***c. Kernel***
++ Linux kernel is the core internals; the software that provides basic ​services for all other parts of the system, manages hardware, and ​distributes systerm resources.​
+
+<img src="images/Screenshot_56.png" alt="hello" style="width:500px; height:auto;"/>
+<img src="images/Linux_kernel_map.jfif" alt="hello" style="width:500px; height:auto;"/>
+​
+
+​
 + Giới thiệu:
     + KHÔNG có libC trong kernel
     + Kernel code supplies its own library implementations: String utilities, Cryptography, Compression
@@ -472,7 +479,7 @@ gcc –o file_name_output main.c tho.c –I. ( Dấu chấm cuối )
 Tất cả file .c và .h bỏ chung 1 folder, hãy viết câu lệnh để build ra file thực thi và chạy file thực thi đó ( .c .h tự viết )
 
 ## 📺 NOTE
-
+- Video: [LINK](https://www.youtube.com/watch?v=N9qCD43gm9Y)
 <img src="images/image-10.png" alt="hello" style="width:900px; height:auto;"/>
 
 
