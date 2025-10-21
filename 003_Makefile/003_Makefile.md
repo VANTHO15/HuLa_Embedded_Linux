@@ -234,10 +234,14 @@ $+ The names of all the dependencies separated by spaces with duplicate names in
     <img src="Images/Screenshot_19.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>
 
-+ The Function in Makefile​: Function Call Syntax: $(function arguments) or ${function arguments}
-    + $(wildcard pattern)​: eg: CSRCS= $(wildcard *.c)​
-    + $(patsubst pattern,replacement,text)​: eg: OBJS+= $(patsubst  %.c,  %.o,  $(CSRCS))
-    + $(shell dirname $@)​: eg: @mkdir -p $(shell dirname $@)​
++ The Function in Makefile​: 
+    + Function Call Syntax: $(function arguments) or ${function arguments}
+        + $(wildcard pattern)​: 
+            + eg: CSRCS= $(wildcard *.c)​
+        + $(patsubst pattern,replacement,text)​: 
+            + eg: OBJS+= $(patsubst  %.c,  %.o,  $(CSRCS))
+        + $(shell dirname $@)​: 
+            + eg: @mkdir -p $(shell dirname $@)​
 
 ***Example***
 <p align="center">
