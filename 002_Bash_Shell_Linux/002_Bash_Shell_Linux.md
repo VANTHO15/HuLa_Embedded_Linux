@@ -181,6 +181,7 @@ export PATH=your_directory:$PATH​
   + $(command)​
   + $((expression))​
   + bc để ra số thập phân, scale=2, lấy 2 chữ số ​thập phân
+
 <p align="center">
   <img src="images/Screenshot_19.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>
@@ -193,24 +194,24 @@ export PATH=your_directory:$PATH​
   + /: Dấu phân cách thư mục, dùng để phân tách một chuỗi tên thư mục. Ví dụ: /usr/src/linux
 ```s
 ?: Represents a single character in a filename.​
-Ex: hello?.txt can represent hello1.txt, helloz.txt, but not hello22.txt​
+  Ex: hello?.txt can represent hello1.txt, helloz.txt, but not hello22.txt​
 [ ]: Can be used to represent a range of values, e.g. [0-9], [A-Z], etc.​
-Ex: hello[0-2].txt represents the names hello0.txt, hello1.txt, and hello2.txt​
+  Ex: hello[0-2].txt represents the names hello0.txt, hello1.txt, and hello2.txt​
 |: "Pipe". Redirect the output of one command into another command.​
-Ex: ls | less​
+  Ex: ls | less​
 >: Redirect output of a command into a new file. If the file already exists,
 over-write it.​
-Ex: ls > myfiles.txt​
+  Ex: ls > myfiles.txt​
 >>: Redirect the output of a command onto the end of an existing file.​
-Ex: echo "Mary 555-1234" >> phonenumbers.txt​
+  Ex: echo "Mary 555-1234" >> phonenumbers.txt​
 <: Redirect a file as input to a program.​
-Ex: more < phonenumbers.txt​
+  Ex: more < phonenumbers.txt​
 ;: Command separator. Allows you to execute multiple commands on a single line.​
-Ex: cd /var/log ; less messages​
-&&: Command separator as above, but only runs the second command if the first one finished without errors.​
-Ex: cd /var/logs && less messages​
+  Ex: cd /var/log ; less messages​
+&&: Command separator as above, but only runs the second command if the first one finished without errors.
+  Ex: cd /var/logs && less messages​
 &: Execute a command in the background, and immediately get your shell back. Same as non-blocking call model.​
-Ex: find / -name core > /tmp/corefiles.txt &​
+  Ex: find / -name core > /tmp/corefiles.txt &​
 ```
 <p align="center">
   <img src="images/Screenshot_20.png" alt="hello" style="width:500px; height:auto;"/>   
@@ -255,6 +256,7 @@ Ví dụ: echo $name > tho.txt​
 ```
 
 ***Bước 2: Command identification - Nhận dạng lệnh​***
+
 Shell chia các command thành các lệnh đơn giản hoặc lệnh ghép
 + Lệnh đơn giản như echo chẳng hặn
 <p align="center">
@@ -312,6 +314,7 @@ Stage 4: Globbing​
 </p>​
 
 ***Bước 4: Quote removal - Loại bỏ kí tự đặc biệt​***
+
 Mục đích của việc trích dẫn là loại bỏ ý nghĩa đặc biệt khỏi các ký tự đặc biệt.​
 ```s
 \​
@@ -354,6 +357,7 @@ Sau khi xong 5 bước này thì bash sẽ thực hiện execute command line​
 ### 4️⃣ Cú pháp lệnh
 
 ***Positional Input​***
+
 <p align="center">
   <img src="images/Screenshot_34.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>​<p align="center">
@@ -361,6 +365,7 @@ Sau khi xong 5 bước này thì bash sẽ thực hiện execute command line​
 </p>​
 
 ***Special param​***
+
 </p>​<p align="center">
   <img src="images/Screenshot_36.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>​
@@ -380,11 +385,13 @@ Sau khi xong 5 bước này thì bash sẽ thực hiện execute command line​
 </p>​
 
 ***Read comamnd​***
+
 </p>​<p align="center">
   <img src="images/Screenshot_40.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>​
 
 ***Ứng dụng​***
+
 </p>​<p align="center">
   <img src="images/Screenshot_41.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>​
