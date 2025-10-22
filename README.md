@@ -11,5 +11,7 @@ This repository is used to show step by step details about Linux BSP. You just n
     + [002_Bash_Shell_Linux](./002_Bash_Shell_Linux/002_Bash_Shell_Linux.md)
 - 003_Makefile
     + [003_Makefile](./003_Makefile/003_Makefile.md)
+- 004_Virtual_File_System
+    + [004_Virtual_File_System](./004_Virtual_File_System/004_Virtual_File_System.md)
 
 **Note**: Board is used for this project is *Myir IMX8MM V2*
