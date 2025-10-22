@@ -299,7 +299,7 @@ int dup(int origfd);
 close(STDERR_FILENO); /* Frees FD 2 */
 newfd = dup(STDOUT_FILENO); /* Reuses FD 2 */
 ```
-+ Nhưng nếu FD 0 đã được clode trước đó thì sao? Chúng ta cần một API tốt hơn.
++ Nhưng nếu FD 0 đã được close trước đó thì sao? Chúng ta cần một API tốt hơn.
 ```s
 #include <unistd.h>
 int dup2(int origfd, int newfd);
