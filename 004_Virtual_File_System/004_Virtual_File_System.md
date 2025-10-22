@@ -305,7 +305,7 @@ newfd = dup(STDOUT_FILENO); /* Reuses FD 2 */
 int dup2(int origfd, int newfd);
     + Tương tự như dup(), nhưng sử dụng newfd cho FD trùng lặp
     + Đóng newfd một cách âm thầm nếu nó đang mở
-    + Close + reuse newfd được thực hiện như một atomic step
+    + Close & reuse newfd được thực hiện như một atomic step
     + Không làm gì nếu newfd == origfd
     + Returns new file descriptor (i.e., newfd) on success
 ```
