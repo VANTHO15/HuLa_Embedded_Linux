@@ -5,10 +5,12 @@ Hiện tại mình biết 3 cách để có được môi trường Ubuntu, ở 
 - Cách 1: Dùng VitualBox để cài Ubuntu.
     + Cái này lúc cài Ubuntu chúng ta phải phân bổ dung lượng ổ ứng, RAM và core cho máy ubuntu. Nghĩa là chúng ta phải chia sức mạnh máy tính thành 2 phần, phần 1 dùng cho máy tính còn phần 2 dùng cho Ubuntu.
     + Bị giới hạn RAM, Core. Nếu chúng ta để trên 50% số RAM, Core thì Ubuntu đã cảnh báo rồi.
+
 - Cách 2: Dùng WSL (Windows Subsystem for Linux).
     + WSL là một tính năng của Windows cho phép bạn chạy môi trường Linux trên máy tính Windows mà không cần máy ảo hay cài đặt song song.
     + Nghĩa là nó có thể dùng chung Core và Ram với máy tính luôn. Điều này giúp linh hoạt hơn trong việc sử dụng sức mạnh của máy tính.
     + Share folder giữa WSL và Windows là /mnt/c
+    
 - Cách 3: Dùng docker để tạo image và container Ubuntu.
     + Ta có thể tạo ra nhiều container tương ứng với nhiều Ubuntu và có thể chạy song song cùng lúc nhiều Ubuntu. 
     + Mạnh khi dùng trên máy Host đang chạy hệ điều hành Linux.

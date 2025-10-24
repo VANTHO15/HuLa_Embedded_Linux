@@ -555,3 +555,5 @@ int main()
 [5] Luu Phu An
 
 [6] https://www.geeksforgeeks.org/linux-unix/processes-in-linuxunix/ 
+
+[7] Linux Kernel Development 3rd Edition - Love - 2010.pdf
