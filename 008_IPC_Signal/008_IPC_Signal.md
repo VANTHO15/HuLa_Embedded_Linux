@@ -343,7 +343,7 @@ Tổng lại:
   + Block and Unblock
 
 ## ✔️ Conclusion
-Ở bài này chúng ta đã có overview về Inter Process Communication. Tiếp theo chúng ta cùng đi vào từng phần trong IPC nhé.
+Ở bài này chúng ta đã biết về signal. Tiếp theo chúng ta cùng đi tìm hiểu về Pipe nhé.
 
 ## 💯 Exercise
 + Bài 1: Viết chương trình block tín hiệu SIGINT và sau đó in ra signal mask của process hiện tại
