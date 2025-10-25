@@ -1,10 +1,10 @@
-# 💚 Process 💛
+# 💚 Thread And Mutex 💛
 
 ## 👉 Introduction and Summary
 
 ### 1️⃣ Introduction
 
-+ Ở bài trước chúng ta đã biết về file và cách hoạt động của nó trong linux. Nếu các bạn chưa đọc thì xem link này nha [005_Process.md](../005_Process/005_Process.md). Ở bài này chúng ta sẽ tìm hiểu về Process trong linux.
++ Ở bài trước chúng ta đã biết về process và cách hoạt động của nó trong linux. Nếu các bạn chưa đọc thì xem link này nha [005_Process.md](../005_Process/005_Process.md). Ở bài này chúng ta sẽ tìm hiểu về Process trong linux.
 
 ### 2️⃣ Summary
 
@@ -1582,3 +1582,5 @@ Viết một chương trình thực hiện tạo 3 threads.
 [3] https://eslinuxprogramming.blogspot.com/2015/06/process-va-thread.html 
 
 [4] https://hpc-tutorials.llnl.gov/posix/
+
+[5] Professional Linux Kernel Development 3rd.pdf

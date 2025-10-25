@@ -17,5 +17,9 @@ This repository is used to show step by step details about Linux BSP. You just n
     + [005_Process](./005_Process/005_Process.md)
 - 006_Thread
     + [006_Thread](./006_Thread/006_Thread.md)
+- 007_Inter_Process_Communication
+    + [007_Inter_Process_Communication](./007_Inter_Process_Communication/007_Inter_Process_Communication.md)
+- 008_IPC_Signal
+    + [008_IPC_Signal](./008_IPC_Signal/008_IPC_Signal.md)
 
 **Note**: Board is used for this project is *Myir IMX8MM V2*
