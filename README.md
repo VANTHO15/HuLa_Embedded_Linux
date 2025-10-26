@@ -27,5 +27,7 @@ This repository is used to show step by step details about Linux BSP. You just n
     + [010_IPC_Shared_Memory](./010_IPC_Shared_Memory/010_IPC_Shared_Memory.md)
 - 011_IPC_Message_Queue
     + [011_IPC_Message_Queue](./011_IPC_Message_Queue/011_IPC_Message_Queue.md)
+- 012_IPC_Socket
+    + [012_IPC_Socket](./012_IPC_Socket/012_IPC_Socket.md)
 
 **Note**: Board is used for this project is *Myir IMX8MM V2*
