@@ -16,7 +16,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 - [II. Contents](#👉-contents)
     - [1. Giới thiệu​](#1️⃣-giới-thiệu)
     - [2. Hoạt động](#2️⃣-hoạt-động)
-    - [3. Tạo PiPe](#3️⃣-tạo-piPe)
+    - [3. Tạo PiPe](#3️⃣-tạo-pipe)
     - [4. Giao tiếp hai chiều](#4️⃣-giao-tiếp-hai-chiều)
     - [5. FIFO - Named Pipe](#5️⃣-fifo---named-pipe)
     - [6. Blocking và unblocking signals](#6️⃣-blocking-va-unblocking-signals)
