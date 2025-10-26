@@ -23,5 +23,7 @@ This repository is used to show step by step details about Linux BSP. You just n
     + [008_IPC_Signal](./008_IPC_Signal/008_IPC_Signal.md)
 - 009_IPC_Pipe_Fifo
     + [009_IPC_Pipe_Fifo](./009_IPC_Pipe_Fifo/009_IPC_Pipe_Fifo.md)
+- 010_IPC_Shared_Memory
+    + [010_IPC_Shared_Memory](./010_IPC_Shared_Memory/010_IPC_Shared_Memory.md)
 
 **Note**: Board is used for this project is *Myir IMX8MM V2*
