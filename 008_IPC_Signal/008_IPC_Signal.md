@@ -4,7 +4,7 @@
 
 ### 1️⃣ Introduction
 
-+ Ở bài trước chúng ta đã biết về Thread và cách hoạt động của nó trong linux. Nếu các bạn chưa đọc thì xem link này nha [006_Thread_And_Mutex.md](../006_Thread_And_Mutex/006_Thread_And_Mutex.md). Ở bài này chúng ta sẽ tìm hiểu về IPC Inter Process Communication trong linux.
++ Ở bài trước chúng ta đã biết sơ lược về IPC trong linux. Nếu các bạn chưa đọc thì xem link này nha [007_Inter_Process_Communication.md](../007_Inter_Process_Communication/007_Inter_Process_Communication.md). Ở bài này chúng ta sẽ tìm hiểu về IPC Signal trong linux.
 
 ### 2️⃣ Summary
 

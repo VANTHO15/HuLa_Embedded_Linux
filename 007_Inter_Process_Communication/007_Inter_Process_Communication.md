@@ -22,7 +22,8 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 
 ## 👉 Contents
 ### 1️⃣ Overview IPC
-+ IPC - inter-process communication is a mechanisms to communicate between a process with an other.
++ IPC (InterProcess Communication) là các phương thức được sử dụng để giao tiếp giữa các process với nhau
++ Giao tiếp ở đây được nói đến trên 2 khía cạnh là: chia sẻ/truyền dữ liệu và đồng bộ truy cập
 <p align="center">
   <img src="Images/Screenshot_4.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>
@@ -80,6 +81,21 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 + Can communicate with OS in user-space
 + Can implement some function for file – open, close
 + Take a lot effort to implement
+
+***Review về cách sử dụng IPC***
++ Thread thì thường dùng mutex, 2 process thì semaphore
++ Mutex thằng nào giữ khóa thì thằng đó phải giải phóng khóa
++ Semaphore thì A giữ khóa B vẫn có thể giải phóng được
++ Khi truyền dữ liệu thì nếu là message hay pipe thì khi lấy xong nó sẽ bị mất đi, còn nếu là shared memory thì nó vẫn còn đó
++ Shared memory thường kết hợp với semaphore, vì shared mà đọc ghi nhiều quá thì cũng quá tải nên để giảm bớt thì dùng semaphore kết hợp với shared
++ Data transfer thì thường đóng gói thành dữ liệu để truyền đi như queue, còn pipe thì cứ truyền dữ liệu vào pipe và mình thích lấy bao nhiêu cũng được
++ Pipe thì là file virtual và khi mất điện thì bị mất đi
++ FIFO thì là file thực nên không mất
++ Mấy thằng unnamed như pipe semaphore unnamed thì thường dùng cho các process có quan hệ cha con, file ảo
++ Named thì dùng cho process chả liên quan với nhau, là file đó
++ Stream socket thì dùng truyền trên 1 máy hoặc 2 máy khác nhau, nếu dùng socket truyền trong 1 máy thì ưu tiên UNIX vì dùng internet socket tốn tài nguyên và tốn nhiều time thiết lập hơn
++ Chỗ shared memory thì systemV là Anonymous mapping (như file ảo đó) , còn POSIX sử dụng phương pháp  file mapping. Ta thường sử dụng file mapping
++ Tùy bài toán mà chọn phương thức tối ưu nhất cho bài toán của mình như chat message thì dùng sockets
 
 ## ✔️ Conclusion
 Ở bài này chúng ta đã có overview về Inter Process Communication. Tiếp theo chúng ta cùng đi vào từng phần trong IPC nhé.
