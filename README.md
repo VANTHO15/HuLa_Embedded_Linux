@@ -2,32 +2,24 @@
 This repository is used to show step by step details about Linux BSP. You just need to follow it. Suitable for beginners to build from scratch.
 
 ***Table of content***
-- 001_Linux_Introduction
-    + [01_Install_Tools](./001_Linux_Introduction/01_Install_Tools.md)
-    + [02_SFTP_VScode](./001_Linux_Introduction/02_SFTP_VScode.md)
-    + [03_Command_and_Edit_File](./001_Linux_Introduction/03_Command_and_Edit_File.md)
-    + [04_Linux_Introduction](./001_Linux_Introduction/04_Linux_Introduction.md)
-- 002_Bash_Shell_Linux
-    + [002_Bash_Shell_Linux](./002_Bash_Shell_Linux/002_Bash_Shell_Linux.md)
-- 003_Makefile
-    + [003_Makefile](./003_Makefile/003_Makefile.md)
-- 004_Virtual_File_System
-    + [004_Virtual_File_System](./004_Virtual_File_System/004_Virtual_File_System.md)
-- 005_Process
-    + [005_Process](./005_Process/005_Process.md)
-- 006_Thread
-    + [006_Thread](./006_Thread/006_Thread.md)
-- 007_Inter_Process_Communication
-    + [007_Inter_Process_Communication](./007_Inter_Process_Communication/007_Inter_Process_Communication.md)
-- 008_IPC_Signal
-    + [008_IPC_Signal](./008_IPC_Signal/008_IPC_Signal.md)
-- 009_IPC_Pipe_Fifo
-    + [009_IPC_Pipe_Fifo](./009_IPC_Pipe_Fifo/009_IPC_Pipe_Fifo.md)
-- 010_IPC_Shared_Memory
-    + [010_IPC_Shared_Memory](./010_IPC_Shared_Memory/010_IPC_Shared_Memory.md)
-- 011_IPC_Message_Queue
-    + [011_IPC_Message_Queue](./011_IPC_Message_Queue/011_IPC_Message_Queue.md)
-- 012_IPC_Socket
-    + [012_IPC_Socket](./012_IPC_Socket/012_IPC_Socket.md)
+| 📁 **Tên bài**                  | 📄 **Link bài viết**                                                                                                                                                                                                                                                                                      |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `001_Linux_Introduction`         | [01_Install_Tools](./001_Linux_Introduction/01_Install_Tools.md) <br> [02_SFTP_VScode](./001_Linux_Introduction/02_SFTP_VScode.md) <br> [03_Command_and_Edit_File](./001_Linux_Introduction/03_Command_and_Edit_File.md) <br> [04_Linux_Introduction](./001_Linux_Introduction/04_Linux_Introduction.md) |
+| `002_Bash_Shell_Linux`           | [002_Bash_Shell_Linux](./002_Bash_Shell_Linux/002_Bash_Shell_Linux.md)                                                                                                                                                                                                                                   |
+| `003_Makefile`                   | [003_Makefile](./003_Makefile/003_Makefile.md)                                                                                                                                                                                                                                                           |
+| `004_Virtual_File_System`        | [004_Virtual_File_System](./004_Virtual_File_System/004_Virtual_File_System.md)                                                                                                                                                                                                                          |
+| `005_Process`                    | [005_Process](./005_Process/005_Process.md)                                                                                                                                                                                                                                                              |
+| `006_Thread`                     | [006_Thread](./006_Thread/006_Thread.md)                                                                                                                                                                                                                                                                 |
+| `007_Inter_Process_Communication`| [007_Inter_Process_Communication](./007_Inter_Process_Communication/007_Inter_Process_Communication.md)                                                                                                                                                                                                  |
+| `008_IPC_Signal`                 | [008_IPC_Signal](./008_IPC_Signal/008_IPC_Signal.md)                                                                                                                                                                                                                                                     |
+| `009_IPC_Pipe_Fifo`              | [009_IPC_Pipe_Fifo](./009_IPC_Pipe_Fifo/009_IPC_Pipe_Fifo.md)                                                                                                                                                                                                                                            |
+| `010_IPC_Shared_Memory`          | [010_IPC_Shared_Memory](./010_IPC_Shared_Memory/010_IPC_Shared_Memory.md)                                                                                                                                                                                                                                |
+| `011_IPC_Message_Queue`          | [011_IPC_Message_Queue](./011_IPC_Message_Queue/011_IPC_Message_Queue.md)                                                                                                                                                                                                                                |
+| `012_IPC_Socket`                 | [012_IPC_Socket](./012_IPC_Socket/012_IPC_Socket.md)                                                                                                                                                                                                                                                     |
+| `013_IPC_Semaphore`              | [013_IPC_Semaphore](./013_IPC_Semaphore/013_IPC_Semaphore.md)                                                                                                                                                                                                                                            |
+| `014_Debug_Code`                 | [014_Debug_Code](./014_Debug_Code/014_Debug_Code.md)                                                                                                                                                                                                                                                     |
+| `015_Board_Myir_Imx8mm`          | [015_Board_Myir_Imx8mm](./015_Board_Myir_Imx8mm/015_Board_Myir_Imx8mm.md)                                                                                                                                                                                                                                |
+| `016_Uboot`                      | [016_Uboot](./016_Uboot/016_Uboot.md)                                                                                                                                                                                                                                                                    |
+| `017_Uboot_Practice_Imx8mm`      | [017_Uboot_Practice_Imx8mm](./017_Uboot_Practice_Imx8mm/017_Uboot_Practice_Imx8mm.md)                                                                                                                                                                                                                    |
 
-**Note**: Board is used for this project is *Myir IMX8MM V2*
+**Note**: Board is used for this project is *Myir IMX8MM V2*                                                                                                                                    
