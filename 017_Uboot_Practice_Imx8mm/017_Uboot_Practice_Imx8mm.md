@@ -193,11 +193,20 @@ $ ./make_sdcard.sh -d=/dev/sdb -ub=flash.bin
   <img src="Images/Screenshot_15.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>
 
-+ DONE
++ DONE FLASH SR CARD
 
 <p align="center">
   <img src="Images/Screenshot_17.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>
+
++ Bây giờ cắm thẻ nhớ vào board mạch và set jump switch về SD card theo ảnh dưới là có thể boot board rồi.
+
+<p align="center">
+  <img src="Images/Screenshot_100.png" alt="hello" style="width:500px; height:auto;"/>   
+</p>
+
++ DONE BOOT BOARD
+
 <p align="center">
   <img src="Images/Screenshot_16.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>
