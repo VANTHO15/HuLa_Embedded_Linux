@@ -165,14 +165,14 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
   + Important command on Uboot​
     + Help: print online help​
     + printenv: Shows all variables​
-    + printenv <variable-name>: Shows the value of a variable​
-    + setenv <variable-name> <variable-value>: Changes the value of a variable or defines a new one, only in RAM
-    + editenv <variable-name>: Edits the value of a variable in-place, only in RAM
+    + printenv variable-name: Shows the value of a variable​
+    + setenv variable-name variable-value: Changes the value of a variable or defines a new one, only in RAM
+    + editenv variable-name: Edits the value of a variable in-place, only in RAM
     + saveenv: Lưu trạng thái hiện tại của môi trường vào bộ nhớ để duy trì
     + tftp: loads a file from the network to RAM
     + ping: to test the network​
     + bootd: (có thể viết tắt là boot), chạy lệnh default boot command, được lưu trữ trong environment variable bootcmd
-    + bootz <address>: Starts a compressed kernel image loaded at the given address in RAM​
+    + bootz address: Starts a compressed kernel image loaded at the given address in RAM​
     + usb: để khởi tạo và điều khiển hệ thống con USB, chủ yếu được sử dụng cho các thiết bị lưu trữ USB như ổ cứng USB.
     + mmc: to initialize and control the MMC subsystem, used for SD and microSD cards
 
