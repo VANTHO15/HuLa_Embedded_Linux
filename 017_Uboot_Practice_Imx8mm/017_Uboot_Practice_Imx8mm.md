@@ -87,13 +87,13 @@ $ source ./toolchain/environment-setup-aarch64-poky-linux
 ```
 
 <p align="center">
-  <img src="Images/Screenshot_6.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_6.png" alt="hello" style="width:900px; height:auto;"/>   
 </p>
 
 + Sau khi source xong thì gõ **export** để xem environment variable, nếu environment variable như ảnh dưới là OK
 
 <p align="center">
-  <img src="Images/Screenshot_7.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_7.png" alt="hello" style="width:900px; height:auto;"/>   
 </p>
 
 + Build bl31
@@ -116,7 +116,7 @@ $ git checkout imx_v2019.04_5.4.3_2.0.0 hoặc lf_v2022.04
 ```
 
 <p align="center">
-  <img src="Images/Screenshot_8.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_8.png" alt="hello" style="width:700px; height:auto;"/>   
 </p>
 
 + Ở trong uboot-imx/configs, ta sẽ thấy có nhiều file *_deconfig, mà mỗi file đó sẽ là config uboot cho 1 board. Ở đây board của ta sẽ là imx8mm_ddr4_evk_defconfig
@@ -133,7 +133,7 @@ Thêm extern vào biến yylloc trong file scripts/dtc/dtc-lexer.lex.c nếu ERR
 + Đọc file file pdf i.MX_Linux_User's_Guide.pdf in page 27
 
 <p align="center">
-  <img src="Images/Screenshot_9.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_9.png" alt="hello" style="width:900px; height:auto;"/>   
 </p>
 
 + Ta cần clone mkimage repo:
@@ -151,14 +151,14 @@ $ git checkout lf-5.15.32_2.0.0
 + Thêm folder [firmware-imx-8.7](https://drive.google.com/drive/folders/1OAEZaFnkRFeN-G9ikguK_kPjoN6BAbxz?usp=sharing) và [uboot-mkimage-run.sh](https://drive.google.com/file/d/1Q43ztplyS01ScISvowGj3xwDMiUU-bSZ/view?usp=sharing) vào folder uboot như ảnh dưới để prepare data cho write SD Card
 
 <p align="center">
-  <img src="Images/Screenshot_11.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_11.png" alt="hello" style="width:400px; height:auto;"/>   
 </p>
 
 + Sau đó sửa lại đường dẫn cho giống đường dẫn bạn đang để tới folder uboot cho file uboot-mkimage-run.sh
   + File mặc định của mình thì đường dẫn đang là "/home/hulatho/uboot", các bạn thay đường dẫn trên thành đường dẫn của các bạn là được nha
 
 <p align="center">
-  <img src="Images/Screenshot_12.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_12.png" alt="hello" style="width:900px; height:auto;"/>   
 </p>
 
 + Sau đó chạy file uboot-mkimage-run.sh là được
@@ -193,7 +193,7 @@ $ ./make_sdcard.sh -d=/dev/sdb -ub=flash.bin
   <img src="Images/Screenshot_15.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>
 
-+ DONE FLASH SR CARD
++ DONE FLASH SD CARD
 
 <p align="center">
   <img src="Images/Screenshot_17.png" alt="hello" style="width:500px; height:auto;"/>   
