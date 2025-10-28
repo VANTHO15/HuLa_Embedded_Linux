@@ -4,7 +4,7 @@
 
 ### 1️⃣ Introduction
 
-+ Ở bài trước chúng ta đã biết Uboot. Nếu các bạn chưa đọc thì xem link này nha [016_Uboot.md](../016_Uboot/016_Uboot.md). Ở bài này chúng ta sẽ tìm hiểu practice về build uboot cho board Myir IMX8MM V2 nhé.
++ Ở bài trước chúng ta đã biết Uboot. Nếu các bạn chưa đọc thì xem link này nha [016_Uboot.md](../016_Uboot/016_Uboot.md). Ở bài này chúng ta sẽ practice về build uboot cho board Myir IMX8MM V2 nhé.
 
 ### 2️⃣ Summary
 
@@ -112,7 +112,7 @@ $ unset LDFLAGS
 ```s
 $ git clone https://github.com/nxp-imx/uboot-imx.git
 $ cd uboot-imx
-$ git checkout imx_v2019.04_5.4.3_2.0.0 hoặc lf_v2022.04
+$ git checkout lf_v2022.04
 ```
 
 <p align="center">
