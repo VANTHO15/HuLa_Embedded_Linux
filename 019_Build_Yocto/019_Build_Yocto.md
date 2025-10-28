@@ -232,7 +232,7 @@ $ sudo dd if=myir-image-full-mys-8mmx.wic of=/dev/sdb bs=1M
 + Video build yocto MYIR IMX8MM : [Video Youtube](https://www.youtube.com/watch?v=VC0RBb2W9H0)
 + Video yocto part 1: [Video](https://www.youtube.com/watch?v=y4CshZ8-qZo)
 + Video yocto part 2: [Video](https://www.youtube.com/watch?v=qeuKi8_doug)
-+ Video yocto part 1: [Video](https://www.youtube.com/watch?v=L7qzXkHmFVc)
++ Video yocto part 3: [Video](https://www.youtube.com/watch?v=L7qzXkHmFVc)
 
 + Cách tìm kí tự trong 1 folder
   > grep -nrwI "chuỗi_cần_tìm" /đường/dẫn/thư/mục
