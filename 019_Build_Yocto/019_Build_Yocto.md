@@ -4,7 +4,7 @@
 
 ### 1️⃣ Introduction
 
-+ Ở bài trước chúng ta đã custom command uboot và dùng command trong uboot để sáng tắt led. Nếu các bạn chưa đọc thì xem link này nha [018_Uboot_Cmd.md](../018_Uboot_Cmd/018_Uboot_Cmd.md). Ở bài này chúng ta sẽ tìm hiểu về cách build yocto cho board Myir IMX8MM nhé. Dưới đây sẽ là 2 cách build, 1 cách thì build từ đầu, yêu cầu máy phải mạnh có dung lượng ổ cài đặt ubuntu khoảng 250GB vì build image và sdk cho board thì tổng đã ăn mất 220GB rồi. Còn cách thứ 2 là download nguyên bộ source, download, build của mình đã build sẵn về, rồi từ đó build tiếp thì sẽ đỡ tốn thời gian fetch source code upstream và ít công fix lỗi hơn.
++ Ở bài trước chúng ta đã custom command uboot và dùng command trong uboot để sáng tắt led. Nếu các bạn chưa đọc thì xem link này nha [018_Custom_Uboot_Cmd.md](../018_Custom_Uboot_Cmd/018_Custom_Uboot_Cmd.md). Ở bài này chúng ta sẽ tìm hiểu về cách build yocto cho board Myir IMX8MM nhé. Dưới đây sẽ là 2 cách build, 1 cách thì build từ đầu, yêu cầu máy phải mạnh có dung lượng ổ cài đặt ubuntu khoảng 250GB vì build image và sdk cho board thì tổng đã ăn mất 220GB rồi. Còn cách thứ 2 là download nguyên bộ source, download, build của mình đã build sẵn về, rồi từ đó build tiếp thì sẽ đỡ tốn thời gian fetch source code upstream và ít công fix lỗi hơn.
 
 ### 2️⃣ Summary
 

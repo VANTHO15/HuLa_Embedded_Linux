@@ -1,4 +1,4 @@
-# 💚 Practice Uboot CMD 💛
+# 💚 Custom Uboot CMD 💛
 
 ## 👉 Introduction and Summary
 
@@ -98,12 +98,32 @@ $ hula_cmd hulatho
 </p>
 
 ### 3️⃣ Uboot Gpio
-+ Khi đã vào uboot trong boot board ta có thể thực hiện nháy led bằng thao tác với gpio command. Làm theo hình bên dưới
-+ Trên board Myir IMX8MM có Two LEDs (User LED – Blue, System indicator – Green). User Led được nối tới chân GPIO1_IO5 là Pin 11 của J7 trên board
-+ Tính theo integer thì GPIO1_IO5 sẽ tương ứng với số 37
 
 <p align="center">
-  <img src="Images/Screenshot_4.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_8.png" alt="hello" style="width:1000px; height:auto;"/>   
+</p>
+
+<p align="center">
+  <img src="Images/Screenshot_9.png" alt="hello" style="width:1000px; height:auto;"/>   
+</p>
+
+<p align="center">
+  <img src="Images/Screenshot_100.png" alt="hello" style="width:1000px; height:auto;"/>   
+</p>
+
++ Đầu tiên trên board Myir IMX8MM có Two LEDs (User LED – Blue, System indicator – Green) và 1 button user như ảnh trên. Tuy nhiên ta tìm không thấy pin trên docs nên ta sẽ sử dụng pin GPIO1_IO9 (9) được show trên header. Ta sẽ sử dụng led và cắm vào pin đó.  
+
++ Khi đã vào uboot trong boot board ta có thể thực hiện nháy led bằng thao tác với gpio command. Làm theo hình bên dưới
+
++ Tính theo integer thì GPIO1_IO9 sẽ tương ứng với số 9
+
+```s
+$ gpio
+$ gpio set 9
+$ gpio clear 9
+```
+<p align="center">
+  <img src="Images/Screenshot_10.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>
 
 
@@ -116,20 +136,8 @@ $ hula_cmd hulatho
 + md.l 0x81000000 0x8​
 
 + Ví dụ:
-  + md 0x4804C000 4
-  + mw 0x4804C134 0xFFFDFFFF​
-  + md 0x44E07134 4: xem địa chỉ 0x44E07134​
-
-***Dưới đây là ví vụ cho sáng led GPIO0_31 trong BBB***
-+ Các thanh ghi:
-  + Xét GPIO0_31​
-  + GPIO_O_ADDRESS_BASE 0x44E07000​
-  + Cho GPIO_OE số 31 về 0 để là output, Offset OE là 0x134​
-  ==> Địa chỉ là 0x44E07134
-+ Cần set
-  + Mw 0x4804C134 0xFFFFFEFF​
-  + Mw 0x4804C194 0x100 : Data Output offset 194 ON​
-  + Mw 0x4804C190 0x100 : Data Output offset 190 OFF
+  + md 0x30200000 4: Xem địa chỉ 16 byte bắt đầu từ địa chỉ 0x30200000
+  + mw 0x30200000 0xFFFDFFFF​: Ghi giá trị 0xFFFDFFFF​ vào địa chỉ 0x30200000
 
 <p align="center">
   <img src="Images/Screenshot_5.png" alt="hello" style="width:500px; height:auto;"/>   
@@ -138,13 +146,56 @@ $ hula_cmd hulatho
   <img src="Images/Screenshot_6.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>
 
++ Xét thêm 1 ví dụ, ta biết GPIO_1_ADDR_BASE=0x30200000 còn led GPIO1_IO9 là pin thứ 9. Vậy ta sẽ dùng gpio set và gpio clear để bật sáng tắt led và xem giá trị của thanh ghi DR có offset là 0
+```s
+$ gpio set 9
+$ md 0x30200000 4
+$ gpio clear 9
+$ md 0x30200000 4
+```
+<p align="center">
+  <img src="Images/Screenshot_11.png" alt="hello" style="width:500px; height:auto;"/>   
+</p>
+
+
+***Dưới đây là ví vụ cho sáng led GPIO1_IO9***
++ Các thanh ghi base_addr_clk:
+  + Clock có địa chỉ là CCM_CCGRn_ADDR_BASE=0x30380000
+  + GPIO1_ENABLE_CLOCK_OFFSET (0x40B0)
+  + Suy ra Clock Address là: 0x303840B0 
+
+  + Clock có địa chỉ là CCM_CCGRn_ADDR_BASE=0x30380000
+  + GPIO1_SET_CLOCK_OFFSET (0x40B4)
+  + Suy ra Clock Address là: 0x303840B4 
+
++ Các thanh ghi base_addr_mux_gpio1_io9:
+  + IO MUX là IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO05_BASE 0x3033003C 
+
++ Các thanh ghi base_addr:
+  + GPIO_1_ADDR_BASE có base address là 0x30200000
+  + GPIO_DR_OFFSET có ofset là 0
+  + GPIO_GDIR1_OFFSET (0x04)
+  + Suy ra 0x30200004
+
++ Cần set như sau:
+```s
+$ mw 0x303840B0 0x00003333    : Enable clock cho GPIO1_IO9
+$ mw 0x303840B4 0x00003333    : Set clock cho GPIO1_IO9
+$ mw 0x3033003C 0x00000010    : ENABLED SION, set bit 4
+$ mw 0x3033003C 0x00000010    : Select signal GPIO1_IO9, clear bit 7
+$ mw 0x30200004 0x00000200    : Set DR cho bit 9
+$ mw 0x30200004 0x00000000    : Clear DR cho bit 9
+$ md 0x30200004 4             : Xem thanh ghi DR
+```
+
+
 + Từ ý tưởng dùng thanh ghi và câu lệnh như trên, ta sẽ viết command để thực hiện sáng tắt led
   + Gõ led_on thì led sáng
   + Gõ led_off thì led tắt
 
 ```s
 /**Use comand line u-boot on, off led
- * GPIO50
+ * GPIO1_IO9
  * cmd: led_cmd LED_ON  => led on
  *      led_cmd LED_OFF => led off
 **/
@@ -156,33 +207,51 @@ $ hula_cmd hulatho
 #define CONFIG_MAX_ARGS 4
 #define CONFIG_REPEATAVLE 1
 #define USAGE "print toogle led Linux"
-#define HELP "u-booot hello command line"
-#define GPIO_OE_OFFSET			              (uint32_t)0x134
-#define GPIO_DATAOUT_OFFSET				        (uint32_t)0x194
-#define GPIO_CLEARDATAOUT_OFFSET			    (uint32_t)0x190
+#define HELP "u-booot hello hula command line"
 
-volatile uint32_t  *base_addr = (uint32_t*)0x4804C000; /*Base adrress for GPIO*/
+#define IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO05_BASE    (0x3033003C)
+#define CCM_CCGRn_ADDR_BASE                      (0x30380000)
+#define GPIO_1_ADDR_BASE                         (0x30200000)
+#define GPIO1_ENABLE_CLOCK_OFFSET                (0x40B0)
+#define GPIO1_SET_CLOCK_OFFSET                   (0x40B4)
+#define GPIO_DR_OFFSET                           (0x00)
+#define GPIO_GDIR1_OFFSET	                       (0x04)	      /* 0 input 1 output */	
+#define LED                                      (1 << 9)     /* GPIO_1_IO9 (1-1)*32 + 9 */
+#define CLK                                      (0x00003333)
+
+volatile uint32_t  *base_addr = (uint32_t*)GPIO_1_ADDR_BASE;
+volatile uint32_t  *base_addr_clk = (uint32_t*)CCM_CCGRn_ADDR_BASE;
+volatile uint32_t  *base_addr_mux_gpio1_io9 = (uint32_t*)IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO05_BASE;
 
 int do_toggle_led(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
 {  
-    char *mode = argv[1];
+  char *mode = argv[1];
 
-   if(strcmp(mode, "LED_ON") == 0)
-   {
-      *(base_addr + GPIO_OE_OFFSET /4) |= 0xFFFBFFFF;
-      *(base_addr + GPIO_DATAOUT_OFFSET /4) |= 0x40000;  /*Data Output for GPIO50*/
-      printf("\n Led on sucess \n");
-   }
-   else if(strcmp(mode, "LED_OFF") == 0) 
-   {
-      *(base_addr + GPIO_CLEARDATAOUT_OFFSET /4) |= 0x40000; /*Clear Data Output GPIO50*/
-      printf("\n Led off sucess \n");
-   }
-   else
-   {
-     printf("\n error CMD \n");
-   }
-    return 1;
+  if(strcmp(mode, "LED_ON") == 0)
+  {
+    *(base_addr_clk + GPIO1_ENABLE_CLOCK_OFFSET / 4) |= CLK;
+    *(base_addr_clk + GPIO1_SET_CLOCK_OFFSET / 4) |= CLK;
+
+    *(base_addr_mux_gpio1_io9) |= 1 << 4;  /* ENABLED SION */
+    *(base_addr_mux_gpio1_io9) &=~ 0x07;  /* Select signal GPIO1_IO05 */
+
+    *(base_addr + GPIO_GDIR1_OFFSET / 4) |= LED;
+    *(base_addr + GPIO_DR_OFFSET / 4) |= LED;
+
+    printf("\n Led on sucess \n");
+  }
+  else if(strcmp(mode, "LED_OFF") == 0) 
+  {
+    *(base_addr + GPIO_DR_OFFSET / 4) &=~ LED;
+    
+    printf("\n Led off sucess \n");
+  }
+  else
+  {
+    printf("\n error CMD \n");
+  }
+
+  return 1;
 }
 
 U_BOOT_CMD(
@@ -192,9 +261,17 @@ U_BOOT_CMD(
 );
 ```
 
++ led_cmd LED_ON  => led on
++ led_cmd LED_OFF => led off
+
 <p align="center">
-  <img src="Images/Screenshot_7.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_12.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>
+
+<p align="center">
+  <img src="Images/100.jpg" alt="hello" style="width:500px; height:auto;"/>   
+</p>
+
 
 ## ✔️ Conclusion
 Ở bài này chúng ta đã biết cách tạo 1 command line trên uboot và test trên board. Tiếp theo chúng ta cùng đi build yocto cho board myir imx8mm nhé.
@@ -204,14 +281,6 @@ U_BOOT_CMD(
 
 ## 📺 NOTE
 + Xem video sau để trực quan hơn nhé : [Video Youtube](https://www.youtube.com/watch?v=qzUfeBrt8Bg)
-
-<p align="center">
-  <img src="Images/Screenshot_8.png" alt="hello" style="width:1000px; height:auto;"/>   
-</p>
-
-<p align="center">
-  <img src="Images/Screenshot_9.png" alt="hello" style="width:1000px; height:auto;"/>   
-</p>
 
 ## 📌 Reference
 
