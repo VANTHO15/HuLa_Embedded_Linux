@@ -163,6 +163,9 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 </p>
 
 ***Workflow of Yocto Project***
+
++ Yocto zues
+
 ```s
 Mkdir source
 Cd source
@@ -181,6 +184,18 @@ Step 4: Building Linux Distribution
   $ bitbake <image_name>
   $ time bitbake core-image-minimal
   core-image-minimal là một image nhỏ cho phép thiết bị khởi động và nó rất hữu ích cho việc kiểm tra và phát triển kernel và bootloader
+```
+
++ Yocto kirkstone
+```s
+sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib \
+     build-essential chrpath socat cpio python3 python3-pip python3-pexpect \
+     libsdl1.2-dev xterm make xsltproc docbook-utils fop dblatex xmlto
+git clone -b kirkstone git://git.yoctoproject.org/poky/
+cd poky
+git clone -b kirkstone git://git.openembedded.org/meta-openembedded
+git clone -b kirkstone git://git.yoctoproject.org/meta-ti
+git clone -b kirkstone https://git.yoctoproject.org/meta-arm
 ```
 
 ***Run the generated image in QEMU***
@@ -1618,7 +1633,9 @@ trong local.conf sẽ chưa đường dẫn này (SSTATE_DIR)
 ***Tổng hợp các comamnd hay dùng trong yocto***
 ```s
 $ source source/poky/oe-init-build-env [ build_directory ] (../build)
-$ git checkout zeus
+$ bitbake -c <task> <recipes>
+$ bitbake <recipes>
+$ bitbake -e <recipes> | grep ^<Variable>
 $ bitbake core-image-minimal
 $ nproc: kiểm tra có bao nhiêu core 
 $ free –m : kiểm tra ram 
@@ -1627,6 +1644,7 @@ $ nographic
 $ poweroff
 $ bitbake-layers show-layers
 $ bitbake-layers add-layer /home/thonv12/yocto_bbb/meta-ti
+$ bitbake-layers create-layer
 ```
 
 + Có 2 cái thay đổi chính trong linux BSP là version yocto và version kernel. Link docs kernel [LINK](https://docs.kernel.org/driver-api/gpio/driver.html)
