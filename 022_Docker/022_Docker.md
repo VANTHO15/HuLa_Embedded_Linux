@@ -85,12 +85,15 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 > $ sudo systemctl status docker --no-pager
 
 <p align="center">
-  <img src="Images/Screenshot_1.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_1.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 + Thêm quyền sudo, sau đó restart lại mới được
-> $ sudo usermod -a -G docker ${USER}
-> $ usermod -aG sudo ${USER}
+```bash
+$ sudo usermod -a -G docker ${USER}
+$ usermod -aG sudo ${USER}
+```
+
 + Kiểm tra xem mình đã là 1 phần của docker group chưa
 > $ id -nG | grep docker
 + Verify that you can run docker commands without sudo.
@@ -148,15 +151,15 @@ exit
 4. Kiểm tra tên các container đang được chạy start trên máy host
 docker ps
 
-4. Kiểm tra tên các container đang có trên máy host
+5. Kiểm tra tên các container đang có trên máy host
 docker ps -a
 
-5. Để khởi động lại container sau khi exit hoặc stop
-docker exec -it <id hoặc name container> /bin/bash
-docker exec -it --user root <id hoặc name container> /bin/bash
-Exit (nếu muốn thoát)
-docker attach <id hoặc name container> (vào lại)
-docker stop <id hoặc name container> (nếu muốn dừng)
+6. Để khởi động lại container sau khi exit hoặc stop
++ docker exec -it <id hoặc name container> /bin/bash
++ docker exec -it --user root <id hoặc name container> /bin/bash
++ Exit (nếu muốn thoát)
++ docker attach <id hoặc name container> (vào lại)
++ docker stop <id hoặc name container> (nếu muốn dừng)
  
 ---
 
