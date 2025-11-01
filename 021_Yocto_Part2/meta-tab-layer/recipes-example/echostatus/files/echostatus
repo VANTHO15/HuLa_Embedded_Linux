@@ -1,0 +1,113 @@
+#!/bin/bash
+
+# Colors
+end="\033[0m"
+
+error="\033[0;31m"
+errorb="\033[1;31m"
+success="\033[0;32m"
+successb="\033[1;32m"
+warn="\033[0;33m"
+warnb="\033[1;33m"
+info="\033[0;36m"
+infob="\033[1;36m"
+
+function white {
+    echo ${1} -e "${white}${2}${end}"
+}
+
+function whiteb {
+    echo ${1} -e "${whiteb}${2}${end}"
+}
+
+function error {
+    echo ${1} -e "${error}${2}${end}"
+}
+
+function errorb {
+    echo ${1} -e "${errorb}${2}${end}"
+}
+
+function success {
+    echo ${1} -e "${success}${2}${end}"
+}
+
+function successb {
+    echo ${1} -e "${successb}${2}${end}"
+}
+
+function warn {
+    echo ${1} -e "${warn}${2}${end}"
+}
+
+function warnb {
+    echo ${1} -e "${warnb}${2}${end}"
+}
+
+function info {
+    echo ${1} -e "${info}${2}${end}"
+}
+
+function infob {
+    echo ${1} -e "${infob}${2}${end}"
+}
+
+function usage {
+    cat <<EOF
+
+    [USAGE]
+    echostatus <status> <option> <text>"
+    Example:
+    echostatus info -b "This is a bold info text "
+    echostatus error  "This is a normal error text "
+
+    status: info, error, warn, success
+    option: -b = bold text, -n = no newline 
+
+EOF
+}
+
+function get_status() {
+    case $1 in
+    i) echo "info" ;;
+    w) echo "warn" ;;
+    e) echo "error" ;;
+    s) echo "success" ;;
+    *) echo $1 ;;
+    esac
+}
+
+argc=$#
+
+declare -r Bold="b"
+declare -r NoNewLine="-n"
+
+status=$(get_status $1)
+
+if [[ $argc -eq 0 ]]; then
+    usage
+    exit
+fi
+
+while true; do
+
+    case $2 in
+    -n)
+        "$status" "$NoNewLine" "$3 "
+        break
+        ;;
+    -b)
+        "$status$Bold" "" "$3"
+        break
+        ;;
+    -bn | -nb)
+        "$status$Bold" "$NoNewLine" "$3 "
+        break
+        ;;
+    *)
+        "$status" "" "$2"
+        break
+        ;;
+    esac
+
+done

@@ -294,7 +294,7 @@ $ runqemu core-image-minimal nographic
   + User Configuration Option (local .conf)
 
 ***Class file là gì***
-+ File Class được sử dụng theo chức năng chung trừu tượng và chia sẻ nó giữa nhiều tệp công thức (.bb)
++ File Class được sử dụng theo chức năng chung trừu tượng và chia sẻ nó giữa nhiều recipe file (.bb)
 + Để sử dụng Class file, ta chỉ cần đảm bảo rằng recipe kế thừa Class đó là được
 + Đuôi: .bbclass
 + Chúng thường được đặt trong thư mục class bên trong thư mục meta (poky/meta/classes)
@@ -771,7 +771,7 @@ ls ../source/meta-mylayer/
 + Có nhiều Package group. Có mặt trong các thư mục con có tên là "packagegroups"
 + cd source/poky/meta
 + find . -name 'packagegroups’
-+ Chúng là các tệp công thức (.bb) và bắt đầu bằng packagegroup-
++ Chúng là các recipe file (.bb) và bắt đầu bằng packagegroup-
 + Ví dụ:  packagegroup-core-boot: Cung cấp bộ gói tối thiểu cần thiết để tạo image có thể khởi động bằng console.
 <p align="center">
   <img src="Images/Screenshot_18.png" alt="hello" style="width:1000px; height:auto;"/>   
@@ -1264,7 +1264,7 @@ userprog
 
 ***oe_runmake***
 + cd /home/thonv12/yocto_bbb/source/poky/meta/classes
-+ vim base.bbclass  ( rồi  /do_compile ddeer xem )
++ vim base.bbclass  (rồi  /do_compile để xem )
 + Hoạt động của tác vụ do_compile là chạy hàm oe_runmake nếu tìm thấy tệp makefile (Makefile, makefile hoặc GNUMakefile). Nếu không tìm thấy tệp như vậy, tác vụ do_compile sẽ không làm gì cả
 + Hành vi mặc định của tác vụ do_configure là chạy oe_runmake clean nếu tìm thấy tệp makefile (Makefile, makefile hoặc GNUmakefile)
 + oe_runmake vs make
@@ -1275,7 +1275,7 @@ userprog
     + Kiểm tra các lỗi được tạo thông qua cuộc gọi.
   + Trong môi trường OE, bạn không nên gọi trực tiếp make mà hãy sử dụng oe_runmake khi bạn cần chạy make.
   + oe_runmake là một trong nhiều hàm trợ giúp được xác định bởi lớp cơ sở
-  + kiểm tra định nghĩa của oe_runmake trong base.bbclass mà  xem
+  + kiểm tra định nghĩa của oe_runmake trong base.bbclass mà xem
 
 ***EXTRA_OEMAKE***
 + Thay vì gọi make V=1 thì ta dùng biến EXTRA_OEMAKE
@@ -1661,6 +1661,7 @@ $ poweroff
 $ bitbake-layers show-layers
 $ bitbake-layers add-layer /home/thonv12/yocto_bbb/meta-ti
 $ bitbake-layers create-layer
+$ bitbake -c clean|cleansstate|cleanall <recipes> 
 ```
 
 + Có 2 cái thay đổi chính trong linux BSP là version yocto và version kernel. Link docs kernel [LINK](https://docs.kernel.org/driver-api/gpio/driver.html)
