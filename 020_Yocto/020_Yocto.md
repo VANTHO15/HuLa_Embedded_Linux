@@ -15,7 +15,8 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
     - [2. Summary](#2️⃣-summary)
 - [II. Contents](#👉-contents)
     - [1. Giới thiệu Yocto](#1️⃣-giới-thiệu-yocto)
-    - [2. Custom Yocto](#2️⃣-custom-yocto)
+    - [2. Operators](#2️⃣-operators)
+    - [3. Custom Yocto](#3️⃣-custom-yocto)
 - [III. Conclusion](#✔️-conclusion)
 - [IV. Exercise](#💯-exercise)
 - [V. NOTE](#📺-note)
@@ -159,11 +160,12 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 	+ Helper scripts to setup environment
 	+ Emulator QEMU to test the image
 <p align="center">
-  <img src="Images/Screenshot_4.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_67.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>
 
 ***Workflow of Yocto Project***
 
++ Ta làm theo link docs sau: [LINK](https://www.yoctoproject.org/development/technical-overview/) và [LINK](https://docs.yoctoproject.org/brief-yoctoprojectqs/index.html) hoặc theo như bên dưới. Ở phần này mình đang làm với yocto Zues nhé.
 + Yocto zues
 
 ```s
@@ -1660,3 +1662,7 @@ $ bitbake-layers create-layer
 [2] https://www.youtube.com/playlist?list=PLwqS94HTEwpQmgL1UsSwNk_2tQdzq3eVJ
 
 [3] https://docs.yoctoproject.org/ref-manual/#ubuntu-packages
+
+[4] https://docs.yoctoproject.org/brief-yoctoprojectqs/index.html 
+
+[5] https://www.yoctoproject.org/development/technical-overview/#getting-started
