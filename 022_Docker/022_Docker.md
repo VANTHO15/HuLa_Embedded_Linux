@@ -80,7 +80,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 </pre>
 
 ### 2️⃣ Install docker
-+ Install docker theo link sau: [LINK](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
++ Install docker theo link sau: [LINK](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository). Cứ làm theo y hệt là được thôi
 + Check thông số của docker khi docker đang run
 > $ sudo systemctl status docker --no-pager
 
