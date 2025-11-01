@@ -4,7 +4,7 @@
 
 ### 1️⃣ Introduction
 
-+ Ở bài trước chúng ta đã biết về lý thuyết yocto và thực hành với yocto Zues. Nếu các bạn chưa đọc thì xem link này nha [021_Yocto_Part2.md](../021_Yocto_Part2/021_Yocto_Part2.md). Ở bài này chúng ta sẽ tìm hiểu về docker nhé.
++ Ở bài trước chúng ta đã biết về lý thuyết yocto và thực hành với yocto Scarthgap. Nếu các bạn chưa đọc thì xem link này nha [021_Yocto_Part2.md](../021_Yocto_Part2/021_Yocto_Part2.md). Ở bài này chúng ta sẽ tìm hiểu về docker nhé.
 
 + Lý thuyết docker mình sẽ bỏ qua mọi người có thể đọc trên mạng. Ở bài này chủ yếu chúng ta tạo ra docker image từ docker file sau đó từ docker file tạo ra container. Lưu ý mỗi container là 1 máy Ubuntu. Ví dụ container 1 tạo ubuntu 18.08 còn container 2 tạo ra ubuntu 22.04.
 
