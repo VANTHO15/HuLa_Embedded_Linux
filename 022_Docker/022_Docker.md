@@ -29,7 +29,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 
 ### 1️⃣ Giới thiệu
 
-+ Mục đích: Vì có quá nhiều version ubuntu trong khi chúng ta làm việc mà cài nhiều máy ảo rất mệt, hơn nữa khi cài máy ảo chỉ cho sử dụng 1 phần sức mạnh của máy tính thôi. Còn cài docker ở đâu thì có thể dùng đầy đủ sức mạnh đối với máy host là máy ubuntu.
++ Mục đích: Vì có quá nhiều version ubuntu trong khi chúng ta làm việc mà cài nhiều máy ảo rất mệt, hơn nữa khi cài máy ảo chỉ cho sử dụng 1 phần sức mạnh của máy tính thôi. Còn cài docker ở đâu thì có thể dùng đầy đủ sức mạnh đối với máy host là máy ubuntu. Hơn nửa chỉ mất vài giây để mở 1 container docker lên, quá nhanh.
 
 + Mỗi container là 1 máy ubuntu, mà container chỉ cần 1GB - 2GB dung lượng ổ cứng. Vì vậy, nó hiệu quả hơn nhiều so với việc cài đặt một máy ảo hoàn chỉnh.
 
