@@ -140,6 +140,7 @@ docker run -it \
   u1804
 
 + Có thể sử dụng: "apt list" Để kiểm tra các gói chúng ta cần cài ở dockerfile có đúng hay không?
++ lscpu: để xem thông số cpu trên máy docker container
 
 3. Để thoát khỏi container
 exit
