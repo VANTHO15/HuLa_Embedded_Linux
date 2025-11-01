@@ -65,7 +65,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 + Nếu một process mới không được tạo ra, hàm fork() trả về -1.
 
 + Ví dụ dùng system call fork để tạo tiến trình
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -101,7 +101,7 @@ int main(int argc, char const *argv[])                      /* Cấp phát sta
 + Trong nhiều trường hợp bạn đang có một tiến trình A đang thực thi và bạn muốn chạy một chương trình B nào đó từ tiến trình A hoặc con của nó. Điều này hoàn toàn có thể thực hiện được thông qua việc sử dụng một danh sách các hàm thuộc dòng exec.
 
 + Danh sách này bao gồm các hàm sau:
-```s
+```bash
 #include <unistd.h>
 int execle(const char *pathname, const char *arg, ...);
 int execlp(const char *filename, const char *arg, ...);
@@ -111,7 +111,7 @@ int execl(const char *pathname, const char *arg, ...);
 None of the above returns on success; all return –1 on error
 ```
 + execl(): Hàm này sẽ thực thi một chương trình tại đường dẫn được chỉ định, kèm theo tên chương trình và các tham số môi trường truyền vào cho chương trình đó.
-```s
+```bash
 #include <unistd.h>
 /*
 * @param[in] path Đường dẫn tới chương trình muốn chạy.
@@ -121,7 +121,7 @@ int execl(const char *path, char *const argv[]);
 ```
 
 + Xét ví dụ sau để biết rõ hơn về hàm execl():
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -177,7 +177,7 @@ int main(int argc, char *argv[])
 + Theo chuẩn ISO C và POSIX.1, hàm exit trước tiên sẽ gọi ra các hàm exit handler sau đó nó sẽ đóng tất cả các stream đang mở của process thông qua hàm fclose (ví dụ như đóng các file đang được mở).
 + Cách duy nhất một chương trình có thể chạy bởi kernel là gọi ra một trong hàm exec. Một process chỉ tự động đóng khi nó gọi ra hàm _exit hoặc _Exit, một cách trực tiếp hoặc gián tiếp qua hàm exit. Một process cũng có thể  bị đóng bởi một signal. 
 + Ví dụ về việc sử dụng hàn exit handler
-```s
+```bash
 #include <stdio.h> 
 #include <stdlib.h> 
 
@@ -210,7 +210,7 @@ int main(void)
 
 ***Kill***
 + Ta có chương trình sau, luôn chạy trong while 1. Khi này process đó có thể bị kết thúc bằng cách sử dụng câu lệnh **kill** trong linux​
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 void main(int argc, char *argv[]) 
@@ -239,7 +239,7 @@ void main(int argc, char *argv[])
 
 ***Sử dụng system call Kill***
 + int kill(pid_t pid, int sig);
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -269,7 +269,7 @@ int main(int argc, char *argv[])
 </p>
 
 ***System call Wait()​***
-```s
+```bash
 #include <sys/wait.h>
 /*
 * @param[out] status Trạng thái kết thúc của tiến trình con.
@@ -291,7 +291,7 @@ công hay kết thúc thất bại​
 
 + Ví dụ về system call wait
   + Thằng cha đang wait() đợi thằng con kết thúc nhưng thằng con lại đang trong while(1) nên không kết thúc được, khi này ta dùng kill ở command line thôi.​
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -325,7 +325,7 @@ int main(int argc, char const *argv[])
   + Nếu tiến trình cha tạo ra nhiều tiến trình con (mutliple children), nó không thể dùng wait() để theo dõi một tiến trình con cụ thể.
   + Nếu tiến trình con không kết thúc, wait() luôn block.
   + waitpid() được sinh ra để giải quyết các vấn đề này. Prototype của waitpid() như sau:
-```s
+```bash
 #include <sys/wait.h>
 /*
 * @param[in]  pid      pid  >  0, PID của tiến trình con cụ thể mà wait muốn theo dõi.
@@ -349,7 +349,7 @@ pid_t waitpid(pid_t pid, int *status, int options);
 trả về thì thằng wait() không làm được mà phải dùng waitpid()​
 
 + Ví dụ về wait status
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -415,7 +415,7 @@ int main(int argc, char const *argv[])
     + T : suspended
     + Z : zombie (defunct)
 
-```s
+```bash
 /* code */
 pid_t child_pid;                /* Lưu trong stack frame của main() */
 int status;
@@ -437,7 +437,7 @@ if (child_pid >= 0) {
 ```
 
 + Xử lý giải quyết tiến trình zombie
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -476,7 +476,7 @@ Khi user-id và group-id thay đổi thì quyền của process cũng thay đổ
 
 + Thay đổi quyền truy cập của tiến trình đó.
 + Dùng để hạ quyền tiến trình từ root xuống user thường (để tăng bảo mật) hoặc chạy một phần mềm với quyền của user khác
-```s
+```bash
 #include <unistd.h>
 int setuid(uid_t uid)
   + uid là User ID mà bạn muốn gán cho tiến trình hiện tại.
@@ -486,7 +486,7 @@ int setgid(gid_t gid)
 
 + Hàm setgid(gid_t gid) trong Linux được dùng để thay đổi Group ID (GID) của tiến trình hiện tại
 + Dùng để Hạ quyền tiến trình từ nhóm root xuống nhóm thường hoặc chạy một phần mềm với quyền nhóm khác để giới hạn quyền truy cập
-```s
+```bash
 #include <unistd.h>
 int setgid(gid_t gid);
   + gid là Group ID mà bạn muốn gán cho tiến trình hiện tại.
@@ -507,7 +507,7 @@ int setgid(gid_t gid)
 + 3: Dùng user A để call chương trình C, trong chương trình C chuyển sang user B, sau đó chương trình sẽ tạo file mới và file đó phải thuộc quyền sở hữu là user B
 
 + Chương trình in ra tên của process từ process id nhập từ bàn phím
-```s
+```bash
 #include <stdio.h>  
 #include <stdlib.h>  
 

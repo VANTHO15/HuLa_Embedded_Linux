@@ -105,7 +105,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 
 + Chạy code write , rồi read. Do câu lệnh cuối mình hủy vùng nhớ rồi nên chỉ đọc 1 lần được. nếu muốn đọc nhiều thì mở nó ra. shmctl(shmid, IPC_RMID, NULL);
 + Code reader.c
-```s
+```bash
 #include <stdio.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
@@ -198,7 +198,7 @@ int main()
 ```
 
 + Code writer.c
-```s
+```bash
 #include <stdio.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
@@ -320,14 +320,14 @@ int main(int argc, char const *argv[])
 
 ***Code Mẫu***
 + Để chạy thì ta dùng lệnh như sau:
-```s
+```bash
 gcc -o write write.c –lrt
 gcc -o read read.c -lrt
 file share memory nằm ở    "ls -l /dev/shm"
 ```
 
 + File reader.c
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -454,7 +454,7 @@ int main()
 ```
 
 + File writer.c
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>

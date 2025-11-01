@@ -178,7 +178,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 ### 5️⃣ Example code
 ***Code named semaphore***
 + Code main.c
-```s
+```bash
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -270,7 +270,7 @@ int main(int argc, char *argv[])
 ```
 
 + Makefile
-```s
+```bash
 .PHONY: all clean
 
 CC := gcc
@@ -292,7 +292,7 @@ clean:
 + khi thằng empty về 0 là trống rồi, còn nếu full là 10 thì đang đầy
 
 + Code main.c
-```s
+```bash
 #include <stdlib.h>     
 #include <sys/mman.h>   // mmap()
 #include <stdio.h>      // io stuff
@@ -380,7 +380,7 @@ int main()
 ```
 
 + Code makefile
-```s
+```bash
 .PHONY: all clean
 
 CC := gcc

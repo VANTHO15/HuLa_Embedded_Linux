@@ -16,7 +16,7 @@
 <img src="images/image-4.png" alt="SFTP config 1" style="width:500px; height:auto;"/>
 
 - Khi này ta sẽ thay thế nội dung trên như bên dưới:
-```s
+```bash
 {
     "name": "hulatho",
     "host": "192.168.30.113",

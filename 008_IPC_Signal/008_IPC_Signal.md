@@ -33,7 +33,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 
 + Mỗi tín hiệu được định nghĩa bằng một số nguyên trong /urs/include/signal.h. Danh sách các hằng tín hiệu của hệ thống có thể xem bằng lệnh: kill –l
 
-```s
+```bash
  1) SIGHUP	 2) SIGINT	 3) SIGQUIT	 4) SIGILL	 5) SIGTRAP
  6) SIGABRT	 7) SIGBUS	 8) SIGFPE	 9) SIGKILL	10) SIGUSR1
 11) SIGSEGV	12) SIGUSR2	13) SIGPIPE	14) SIGALRM	15) SIGTERM
@@ -59,7 +59,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 + Ta có 1 chương trình đang chạy vô hạn, khi ta dùng lệnh kill để nó dừng lại thì thực chất là ta đang gửi 1 tín hiệu kết thúc tới chương trình(process) đó:
 
 **Bước 1:** Ta có chương trình 
-```s
+```bash
 #include <stdio.h>
 int main()
 {
@@ -143,7 +143,7 @@ int main()
 
 + Ví dụ code: Code cứ 2s thì in ra hello và khi nào ta bấm ctrl C thì nhảy vào sig_handler1 để thực hiện cái số num chính là giá trị của SIGINT là số 2
 
-```s
+```bash
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -170,7 +170,7 @@ int main()
 ```
 
 + Ví dụ code: Mặc dù ta đã đăng kí thêm 1 signal nữa nhưng vì là SIGKILL nên nó k thể có tín hiệu được, ta có "kill -9 num" thì cũng vậy
-```s
+```bash
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -212,7 +212,7 @@ int main()
     + Trả về 0 nếu thành công, nhỏ hơn 0 nếu thất bại
 
 + Code sau 5s thì gửi kill tới tiến trình của chúng ta và nó sẽ kết thúc
-```s
+```bash
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -293,7 +293,7 @@ int main()
 </p>
 
 + Code: Ta muốn block cái SIGINT( nghĩa là ctrl C mà không thể nào mà thoát được)
-```s
+```bash
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>

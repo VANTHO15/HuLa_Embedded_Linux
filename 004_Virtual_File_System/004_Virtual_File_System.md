@@ -120,7 +120,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 + Việc tổ chức các file vào trong các thư mục và tạo các thư mục con trong thư mục cha nhằm phân cấp và sắp xếp hệ thống file người ta còn gọi chúng với cái tên cây thư mục. Cây thư mục có các node lá là file, node cành là các thư mục vào node gốc là thư mục root của hệ thống. 
 
 ***Các loại file trong Linux***
-```s
+```bash
 Regular file: là các file thông thường như text file, executable file.​
 Directories file: file chứa danh sách các file khác.​
 Character Device file: file đại diện cho các thiết bị không có địa chỉ vùng nhớ.​
@@ -149,7 +149,7 @@ Hầu hết các tệp trong Linux là tệp tin thường hoặc tệp tin thư
   <img src="Images/Screenshot_12.png" alt="hello" style="width:500px; height:auto;"/>   
 </p>
 
-```s
+```bash
 - Chữ R:    là Regular file​
 - Chữ D:    là Directories file​
 - Chữ C:    là Character Device file​
@@ -162,7 +162,7 @@ Hầu hết các tệp trong Linux là tệp tin thường hoặc tệp tin thư
 
 ***Thay đổi quyền file***
 + Để thay đổi quyền của file ta dùng câu lệnh chmod. Có thể vào [LINK NÀY](https://chmod-calculator.com/​) để xem quyền trực quan hơn
-```s
+```bash
 chmod 744 Name_file​
 chmod o+r test.txt: thêm quyền read.​
 chmod u-r test.txt: bỏ quyền read.​
@@ -200,7 +200,7 @@ chmod u-r test.txt: bỏ quyền read.​
     - close() đóng file​
 
 + System call Open:
-```s
+```bash
 int open(const char *pathname, int flags, mode_t mode);​
     + pathname: là đường dẫn file​
     + flags: là quyền của file đó​
@@ -224,7 +224,7 @@ File descriptor trả về bởi hàm open luân luân là số nhỏ nhất ch�
 ```
 
 + System call Close:
-```s
+```bash
 int close(int fd)
   + Return về 0 nếu thành công, -1 nếu lỗi
   + Để đóng một file chúng ta dùng hàm close 
@@ -232,7 +232,7 @@ int close(int fd)
 ```
 
 + System call Lseek:
-```s
+```bash
 off_t lseek(int fd, off_t offset, int whence);​
     + lseek(): Đưa con trỏ file tới vị trí thứ mấy.​
     + whence:​
@@ -247,7 +247,7 @@ off_t lseek(int fd, off_t offset, int whence);​
 ```
 
 + System call Read:
-```s
+```bash
 #include <unistd.h>
 ssize_t read(int fd, void *buf, size_t count);
   + Dữ liệu trong một tệp tin đã mở được đọc ra bằng hàm read
@@ -257,7 +257,7 @@ ssize_t read(int fd, void *buf, size_t count);
 ```
 
 + System call Write:
-```s
+```bash
 #include <unistd.h>
 ssize_t write(int fd, const void *buf, size_t count);
   + Dữ liệu được ghi vào tệp tin đã mở bằng hàm write
@@ -267,7 +267,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 + System call ioctl:
   + ioctl là một hàm đa chức năng. Tất cả những gì không làm được khi sử dụng các hàm trên thì thường sẽ làm được khi dùng hàm ioctl. Thiết bị vào ra chuẩn là ví dụ điển hình về việc sử dụng hàm ioctl. Để xử lý được hàm ioctl thì trong driver của thiết bị phải khai báo hàm handle. 
-```s
+```bash
 #include <sys/ioctl.h>
 int ioctl(int fd, unsigned long request, ...);
   + Return -1 nếu lỗi, ngược lại thì thành công
@@ -275,7 +275,7 @@ int ioctl(int fd, unsigned long request, ...);
 ```
 
   + ioctl trên tầng user
-```s
+```bash
 #include <stdio.h> 
 #include <sys/ioctl.h> 
 #include <sys/types.h> 
@@ -342,7 +342,7 @@ int main(void)
 } 
 ```
   + ioctl trên tầng driver
-```s
+```bash
 #include <linux/module.h> 
 #include <linux/kernel.h> 
 #include <linux/version.h> 
@@ -456,7 +456,7 @@ module_exit(myioctl_exit);
 
 
 + Ví dụ cơ bản về thao tác đọc ghi file
-```s
+```bash
 #include<stdio.h> 
 #include<string.h> 
 #include<unistd.h> 
@@ -522,7 +522,7 @@ int main (void)
 </p>
 
   + Ví dụ dưới đây trả về mode, user id, group id, và kích thước của một file bất kì: 
-```s
+```bash
 #include <fcntl.h> 
 #include <stdio.h> 
 #include <sys/stat.h> 
@@ -596,7 +596,7 @@ int main(int argc, char *argv[])
 </p>
 
   + Ví dụ dưới đây dùng để kiểm tra quyền truy cập của một file bất kỳ. File execute a.out có thể truy cập được đường dẫn này nhưng không thể truy cập đường dẫn khác
-```s
+```bash
 #include <unistd.h> 
 #include <fcntl.h> 
 #include <stdio.h> 
@@ -739,7 +739,7 @@ Các bước thực hiện với file trong linux:
 </p>
 
 + Duplicating file descriptors sử dụng function dup
-```s
+```bash
 #include <unistd.h>
 int dup(int origfd);
     + origfd : an existing file descriptor
@@ -747,12 +747,12 @@ int dup(int origfd);
     + New file descriptor is guaranteed to be lowest available
 ```
 + Các FD 0, 1 và 2 thường luôn mở, do đó shell có thể thực hiện chuyển hướng 2>&1 bằng
-```s
+```bash
 close(STDERR_FILENO); /* Frees FD 2 */
 newfd = dup(STDOUT_FILENO); /* Reuses FD 2 */
 ```
 + Nhưng nếu FD 0 đã được close trước đó thì sao? Chúng ta cần một API tốt hơn.
-```s
+```bash
 #include <unistd.h>
 int dup2(int origfd, int newfd);
     + Tương tự như dup(), nhưng sử dụng newfd cho FD trùng lặp
@@ -785,7 +785,7 @@ int dup2(int origfd, int newfd);
 
 ***Kĩ thuật Flock()***
 + Flock dựa vào thông tin file descriptor để đặt trạng thái lock vào i-node table
-```s
+```bash
 int flock(int fd, int operation);
   + Fd: file descriptor của file cần lock
   + Operation: giá trị lock muốn set
@@ -805,7 +805,7 @@ int flock(int fd, int operation);
   + Còn nếu LOCK_EX | LOCK_NB thì nó bỏ qua luôn
 
 - File Process A
-```s
+```bash
 #include <sys/stat.h>
 #include <stdio.h>
 #include <sys/file.h>
@@ -846,7 +846,7 @@ int main(void)
 }
 ```
 - File Process B
-```s
+```bash
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/file.h>
@@ -890,7 +890,7 @@ int main(void)
 ***Kĩ thuật Fcntl()***
 + fcntl() cho phép lock từng phần của file (thậm chí đến từng byte). Thông tin lock đặt vào i-node table sẽ gồm process ID, trạng thái lock, vùng lock. Vậy nên fcntl() linh hoạt hơn flock().
 
-```s
+```bash
 fcntl(fd, cmd, &flockstr)
   + fd: file descriptor của file cần lock
   + cmd: action muốn thực hiện
@@ -905,7 +905,7 @@ fcntl(fd, cmd, &flockstr)
 **Ví dụ Fcntl**
 
 + File Process A
-```s
+```bash
 #include <stdio.h>
 #include <sys/stat.h> 
 #include <sys/file.h> 
@@ -953,7 +953,7 @@ int main(void)
 }
 ```
 + File Process B
-```s
+```bash
 #include <stdio.h>
 #include <sys/stat.h> 
 #include <sys/file.h> 
@@ -1019,7 +1019,7 @@ int main(void)
 
 ***Ví dụ code***
 + Ví dụ về in một file ra cửa sổ console
-```s
+```bash
 #include <stdio.h>  
 #include <stdlib.h> // For exit()  
 int main() 

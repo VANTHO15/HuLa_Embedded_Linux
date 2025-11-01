@@ -66,7 +66,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 
 ***Quyền file​***
 + Linux quản lý tất cả mọi thứ như 1 file​. Các loại file trong linux:​
-```s
+```bash
 Chữ R:  là Regular file​, là các file thông thường như text file, executable file
 Chữ D:  là Directories file​, file chứa danh sách các file khác.​
 Chữ C:  là Character Device file​, file đại diện cho các thiết bị không có địa chỉ vùng nhớ.
@@ -87,7 +87,7 @@ Dấu " - ":  là file thông thường​
 
 ***Thay đổi quyền file***
 + Để thay đổi quyền của file ta dùng câu lệnh chmod. Có thể vào [LINK NÀY](https://chmod-calculator.com/​) để xem quyền trực quan hơn
-```s
+```bash
 chmod 744 Name_file​
 chmod o+r test.txt: thêm quyền read.​
 chmod u-r test.txt: bỏ quyền read.​
@@ -102,7 +102,7 @@ chmod u-r test.txt: bỏ quyền read.​
 ***Path environment***
 + PATH là một biến môi trường trong Linux, cho shell biết thư mục nào cần tìm kiếm các tệp thực thi để đáp ứng các lệnh do người dùng đưa ra.
 + Thường được định nghĩa trong /etc/bash.bashrc và ~/.bashrc
-```s
+```bash
 PATH=/usr/bin:/bin:/usr/local/bin
 Phân cách bằng ký tự ":"
 Hệ thống sẽ tìm kiếm lệnh từ trái sang phải
@@ -125,7 +125,7 @@ Có thể lấy PATH hiện tại bằng lệnh "echo $PATH"
 </p>
 
   + Thêm trọn đời:
-```s
+```bash
 vim ~/.profile
 Thêm export PATH=$PATH:/home/hulatho/bash_shell vào file
 source ~/.profile để lưu nội dung lại
@@ -135,7 +135,7 @@ source ~/.profile để lưu nội dung lại
 </p>
 
 + Như ta biết, khi chạy 1 file, nó sẽ tìm đường dẫn trong biến PATH này, tìm từ trên xuống dưới nếu có thì file đó được chạy luôn. Như vậy ta sẽ cần có thêm sự ưu tiên, nghĩa là sẽ tìm PATH của ta trước. Để có sự ưu tiên trước thì ta sẽ thêm đường dẫn trước $PATH, còn không cần ưu tiên thì thêm đường dẫn vào sau $PATH
-```s
+```bash
 ❌ export PATH=$PATH:/home/hulatho/bash_shell
 export PATH=your_directory:$PATH​
 ✔️ export PATH=/home/hulatho/bash_shell:$PATH​
@@ -192,7 +192,7 @@ export PATH=your_directory:$PATH​
   + ~+ : lấy ra đường dẫn PWD hiện tại​
   + \: Ký tự thoát. Nếu bạn muốn tham chiếu đến một ký tự đặc biệt, trước tiên bạn phải "thoát" nó bằng dấu gạch chéo ngược. Ví dụ: touch /tmp/filename\*
   + /: Dấu phân cách thư mục, dùng để phân tách một chuỗi tên thư mục. Ví dụ: /usr/src/linux
-```s
+```bash
 ?: Represents a single character in a filename.​
   Ex: hello?.txt can represent hello1.txt, helloz.txt, but not hello22.txt​
 [ ]: Can be used to represent a range of values, e.g. [0-9], [A-Z], etc.​
@@ -229,7 +229,7 @@ over-write it.​
 ### 3️⃣ Các bước khi thực hiện 1 command-line​
 
 Khi chạy 1 commad line có 5 bước:​
-```s
+```bash
 + Tokenisation​
 + Command identification​
 + Shell expansions​
@@ -238,7 +238,7 @@ Khi chạy 1 commad line có 5 bước:​
 ```
 ***Bước 1: Tokenisation***
 + Đi tìm kiếm nơi code command bắt đầu và kết thúc bằng các kí tự đặc biệt bên dưới và được sử dụng để chia nhỏ dòng lệnh ra​
-```s
+```bash
 |​
 &​
 ;​
@@ -248,7 +248,7 @@ Space, tab, newline
 ```
 
 + Ví dụ:
-```s
+```bash
 Ví dụ: echo $name > tho.txt​
 + Thằng này ban đầu nó chỉ là 1 string thôi​
 + Sau đó shell bắt đầu xác định các kí tự đặc biệt trong đây​
@@ -264,7 +264,7 @@ Shell chia các command thành các lệnh đơn giản hoặc lệnh ghép
 </p>
 
 + Tất cả các lệnh đơn giản đều được kết thúc bằng 1 toán tử điều khiển
-```s
+```bash
 Newline​
 |​
 ||​
@@ -288,7 +288,7 @@ Newline​
 ***Bước 3: Shell expansions​***
 + Thực hiện mở rộng câu lệnh
 + Có bốn giai đoạn mở rộng Shell.
-```s
+```bash
 Stage 1: Brace expansion​
 Stage 2: include: Parameter, arithmetic, command substitution​
 Stage 3: Word splitting - Tách từ​
@@ -316,7 +316,7 @@ Stage 4: Globbing​
 ***Bước 4: Quote removal - Loại bỏ kí tự đặc biệt​***
 
 Mục đích của việc trích dẫn là loại bỏ ý nghĩa đặc biệt khỏi các ký tự đặc biệt.​
-```s
+```bash
 \​
 ``
 ""
@@ -329,7 +329,7 @@ Mục đích của việc trích dẫn là loại bỏ ý nghĩa đặc biệt k
 </p>​
 
 + Ví dụ
-```s
+```bash
 Name="Tho"     out="out.txt”"
 Echo $name > $out
 Step 1: tìm Word và toán tử                      ​Echo $name > $out​
@@ -397,7 +397,7 @@ Sau khi xong 5 bước này thì bash sẽ thực hiện execute command line​
 </p>​
 
 ***Điều kiện biến​***
-```s
+```bash
 string1 = string2 : true nếu 2 chuỗi bằng nhau​
 string1 != string2 : true nếu 2 chuỗi không bằng nhau​
 -n string1 : true nếu tring1 không rỗng​
@@ -418,7 +418,7 @@ expression1 -le expression2 : true nếu biểu thức expression1 nhỏ hơn ho
 </p>​
 
 ***Điều kiện Fille​***
-```s
+```bash
  -d file : true nếu file là thư mục​
  -e file : true nếu file tồn tại trên đĩa​
  -f file : true nếu file là tập tin thông thường​
@@ -492,7 +492,7 @@ expression1 -le expression2 : true nếu biểu thức expression1 nhỏ hơn ho
 </p>​
 
 ***Tổng Hợp lại***
-```s
+```bash
 Does not have type definition​
 Declare by: <var_name>=[value] (no spaces at =)​
 Used by: $var_name, ${var_name}​
@@ -582,7 +582,7 @@ BASH function​
 + Ex1: Viết script tìm số lớn nhất trong 3 số được nhập từ dòng lệnh
 + Ex2: Viết script tính tổng các ký số của một số được nhập vào vd: tinh 1234 -> 10
 + Ex3: Tạo menu tương tác với người dùng:
-```s
+```bash
 ---------------------------------------Main Menu---------------------------------------
 [1] Show today date/time
 [2] Show all files in current directory
@@ -594,7 +594,7 @@ BASH function​
 + Ex5: Viết script để xác định đường dẫn một file và kiểm tra xem file đó có tồn tại hay không
 + Ex6: Chương trình đếm số dòng/từ của một file
 + Ex7: Phân tích 5 bước của 2 câu lệnh bên dưới​
-```s
+```bash
   Echo "$name" > "$out"​
   Echo "$(ls *.txt)"​
 ```

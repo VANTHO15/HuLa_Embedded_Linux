@@ -112,7 +112,7 @@ Các bước triển khai
 + Code : A nhận type là 1, B nhận type là 2, 2 thằng sẽ block do cờ nhận ta để là 0 còn nếu để IPC_NOWAIT thì nó return luôn chứ không bị block nữa, và đợi produced gửi 
 
 + File ConsumerA.c
-```s
+```bash
 #include <stdio.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
@@ -150,7 +150,7 @@ int main()
 ```
 
 + File ConsumerB.c
-```s
+```bash
 #include <stdio.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
@@ -188,7 +188,7 @@ int main()
 ```
 
 + File Produced.c
-```s
+```bash
 #include <stdio.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
@@ -295,7 +295,7 @@ int main()
 + Chạy chương trình thì như dưới
 > gcc -o main -g main.c -Wall -lrt
 
-```s
+```bash
 #include <stdio.h>
 #include <string.h>
 #include <mqueue.h>  

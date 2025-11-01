@@ -1,7 +1,7 @@
 # Phần 3: Các command line hay dùng và cách làm việc với file 💚
 
 ## 1. Install các tool cần thiết
-```s
+```bash
 sudo apt install gcc
 sudo apt install make
 sudo apt install vim
@@ -25,7 +25,7 @@ sudo apt install tree
 
 ## 3. Các CommandLine hay dùng
 ***Gõ 2 đến 3 kí tự rồi bấm TAB là ra***
-```s
+```bash
 sudo apt-get install XXX: Install XXX
 pwd: Xem đường dẫn hiện tại
 tree

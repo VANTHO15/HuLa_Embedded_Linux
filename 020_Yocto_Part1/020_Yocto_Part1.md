@@ -4,7 +4,7 @@
 
 ### 1️⃣ Introduction
 
-+ Ở bài trước chúng ta đã build yocto cho board myir imx8mm. Nếu các bạn chưa đọc thì xem link này nha [019_Build_Yocto.md](../019_Build_Yocto/019_Build_Yocto.md). Ở bài này chúng ta sẽ tìm hiểu lý thuyết và thực hành liên quan về yocto nhé.
++ Ở bài trước chúng ta đã build yocto cho board myir imx8mm. Nếu các bạn chưa đọc thì xem link này nha [019_Build_Yocto_Imx8mm.md](../019_Build_Yocto_Imx8mm/019_Build_Yocto_Imx8mm.md). Ở bài này chúng ta sẽ tìm hiểu lý thuyết và thực hành liên quan về yocto nhé.
 
 ### 2️⃣ Summary
 
@@ -206,8 +206,8 @@ git clone -b kirkstone https://git.yoctoproject.org/meta-arm
 + Hiện nay mô phỏng được hỗ trợ cho: ARM, MIPS, MIPS64, PowerPC, X86, X86_64...
 + Poky cung cấp tập lệnh 'runqemu' cho phép ta khởi động QEMU bằng hình ảnh do yocto tạo
 + Tập lệnh runqemu được chạy dưới dạng:
-```s
-runqemu <máy> <zimage> <hệ thống tập tin>
+```bash
+runqemu <machine> <zimage> <hệ thống tập tin>
   <machine> là kiến trúc sẽ sử dụng (qemuarm/qemumips/qemuppc/qemux86/qemux86-64)    
   <zimage> là đường dẫn đến kernel (ví dụ zimage-qemuarm.bin)    
   <filesystem> là đường dẫn đến image ext2 (ví dụ: filesystem-qemuarm.ext2) hoặc thư mục nfs
@@ -215,7 +215,7 @@ runqemu <máy> <zimage> <hệ thống tập tin>
 
 + Thoát QEMU bằng cách nhấp vào biểu tượng tắt máy hoặc bằng cách nhập Ctrl C trong QEMU
 + Tóm tắt các câu lệnh chạy:
-```s
+```bash
 $ nproc: kiểm tra có bao nhiêu core
 $ free –m : kiểm tra ram
 $ cd build
@@ -225,7 +225,7 @@ $ runqemu qemux86-64 core-image-minimal
 ***Steps to Generate ARM image and Run in QEMU***
 + Khi ta thiết lập môi trường xây dựng, tệp cấu hình cục bộ có tên local.conf sẽ có sẵn trong thư mục con conf của Build Directory
 + Các giá trị mặc định được đặt để xây dựng cho target qemux86-64, ta sẽ sửa lại thành qemuarm
-```s
+```bash
 $ vim ./build/conf/local.conf
 Tìm biến MACHINE và set MACHINE = "qemuarm"
 $ source poky/oe-init-build-env
@@ -235,19 +235,27 @@ $ runqemu core-image-minimal
 
 ***Không sử dụng Graphic***
 + Khi ta chạy lệnh "runqemu core-image-minimal" thì mặc định nó sẽ mwor lên cả 1 cái giao diện nữa, tuy nhiên ta không cần cái giao diện qq này. Ta sẽ đi tắt đi bằng cách thêm vào trong command nographic
-```s
+```bash
 $ runqemu core-image-minimal nographic
 $ poweroff
 ```
 
 ***Thêm 1 Package vào root file system***
++ Để kiểm tra 1 pacgake có tồn tại hay không ta vào folder build và gõ như dưới, đang check Package git
+> $ bitbake-layers show-recipes git
+
 + Để thêm một Package cụ thể vào root file system ta làm như sau:
-```s
+```bash
 Mở tệp local.conf của ta và thêm tên công thức bên dưới
 IMAGE_INSTALL += "recipe-name"
-Ví dụ: IMAGE_INSTALL += "usbutils" or IMAGE_INSTALL_append = " usbutils"
+Ví dụ: 
+  + IMAGE_INSTALL += "usbutils" or IMAGE_INSTALL_append = " usbutils"
+  + IMAGE_INSTALL:append = " git"
+  + IMAGE_INSTALL:append = " python3"
 $ runqemu core-image-minimal nographic
 ```
+
++ Khi thêm package rồi thì khi boot board lên ta có thể dùng nó
 <p align="center">
   <img src="Images/Screenshot_5.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
@@ -336,7 +344,7 @@ $ runqemu core-image-minimal nographic
 + Packages là tệp nhị phân có tên *.rpm, *.deb hoặc *.ipkg
 + Một single recipe  tạo ra nhiều Packages. Tất cả các Packages mà recipe tạo ra đều được liệt kê trong variable recipe
 + Ví dụ ta kiểm tra biến PACKAGES
-```s
+```bash
 $ cd Poky
 $ vim meta/recipes-multimedia/libtiff/tiff_4.0.10.bb
 Check PACKAGES =+ "tiffxx tiff-utils"
@@ -405,13 +413,13 @@ Check PACKAGES =+ "tiffxx tiff-utils"
 ***Tiết kiệm ổ đĩa***
 + Tiết kiệm dung lượng ổ đĩa khi xây dựng Yocto
 + Hệ thống xây dựng Yocto có thể chiếm nhiều dung lượng ổ đĩa trong quá trình xây dựng. Nhưng bitbake cung cấp các tùy chọn để bảo toàn dung lượng ổ đĩa. nếu bạn muốn loại trừ mã nguồn xóa bitbake của một gói cụ thể, ta có thể thêm nó vào RM_WORK_EXCLUDE += "recipe-name"
-```s
+```bash
 $ Cd build/conf/local.conf
 $ RM_WORK_EXCLUDE += "core-image-minimal"
 ```
 
 ***Build yocto image cho BBB***
-```s
+```bash
 $ source source/poky/oe-init-build-env build_bbb
 $ vim conf/local.conf ( mở MACHINE ?= "beaglebone-yocto" ra)
 $ bitbake core-image-minimal
@@ -472,7 +480,7 @@ $ bitbake core-image-minimal
 + Theo mặc định, root filesystem được chứa trong phân vùng thứ hai (mmcblk0p2) của thẻ nhớ microSD, được định dạng cho hệ thống tập tin ext3.
 
 ***Tạo partition cho Thẻ nhớ***
-```s
+```bash
 + lsblk  : sẽ thấy sdb ( sdb1 sdb2)
 1. Ngắt kết nối bất kỳ phân vùng đã gắn nào bằng lệnh umount:
 $ umount /dev/sdb1
@@ -611,7 +619,7 @@ $ sudo mkfs.ext4 -L "ROOT" /dev/sdb2
 ***Mở rộng biến***
 + Toán tử ":=" dẫn đến nội dung của biến được mở rộng ngay lập tức, thay vì khi biến đó thực sự được sử dụng
 + Toán tử "=" không ngay lập tức mở rộng các tham chiếu biến ở phía bên phải, việc mở rộng được trì hoãn cho đến khi biến được gán được sử dụng.
-```s
+```bash
 A = "hello“
 B = "${A} world“
 $ bitbake -e | grep ^A=
@@ -688,7 +696,7 @@ D = "${B}"
   + Bước 2: Tạo conf/layer.conf
     + Đi copy cho nhanh
   + Bước 3: update vào bblayer.conf
-```s
+```bash
 Cd source
 Mkdir meta-mylayer
 Cd meta-mylayer
@@ -709,7 +717,7 @@ bitbake-layers show-layers
   + Ta có thể tạo lớp của riêng mình bằng lệnh bitbake-layers create-layer
     + bitbake-layers create-layer –help
     + Công cụ này tự động hóa việc tạo lớp bằng cách thiết lập thư mục con với tệp cấu hình layer.conf, thư mục con recipes-example chứa công thức example.bb, tệp cấp phép và README
-```s
+```bash
 Cd build
 bitbake-layers create-layer ../source/meta-mylayer
 Default priority of the layer is 6
@@ -784,7 +792,7 @@ ls ../source/meta-mylayer/
 + mkdir -p recipes-examples/images
 + vim recipes-examples/images/tho-image.bb
 + Nội dung file
-```s
+```bash
 SUMMARY = "A small boot image for tho image"
 LICENSE = "MIT"
 inherit core-image
@@ -796,7 +804,7 @@ IMAGE_INSTALL += "usbutils"
 ```
 
 + Sau khi them image tho-image xong ta kiểm tra:
-```s
+```bash
 Cd build_bbb
 bitbake -e tho-image | grep ^IMAGE_INSTALL=
 Sau đó
@@ -1010,7 +1018,7 @@ poweroff
 + Mà mỗi thành phần phần mềm đều phải có 1 recipes, chỉ khi có recipes ta mới có thể đưa vào rootfs hay image
 + Nên ta cần viết 1 công thức cho thành phần vied mềm cụ thể này để có thể biên dịch và cài đặt phần mềm này
 + Bước 1: Create a file userprog.c :
-```s
+```bash
 #include <stdio.h>
 int main()
 {	
@@ -1025,7 +1033,7 @@ int main()
 + Bước 3: Tạo folder tên là “files” ở trong myhello và bỏ file userprog.c vào
   + mkdir -p recipes-examples/myhello/files
 + Bước 4: Tạo file 'myhello_0.1.bb’ (tên và phiên bản)  với nội dung như dưới: Ta install là bỏ file của mình vào folder bin
-```s
+```bash
 DESCRIPTION = "Simple helloworld application"	
 LICENSE = "MIT"	
 LIC_FILES_CHKSUM ="file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"	
@@ -1086,7 +1094,13 @@ do_install() {
 + PN : Tên công thức dùng để build package
 + PV: Phiên bản của công thức được sử dụng để xây dựng gói
 + PR : Bản sửa đổi công thức được sử dụng để xây dựng gói.
-
++ PN (Package Name)
++ PV (Package Version)
++ PR (Package Revision)
++ WORKDIR (Working Directory)
++ S (Source)
++ D (Destination)
++ B (Build Directory)
 
 ***Giải thích recipes***
 + Các tác vụ phù hợp nhất sẽ được thực thi khi gọi bitbake myhello như sau:
@@ -1181,7 +1195,7 @@ do_install() {
 + bb.note và bbnote: Những thứ này thêm ghi chú cho người dùng. Chúng chỉ mang tính thông tin.
 + bb.plain và bbplain: Chúng xuất ra một thông báo.
 + bb.debug và bbdebug: Những thông tin này thêm thông tin gỡ lỗi được hiển thị tùy thuộc vào mức độ gỡ lỗi được sử dụng.
-```s
+```bash
 do_compile() { 
 bbplain "*************************************" 
 bbplain "* *" 
@@ -1209,7 +1223,7 @@ bbplain "*************************************“
 <p align="center">
   <img src="Images/Screenshot_37.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
-```s
+```bash
 Bitbake myhellomulti
 bitbake -e myhellomulti | grep ^T=
 cd đường dẫn
@@ -1236,7 +1250,7 @@ userprog
   <img src="Images/Screenshot_39.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
-```s
+```bash
 cd build_bbb
 bitbake -c cleanall mymakefile
 bitbake mymakefile
@@ -1578,7 +1592,7 @@ userprog
   + Điều này có nghĩa là đầu ra từ một tác vụ nhất định có thể bị xóa, nâng cấp hoặc bị thao tác.
 + Ý 3: Các thành phần pre-built không cần phải xây dựng lại từ đầu được sử dụng như thế nào khi có sẵn?
 build system có thể fetch các state objects từ các vị trí ở xa và cài đặt chúng nếu chúng được coi là hợp lệ
-```s
+```bash
 cd build_bbb
 ls state-cache
 trong local.conf sẽ chưa đường dẫn này (SSTATE_DIR)
@@ -1633,7 +1647,7 @@ trong local.conf sẽ chưa đường dẫn này (SSTATE_DIR)
 
 ## 📺 NOTE
 ***Tổng hợp các comamnd hay dùng trong yocto***
-```s
+```bash
 $ source source/poky/oe-init-build-env [ build_directory ] (../build)
 $ bitbake -c <task> <recipes>
 $ bitbake <recipes>
@@ -1666,3 +1680,5 @@ $ bitbake-layers create-layer
 [4] https://docs.yoctoproject.org/brief-yoctoprojectqs/index.html 
 
 [5] https://www.yoctoproject.org/development/technical-overview/#getting-started
+
+[6] https://github.com/Munawar-git/YoctoTutorials/

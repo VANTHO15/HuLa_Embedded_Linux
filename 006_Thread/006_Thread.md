@@ -177,7 +177,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 
 + Để tạo một thread mới chúng ta sử dụng hàm pthread_create().
 
-```s
+```bash
 int pthread_create(pthread_t *threadID, const pthread_attr_t *attr, void *(*start)(void *), void *arg);
     + Đối số đầu tiên: Một khi tiến trình được gọi thành công, đối số đầu tiên sẽ giữ thread ID của thread mới được tạo.
     + Đối số thứ hai: Thông thường giá trị này đặt thành NULL
@@ -187,7 +187,7 @@ int pthread_create(pthread_t *threadID, const pthread_attr_t *attr, void *(*star
 ```
 
 + Ví dụ code tạo thread
-```s
+```bash
 #include <pthread.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -222,7 +222,7 @@ int main (int argc, char *argv[])
 
 + Ví dụ code thread, makefile và truyền thông số vào:
 
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -276,7 +276,7 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
-```s
+```bash
 CC := gcc
 CFLAGS := -pthread
 
@@ -320,7 +320,7 @@ clean:
         + Trả về 0 nếu thành công, nhỏ hơn 0 nếu thất bại.
 
 ***Code sleep 5s sau đó thread 2 sẽ bị cancel và không in thông tin trong thread 2 ra nữa.***
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -403,7 +403,7 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
-```s
+```bash
 
 CC := gcc
 CFLAGS := -pthread
@@ -431,7 +431,7 @@ clean:
 </p>
 
 + Code chứng minh tạo nhiều thread quá thì không tạo đươc nữa.
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -513,7 +513,7 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
-```s
+```bash
 CC := gcc
 CFLAGS := -pthread
 
@@ -526,7 +526,7 @@ clean:
 
 + Khi này ta chưa dùng pthread_join thì nó sẽ tạo ra thread zombie, nên để ok thì ta thêm pthread_join() như code dưới.
 
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -608,7 +608,7 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
-```s
+```bash
 CC := gcc
 CFLAGS := -pthread
 
@@ -630,7 +630,7 @@ clean:
 
 + Sau 5s đợi khi gọi pthread_join() thì sẽ có hàm exit() và khi này cả chương trình cũng kết thúc theo do 1 thread exit thì khiến cho toàn bộ thread cũng exit theo
 
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -714,7 +714,7 @@ int main(int argc, char const *argv[])
 
 + Nếu dùng pthread_exit(NULL) thì chỉ kết thuc mình thread 2 thôi
 
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -813,7 +813,7 @@ int main(int argc, char const *argv[])
 
 + Code: Ta tạo thread 3 liên tục trong while 1 và detach ở thread 3, khi này hệ thống tự dọn dẹp thread
 
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1002,7 +1002,7 @@ int main(int argc, char const *argv[])
         + Trả về 0 nếu thành công, nhỏ hơn 0 nếu thất bại.
 
 + Chương trình ví dụ này minh họa việc sử dụng các biến mutex trong một chương trình luồng thực hiện phép tính tích vô hướng. Dữ liệu chính được cung cấp cho tất cả các luồng thông qua một cấu trúc có thể truy cập toàn cục. Mỗi luồng xử lý một phần dữ liệu khác nhau. Luồng chính chờ tất cả các luồng hoàn tất việc tính toán, sau đó in ra tổng kết quả. (dotprod_mutex.c)
-```s
+```bash
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -1116,7 +1116,7 @@ pthread_exit(NULL);
 
 + Code mutex Thraed
 
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1186,7 +1186,7 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
-```s
+```bash
 # Mutilple Thread
 CC := gcc
 CFLAGS := -pthread
@@ -1269,7 +1269,7 @@ clean:
 + Việc gọi pthread_cond_signal() trước khi gọi pthread_cond_wait() là một lỗi logic.
 
 + Ví dụ - Sử dụng Biến Điều kiện: minh họa việc sử dụng một số hàm biến điều kiện Pthread. Hàm chính tạo ra ba luồng. Hai luồng thực hiện công việc và cập nhật biến "count". Luồng thứ ba đợi cho đến khi biến count đạt đến một giá trị được chỉ định.
-```s
+```bash
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -1394,7 +1394,7 @@ int main (int argc, char *argv[])
 
 + Code Hàm Main
 
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1462,7 +1462,7 @@ int main(int argc, char const *argv[])
 
 + Con_var: Code khi ta dùng wait : ở handle_th1 khi mà đầy bi thì gửi 1 signal cho thằng wait đang đợi
 
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1536,7 +1536,7 @@ int main(int argc, char const *argv[])
 
 + Bên trong thằng wait sẽ unlock ra để nó truy cập vào vùng nhớ dùng chung là biến counter
 
-```s
+```bash
 # Conditional Variable
 
 .PHONY := conVar pooling

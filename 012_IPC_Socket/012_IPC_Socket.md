@@ -87,7 +87,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 + Xét ví dụ: Domain: ipv4, Type: stream, Protocol: 0
   + Sau khi make all thì chạy   sudo ./server 80    ( 80 là port 80 , muốn mấy cũng được)
 + Code ipv4_stream Stream_server
-```s
+```bash
 // sudo ./server 80
 #include <stdio.h>
 #include <stdlib.h>
@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
 
 + Code ipv4-client  stream_client
 + Sau khi make all thì chạy   ./client 192.168…. 80    ( 80 là port server tạo ra)
-```s
+```bash
 // ./client 192.168…. 80
 #include <stdio.h>
 #include <stdlib.h>
@@ -292,7 +292,7 @@ int main(int argc, char *argv[])
 ```
 
 + Code makefile
-```s
+```bash
 all:
 	gcc -o server stream_server.c
 	gcc -o client stream_client.c
@@ -317,7 +317,7 @@ clean:
 + Domain: AF_INET/AF_INET6
 + Socket chỉ có một kiểu địa chỉ duy nhất là sockaddr
 + Tuy nhiên để tiện cho việc sử dụng với từng domain socket khác nhau người ta định nghĩa thêm các struct địa chỉ riêng cho từng domain sau đó sẽ ép kiểu về struct socaddr
-```s
+```bash
 struct sockaddr {
 sa_family_t  sa_family;     /* address family, AF_xxx */
 char         sa_data[14];   /* 14 bytes of protocol address*/
@@ -325,7 +325,7 @@ char         sa_data[14];   /* 14 bytes of protocol address*/
 ```
 
 ***IPv4 Socket Address***
-```s
+```bash
 struct sockaddr_in {         
     sa_family_t sin_family;  	/* Address family (AF_INET) */ 
     in_port_t sin_port;      	/* Port number */ 
@@ -387,7 +387,7 @@ struct in_addr {            	/* IPv4 4-byte address */
 
 + Code Unix dgram socket 
 + Code server chạy ./server
-```s
+```bash
 // ./server
 #include <sys/un.h>
 #include <sys/socket.h>
@@ -436,7 +436,7 @@ int main(int argc, char *argv[])
 ```
 
 + Code client unix dgram  chạy « ./client vantho » thì nó sẽ trả về vantho viết hoa
-```s
+```bash
 // ./client vantho
 #include <sys/un.h>
 #include <sys/socket.h>
@@ -479,7 +479,7 @@ int main(int argc, char *argv[])
 ```
 
 + Code Makefile
-```s
+```bash
 .PHONY: clean all
 
 all:
@@ -493,7 +493,7 @@ clean:
 
 + IPV4_DGRAM 
 + Dgram_client
-```s
+```bash
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <stddef.h>
@@ -532,7 +532,7 @@ int main(int argc, char *argv[])
 ```
 
 + Dgram server
-```s
+```bash
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -587,7 +587,7 @@ int main(int argc, char *argv[])
 
 + UNIX STREAM
 + Stream client
-```s
+```bash
 #include <sys/un.h>
 #include <sys/socket.h>
 #include <stddef.h>
@@ -635,7 +635,7 @@ int main(int argc, char *argv[])
 ```
 
 + Stream server
-```s
+```bash
 #include <sys/un.h>
 #include <sys/socket.h>
 #include <stddef.h>

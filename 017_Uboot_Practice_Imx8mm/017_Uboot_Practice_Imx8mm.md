@@ -29,7 +29,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 + Ở bài này chúng ta sẽ đọc tài liệu của NXP để làm theo: [LINK](https://drive.google.com/file/d/14sEQAQ3e72fjQo09eLYM4ZiIWacnUs4K/view?usp=sharing)
 
 + Tạo folder và config git
-```s
+```bash
 $ mkdir Build_Uboot
 $ cd Build_Uboot
 $ git config --global user.name "Your Name"
@@ -59,7 +59,7 @@ $ git config --global user.email "your.email@example.com"
 ### 2️⃣ Step to build
 
 ***Step 1: Build Arm Trusted Firmware***
-```s
+```bash
 $ git clone https://github.com/nxp-imx/imx-atf.git
 $ cd imx-atf
 $ git checkout lf_v2.6
@@ -77,7 +77,7 @@ $ ls -la
 <br>
 
 + Sau đó ta đi tạo folder toolchain và chạy file .sh này, follow bên dưới
-```s
+```bash
 $ mkdir toolchain
 $ tree -L 1 .
 $ sudo chmod 0777 fsl-imx-xwayland-glibc-x86_64-meta-toolchain-aarch64-mys-8mmx-toolchain-5.4-zeus.sh
@@ -100,7 +100,7 @@ $ source ./toolchain/environment-setup-aarch64-poky-linux
   + Command line: CROSS_COMPILE=aarch64-linux-gnu- make PLAT=<Target_SoC> bl31
   + Target_SoC should be "imx8mq" for i.MX8MQ SoC.
   + Target_SoC should be "imx8mm" for i.MX8MM SoC.
-```s
+```bash
 $ cd imx-aft
 $ make PLAT=imx8mm bl31
 Nếu gặp lỗi: 
@@ -109,7 +109,7 @@ $ unset LDFLAGS
 ```
 
 ***Step 2: Build Uboot***
-```s
+```bash
 $ git clone https://github.com/nxp-imx/uboot-imx.git
 $ cd uboot-imx
 $ git checkout lf_v2022.04
@@ -120,7 +120,7 @@ $ git checkout lf_v2022.04
 </p>
 
 + Ở trong uboot-imx/configs, ta sẽ thấy có nhiều file *_deconfig, mà mỗi file đó sẽ là config uboot cho 1 board. Ở đây board của ta sẽ là imx8mm_ddr4_evk_defconfig
-```s
+```bash
 $ cd uboot-imx
 $ make clean
 $ make imx8mm_ddr4_evk_defconfig
@@ -137,7 +137,7 @@ Thêm extern vào biến yylloc trong file scripts/dtc/dtc-lexer.lex.c nếu ERR
 </p>
 
 + Ta cần clone mkimage repo:
-```s
+```bash
 $ cd uboot
 $ git clone https://github.com/nxp-imx/imx-mkimage.git
 $ git checkout lf-5.15.32_2.0.0
@@ -162,7 +162,7 @@ $ git checkout lf-5.15.32_2.0.0
 </p>
 
 + Sau đó chạy file uboot-mkimage-run.sh là được
-```s
+```bash
 $ sudo chmod 0777 uboot-mkimage-run.sh
 $ ./uboot-mkimage-run.sh
 ```
@@ -177,7 +177,7 @@ $ ./uboot-mkimage-run.sh
 
 + Download file [HuLa_make_SDcard](https://drive.google.com/file/d/1ACu6SRb14qz-yw0R51OiSw93_8oNVjzW/view?usp=sharing) để tạo partision cho SD card và **dd** file **flash.bin** vào SD card 
 
-```s
+```bash
 $ mkdir flash_SDCrad
 $ cp imx-mkimage/iMX8M/flash.bin flash_SDCrad/
 $ cd flash_SDCrad

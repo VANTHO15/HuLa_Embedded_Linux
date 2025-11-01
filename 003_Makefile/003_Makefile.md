@@ -101,7 +101,7 @@ Như vậy theo thứ tự compile thì đuôi của các file sẽ là:
 + Makefile rule’s commands​
     + The command can be shell command, make function, macro​
     + Một số macro đặc biệt hữu ích khi sử dụng lệnh shell.
-```s
+```bash
 -: bỏ qua kết quả lệnh (tiếp tục nếu có lỗi).
 clean:​
     -rm *.o *~ prog
@@ -117,7 +117,7 @@ clean:​
 + -n: Print the commands that would be executed, but do not execute them.
 
 + Makefile special macro​
-```s
+```bash
 $@ The file name of the target.​
 $< The name of the first dependency.​
 $* The part of a filename which matched a suffix rule.​
@@ -135,7 +135,7 @@ $+ The names of all the dependencies separated by spaces with duplicate names in
 </p>
 
 + Debug Makefile​
-```s
+```bash
 --just-print: print every command it would execute without executing them.​
 --print-data-base: it will dump the internal database (variables, directories, implicit rules, files, search path).​
 --warn-undefined-variables: print warning when undefined variable was used.​
@@ -235,7 +235,7 @@ $+ The names of all the dependencies separated by spaces with duplicate names in
 </p>
 
 + The Function in Makefile​: 
-```s
+```bash
     + Function Call Syntax $(function arguments) or ${function arguments}
         + $(wildcard pattern)​: 
             + eg: CSRCS= $(wildcard *.c)​
@@ -255,7 +255,7 @@ $+ The names of all the dependencies separated by spaces with duplicate names in
 </p>
 
 + Compile without Makefile​
-```s
+```bash
 Compile program​
     gcc -c main.c sum.c multiply.c​
     gcc -o prog main.o sum.o multiply.o​
@@ -266,7 +266,7 @@ Change one file & recompile​
 ```
 
 + Simple Makefile
-```s
+```bash
 CC=gcc​
 CFLAGS= -c -Wall​
 LDFLAGS=​
@@ -284,7 +284,7 @@ clean:​
 ```
 
 + Makefile with pattern rule
-```s
+```bash
 CC=gcc​
 CFLAGS= -c -Wall​
 LDFLAGS=​

@@ -32,19 +32,19 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 
 ### 2️⃣ Build yocto theo guideline
 + Config git
-```s
+```bash
 $ git config --global user.name "user"
 $ git config --global user.email "email"
 $ git config --list
 ```
 
 + Installation of necessary tools
-```s
+```bash
 $ sudo apt-get install gawk wget git-core diffstat unzip texinf o gcc-multilib build-essential chrpath socat libsdl1.2-dev libsdl1.2-dev xterm sed c vs subversion coreutils texi2html docbook-utils python-pysqlite2 help2man make gcc g++ desktop-file-utils libgl1-mesa-dev libglu1-mesa-dev mercurial autoconf automake groff curl lzop asciidoc u-boot-tools python3-pip
 ```
 
 + Setup env google repo
-```s
+```bash
 $ mkdir -p ~/.bin
 $ PATH="${HOME}/.bin:${PATH}"
 $ curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
@@ -53,7 +53,7 @@ $ cp repo ~/.bin/       (repo get from 03-tools/repo) if ERROR get from https://
 ```
 
 + Repo sync source from google repo
-```s
+```bash
 $ mkdir MYIR
 $ cd MYIR
 $ vim ~/.gitconfig     and add this below
@@ -73,7 +73,7 @@ $ vim ~/.gitconfig     and add this below
         insteadOf = https://source.codeaurora.org/mirrored_source/external/imx/DevIL-1.8.0.zip
 ```
 
-```s
+```bash
 $ sudo apt install repo
 $ repo init -u https://github.com/MYiR-Dev/myir-imx-manifest.git --no-clone-bundle --depth=1 -m myir-i.mx8m-5.4.3-2.0.0.xml -b i.MX8M-5.4-zeus
 $ repo sync
@@ -84,7 +84,7 @@ $ repo sync
 </p>
 
 + Check info source and choose version
-```s
+```bash
 $ sudo apt  install tree
 $ tree -a -L 1 ../MYIR/
 $ vim sources/meta-myir/meta-bsp/conf/machine/mys-8mmx.conf
@@ -97,7 +97,7 @@ $ vim sources/meta-myir/meta-bsp/conf/machine/mys-8mmx.conf
 </p>
 
 + Check command build
-```s
+```bash
 $ source setup-environment : You will see command and guideline command
 $ DISTRO=fsl-imx-xwayland MACHINE=mys-8mmx source sources/meta-myir/tools/myir-setup-release.sh -b build-xwayland
 Enter space until 100% and choose y
@@ -196,7 +196,7 @@ Enter space until 100% and choose y
 </p>
 
 + Install environment tools
-```s
+```bash
 $ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev libsdl1.2-dev xterm sed cvs subversion coreutils texi2html docbook-utils python-pysqlite2 help2man make gcc g++ desktop-file-utils libgl1-mesa-dev libglu1-mesa-dev mercurial autoconf automake groff curl lzop asciidoc u-boot-tools python3-pip
 ```
 
@@ -217,7 +217,7 @@ $ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib bu
 
 ***Flash Image SD card***
 + Sau khi build Image xong ta vào folder tmp/deploy/images/mys-8mmx sẽ thấy có 1 file đuôi là wic.bz2, ta chỉ cần giải nén file này và dd trực tiếp file này vào thẻ SD card là có thể boot board thành công, vì file này đã chứa tất cả các thành phần linux BSP rồi
-```s
+```bash
 $ bunzip2 -dk -f myir-image-full-mys-8mmx-20231220092504.rootfs.wic.bz2
 $ sudo dd if=myir-image-full-mys-8mmx.wic of=/dev/sdb bs=1M
 ```

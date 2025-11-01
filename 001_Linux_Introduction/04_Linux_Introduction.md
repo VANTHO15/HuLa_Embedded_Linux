@@ -359,7 +359,7 @@ Mỗi dự án đều bắt đầu bằng việc thu thập, tùy chỉnh và tr
 
 ### 9️⃣ Chạy chương trình c
 ***Khi có 1 file main.c***
-```s
+```bash
 Câu lệnh: gcc –o name_file_output main.c
 Sau khi chạy lệnh sẽ tạo ra 1 file name_file_output.
 Chạy file đó là ra được kết quả: ./ name_file_output
@@ -367,14 +367,14 @@ Chạy file đó là ra được kết quả: ./ name_file_output
 <img src="images/Screenshot_6.png" alt="hello" style="width:500px; height:auto;"/>  
 
 ***Khi có nhiều file***
-```s
+```bash
 Ta bỏ tất cả file .h vào folder include là được
 gcc –o file_name_output main.c tho.c –I include/
 ```
 <img src="images/Screenshot_7.png" alt="hello" style="width:500px; height:auto;"/>  
 
 ***Tất cả file .c và .h bỏ chung 1 folder***
-```s
+```bash
 gcc –o file_name_output main.c tho.c –I. ( Dấu chấm cuối )
 ```
 

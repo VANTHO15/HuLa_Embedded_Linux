@@ -34,7 +34,7 @@ Hiện tại mình biết 3 cách để có được môi trường Ubuntu, ở 
 
 ### 3.1. Cách ssh từ MobaXterm đến VitualBox
 - Chúng ta thực hiện trên terminal của máy VitualBox trước:
-```s
+```bash
 sudo apt install openssh-server
 sudo apt install net-tools
 ifconfig

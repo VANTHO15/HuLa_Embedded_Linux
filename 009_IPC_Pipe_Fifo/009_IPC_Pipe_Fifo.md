@@ -72,7 +72,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
     + Pipe giao tiếp coi như 1 file thôi
 
 + Code tạo pipe và đọc ghi với pipe
-```s
+```bash
 #include <unistd.h>   
 #include <fcntl.h>
 #include <stdio.h>
@@ -94,7 +94,7 @@ int main()
 ```
 
 + Code tạo pipe và đọc ghi với pipe
-```s
+```bash
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -131,7 +131,7 @@ int main(int argc, char const *argv[])
 ```
 
 + Read từ pipe thì bị block do pipe đang rỗng, Ctrl C để ghi vào pipe thì mới đọc được và thoát
-```s
+```bash
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -164,7 +164,7 @@ int main(int argc, char const *argv[])
 ```
 
 + Code ở thằng con sau khi đọc hết data thì break và kết thúc thằng con, khi này thằng cha đăng kí SIGCHILD nên khi này nó nhảy vào hàm func và giải phóng thằng con đi
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -260,7 +260,7 @@ int main(int argc, char const *argv[])
     + Trường hợp 2 là ngược lại, 2 đầu con mở còn 2 đầu cha đóng
 
 + Code ví dụ write đóng cả 2 đầu còn read thì cứ đọc trong while 1
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -357,7 +357,7 @@ int main(int argc, char const *argv[])
 + Bài toán producer - consumer : Thằng producer sẽ gửi data và thằng consumer sẽ nhận, bình thường thì consumer sẽ bị block do tính chát của pipe, nếu producer gửi thì nó sẽ nhận
 
 1. File Producer.c
-```s
+```bash
 #include <stdio.h>
 #include <string.h>
 #include <fcntl.h>
@@ -389,7 +389,7 @@ int main(int argc, char const *argv[])
 }
 ```
 2. File Consumer.c
-```s
+```bash
 #include <stdio.h>
 #include <string.h>
 #include <fcntl.h>

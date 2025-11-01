@@ -35,13 +35,13 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 ### 2️⃣ Create a command uboot
 ***Để tạo 1 command uboot ta làm theo các bước sau:***
 1. Trong folder uboot-imx/cmd ta tạo 1 file ví dụ hula.c
-```s
+```bash
 $ cd uboot-imx/cmd
 $ touch hula.c
 ```
 
 2. Nội dung của file hula.c sẽ như sau
-```s
+```bash
 #include <common.h>
 #include <command.h>
 
@@ -72,7 +72,7 @@ U_BOOT_CMD(
 ```
 
 3. Sau đó ở trong folder uboot-imx/cmd ta mở file Makefile lên và thêm command ta mới tạo vào
-```s
+```bash
 $ cd uboot-imx/cmd
 $ vim Makefile
 $ obj-y += hula.o
@@ -82,7 +82,7 @@ $ obj-y += hula.o
 </p>
 
 4. Sau đó ta đi build lại uboot
-```s
+```bash
 $ cd uboot-imx
 $ make clean
 $ make imx8mm_ddr4_evk_defconfig
@@ -90,7 +90,7 @@ $ make -j16
 ```
 
 5. Boot board và vào uboot, ta gõ hula_cmd sẽ in ra kết quả
-```s
+```bash
 $ hula_cmd hulatho
 ```
 <p align="center">
@@ -117,7 +117,7 @@ $ hula_cmd hulatho
 
 + Tính theo integer thì GPIO1_IO9 sẽ tương ứng với số 9
 
-```s
+```bash
 $ gpio
 $ gpio set 9
 $ gpio clear 9
@@ -147,7 +147,7 @@ $ gpio clear 9
 </p>
 
 + Xét thêm 1 ví dụ, ta biết GPIO_1_ADDR_BASE=0x30200000 còn led GPIO1_IO9 là pin thứ 9. Vậy ta sẽ dùng gpio set và gpio clear để bật sáng tắt led và xem giá trị của thanh ghi DR có offset là 0
-```s
+```bash
 $ gpio set 9
 $ md 0x30200000 4
 $ gpio clear 9
@@ -178,7 +178,7 @@ $ md 0x30200000 4
   + Suy ra 0x30200004
 
 + Cần set như sau:
-```s
+```bash
 $ mw 0x303840B0 0x00003333    : Enable clock cho GPIO1_IO9
 $ mw 0x303840B4 0x00003333    : Set clock cho GPIO1_IO9
 $ mw 0x3033003C 0x00000010    : ENABLED SION, set bit 4
@@ -193,7 +193,7 @@ $ md 0x30200004 4             : Xem thanh ghi DR
   + Gõ led_on thì led sáng
   + Gõ led_off thì led tắt
 
-```s
+```bash
 /**Use comand line u-boot on, off led
  * GPIO1_IO9
  * cmd: led_cmd LED_ON  => led on

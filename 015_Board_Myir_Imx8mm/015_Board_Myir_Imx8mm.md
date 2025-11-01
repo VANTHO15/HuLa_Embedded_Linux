@@ -52,7 +52,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 ### 2️⃣ Insert wic file vào thẻ nhớ SD
 + Ta kéo tới mục 4.3.2 của file MYS-8MMX-V2 Product Manual-V2.0.pdf, ta sẽ thấy hướng dẫn cách insert file .wic vào thử SD card
 
-```s
+```bash
 $ bunzip2 -dk -f myir-image-full-mys-8mmx.wic.bz2
 $ sudo dd if=myir-image-full-mys-8mmx.wic of=/dev/sdb bs=1M && sync
 $ source toolchain/environment-setup-aarch64-poky-linux

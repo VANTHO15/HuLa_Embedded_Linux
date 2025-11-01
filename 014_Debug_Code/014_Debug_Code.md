@@ -27,7 +27,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 ### 1️⃣ GDB
 
 + Ta có đoạn code sau:
-```s
+```bash
 #include <stdio.h>
 
 void sum(int i)
@@ -75,7 +75,7 @@ int main()
 
 ***GDB fix lỗi segmentation fault, core dumped***
 + Ta có đoạn code sau
-```s
+```bash
 #include <stdio.h>
 void sum()
 {
@@ -135,7 +135,7 @@ int main()
 
 ### 2️⃣ Valgrind
 + Ta có đoạn code sau: Ta khởi tạo mà không free đi​
-```s
+```bash
 #include<stdio.h>
 #include<stdlib.h>
 int main(int argc, char* argv[])
@@ -187,7 +187,7 @@ int main(int argc, char* argv[])
 
 + Strace = Strack trace
 + Ta có đoạn code sau: Khi ta ghi vào file thì con trỏ leeksek đang ở cuối file, nên lúc đọc file ra sẽ không đọc được gì cả. nếu không có kiến thức về file thì rất khó phát hiện. Nên ta dùng strace để xem tường bước chạy code thì chương trình làm gì
-```s
+```bash
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
