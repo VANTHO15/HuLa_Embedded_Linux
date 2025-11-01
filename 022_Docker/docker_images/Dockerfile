@@ -1,0 +1,49 @@
+# Sử dụng Ubuntu 18.04 làm base image
+FROM ubuntu:18.04
+
+# Khai báo các biến ARG (có thể truyền vào khi build)
+ARG host_uid=1000
+ARG host_gid=1000
+ARG USERNAME=u18_04
+ARG TZ_VALUE="Asia/Ho_Chi_Minh"
+
+# Thiết lập biến môi trường cho múi giờ và locale
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=$TZ_VALUE
+ENV LANG=en_US.UTF-8
+ENV TERM=xterm-256color
+
+# Cập nhật và cài đặt các gói cần thiết, bao gồm SSH, TFTP, NFS
+RUN apt update && apt upgrade -y && \
+    apt update && \
+    apt install -y --no-install-recommends tzdata apt-utils sudo curl nano pv repo \
+        tmux tree vim zip p7zip-full whiptail locales libssl-dev crossbuild-essential-arm64 \
+        bc bison flex make libc6-dev libncurses5-dev gawk wget git diffstat unzip \
+        texinfo gcc build-essential chrpath socat cpio python3 python3-pip \
+        python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 \
+        python3-subunit zstd liblz4-tool file libacl1 libsdl1.2-dev pylint3 xterm \
+        net-tools openssh-server htop && \
+    ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && \
+    echo $TZ_VALUE > /etc/timezone && \
+    dpkg-reconfigure -f noninteractive tzdata && \
+    apt clean && rm -rf /var/lib/apt/lists/*
+
+# Cấu hình locale
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=en_US.UTF-8
+
+# Tạo tài khoản người dùng với UID và GID khớp với host
+RUN groupadd -g $host_gid $USERNAME && \
+    adduser --disabled-password --shell /bin/bash --uid $host_uid --gid $host_gid --gecos '' $USERNAME && \
+	echo "$USERNAME:latest" | chpasswd && \
+    adduser $USERNAME sudo
+
+# Cấp quyền sudo không cần mật khẩu cho nhóm sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+# Chuyển sang người dùng không phải root
+USER $USERNAME
+
+# Khởi động bash
+CMD ["/bin/bash"]

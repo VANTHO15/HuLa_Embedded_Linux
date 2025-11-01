@@ -4,7 +4,7 @@
 
 ### 1️⃣ Introduction
 
-+ Ở bài trước chúng ta đã biết về lý thuyết yocto và thực hành với yocto Zues. Nếu các bạn chưa đọc thì xem link này nha [019_Build_Yocto_Imx8mm.md](../019_Build_Yocto_Imx8mm/019_Build_Yocto_Imx8mm.md). Ở bài này chúng ta sẽ tìm hiểu thêm về lý thuyết và thực hành liên quan về yocto Scarthgap nhé.
++ Ở bài trước chúng ta đã biết về lý thuyết yocto và thực hành với yocto Scarthgap. Nếu các bạn chưa đọc thì xem link này nha [020_Yocto_Part1.md](../020_Yocto_Part1/020_Yocto_Part1.md). Ở bài này chúng ta sẽ tìm hiểu thêm về lý thuyết và thực hành liên quan về yocto Scarthgap nhé.
 
 ### 2️⃣ Summary
 

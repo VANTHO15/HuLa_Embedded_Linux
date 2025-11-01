@@ -4,7 +4,7 @@
 
 ### 1️⃣ Introduction
 
-+ Ở bài trước chúng ta đã build yocto cho board myir imx8mm. Nếu các bạn chưa đọc thì xem link này nha [019_Build_Yocto_Imx8mm.md](../019_Build_Yocto_Imx8mm/019_Build_Yocto_Imx8mm.md). Ở bài này chúng ta sẽ tìm hiểu lý thuyết và thực hành liên quan về yocto nhé.
++ Ở bài trước chúng ta đã build yocto cho board myir imx8mm. Nếu các bạn chưa đọc thì xem link này nha [019_Build_Yocto_Imx8mm.md](../019_Build_Yocto_Imx8mm/019_Build_Yocto_Imx8mm.md). Ở bài này chúng ta sẽ tìm hiểu lý thuyết và thực hành liên quan về yocto zues nhé.
 
 ### 2️⃣ Summary
 
