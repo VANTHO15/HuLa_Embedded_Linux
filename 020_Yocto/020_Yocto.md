@@ -47,7 +47,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 + Mỗi version yocto sẽ đi kèm theo là 1 bản ubuntu hỗ trợ, nên ta cần kiếm tra xem ta đang muốn dùng bản yocto nào để từ đó cài đặt ubuntu cho phù hợp. Check link sau để biết version nào đi kèm với yocto version nào, tính đến năm 2025 [LINK](https://dev.variscite.com/dart-mx8m-plus/yocto/yocto-development-environment/)
 
 <p align="center">
-  <img src="Images/Screenshot_1.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_1.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Các khái niệm***
@@ -88,7 +88,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 
 + Một số trường hợp thì metadata có sẵn của Poky không đủ để build ra software nên cần lấy từ nguồn khác bỏ vào ( ví dụ meta-ti...)
 <p align="center">
-  <img src="Images/Screenshot_2.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_2.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 + Các Linux software packages có thể build dùng Poky bao gồm 
@@ -99,7 +99,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 + Ta mở folder source/poke lên sẽ thấy các file như ảnh dưới
 
 <p align="center">
-  <img src="Images/Screenshot_3.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_3.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Metadata là gì***
@@ -160,7 +160,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 	+ Helper scripts to setup environment
 	+ Emulator QEMU to test the image
 <p align="center">
-  <img src="Images/Screenshot_67.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_67.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Workflow of Yocto Project***
@@ -249,7 +249,7 @@ Ví dụ: IMAGE_INSTALL += "usbutils" or IMAGE_INSTALL_append = " usbutils"
 $ runqemu core-image-minimal nographic
 ```
 <p align="center">
-  <img src="Images/Screenshot_5.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_5.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Recipes là gì***
@@ -267,7 +267,7 @@ $ runqemu core-image-minimal nographic
 + Sau khi có thông tin ở trên xong thì bitbake sẽ tạo ra 1 tập hợp các nhiệm vụ được sắp xếp và sẽ thực hiện những nhiệm vụ này
 + Ví dụ về 1 recipe cơ bản
 <p align="center">
-  <img src="Images/Screenshot_6.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_6.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Configuration file***
@@ -294,7 +294,7 @@ $ runqemu core-image-minimal nographic
   + cmake.bbclass: thực hiện cmake trong recipes
   + kernel.bbclass: thực hiện build kernel, chứa code để build all kernel tree
 <p align="center">
-  <img src="Images/Screenshot_7.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_7.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Layers là gì***
@@ -310,11 +310,11 @@ $ runqemu core-image-minimal nographic
 + Meta-poky: bản thân nó là một Layer được áp dụng trên layer metadata OE-Core
 
 <p align="center">
-  <img src="Images/Screenshot_8.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_8.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 <p align="center">
-  <img src="Images/Screenshot_9.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_9.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 + Câu hỏi đặt ra: Những lớp nào được sử dụng bởi hệ thống xây dựng Poky?
@@ -327,7 +327,7 @@ $ runqemu core-image-minimal nographic
   + Để thêm 1 layer mới thì ta mở file build/conf/bblayers.conf và thêm vào đây
 
 <p align="center">
-  <img src="Images/Screenshot_10.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_10.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Image and Packages là gì***
@@ -375,7 +375,7 @@ Check PACKAGES =+ "tiffxx tiff-utils"
     + $ bitbake -e core-image-minimal | grep ^PARALLEL_MAKE=
 
     <p align="center">
-      <img src="Images/Screenshot_11.png" alt="hello" style="width:500px; height:auto;"/>   
+      <img src="Images/Screenshot_11.png" alt="hello" style="width:1000px; height:auto;"/>   
     </p>
 
 ***Các folder quan trọng khác***
@@ -417,7 +417,7 @@ $ vim conf/local.conf ( mở MACHINE ?= "beaglebone-yocto" ra)
 $ bitbake core-image-minimal
 ```
 <p align="center">
-  <img src="Images/Screenshot_12.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_12.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 + Sau khi quá trình xây dựng hoàn tất, ta sẽ có image của mình tại tmp/deploy/images/beaglebone-yocto/
@@ -546,10 +546,10 @@ $ sudo mkfs.ext4 -L "ROOT" /dev/sdb2
   + vim conf/bblayers.conf và thêm vào như hình bên
   + Sau đó bitbake-layers show-layers
 <p align="center">
-  <img src="Images/Screenshot_13.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_13.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 <p align="center">
-  <img src="Images/Screenshot_14.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_14.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Các bước build image với meta-ti***
@@ -589,7 +589,7 @@ $ sudo mkfs.ext4 -L "ROOT" /dev/sdb2
 + Các file .conf (local bblayers) đều kiểm tra được biến hết
 
 <p align="center">
-  <img src="Images/Screenshot_15.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_15.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Biến***
@@ -702,7 +702,7 @@ bitbake-layers show-layers
 ```
 
 <p align="center">
-  <img src="Images/Screenshot_16.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_16.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 + Create layer bằng scrip
@@ -742,7 +742,7 @@ ls ../source/meta-mylayer/
 + Cd yocto_bbb/source
 + yocto-check-layer meta-mylayer: ta sẽ thấy được PASS hay FAIL
 <p align="center">
-  <img src="Images/Screenshot_17.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_17.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***IMAGE***
@@ -766,7 +766,7 @@ ls ../source/meta-mylayer/
 + Chúng là các tệp công thức (.bb) và bắt đầu bằng packagegroup-
 + Ví dụ:  packagegroup-core-boot: Cung cấp bộ gói tối thiểu cần thiết để tạo image có thể khởi động bằng console.
 <p align="center">
-  <img src="Images/Screenshot_18.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_18.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Tạo một IMAGE từ đầu***
@@ -774,10 +774,10 @@ ls ../source/meta-mylayer/
 + IMAGE_INSTALL để chỉ định các gói cần cài đặt vào hình ảnh thông qua image.bbclass.
 + Cd source/poky/meta/classes   vim core-image.bbclass
 <p align="center">
-  <img src="Images/Screenshot_19.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_19.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 <p align="center">
-  <img src="Images/Screenshot_20.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_20.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 + cd source/meta-mylayer
@@ -806,7 +806,7 @@ Khi này gõ lệnh cmd “lsusb” sẽ thành công
 poweroff
 ```
 <p align="center">
-  <img src="Images/Screenshot_21.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_21.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Sử dụng lại hình ảnh hiện có***
@@ -821,7 +821,7 @@ poweroff
   + runqemu nographic   poweroff
 
 <p align="center">
-  <img src="Images/Screenshot_22.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_22.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Image feature***
@@ -844,7 +844,7 @@ poweroff
 + runqemu nographic poweroff
 
 <p align="center">
-  <img src="Images/Screenshot_23.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_23.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Read-Only Root Filesystem***
@@ -862,7 +862,7 @@ poweroff
 + Chỉ định danh sách các ngôn ngữ để cài đặt vào hình ảnh trong quá trình xây dựng hệ thống tập tin gốc
 + IMAGE_LINGUAS = "zh-cn"
 <p align="center">
-  <img src="Images/Screenshot_24.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_24.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***IMAGE_FSTYPES***
@@ -883,7 +883,7 @@ poweroff
   + Bitbake tho-image
   + Cd build_bbb và runqemu nographic
 <p align="center">
-  <img src="Images/Screenshot_25.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_25.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***IMAGE_MANIFEST***
@@ -965,7 +965,7 @@ poweroff
 + Nếu bản vá của bạn cần loại bỏ nhiều cấp thư mục hơn, hãy chỉ định số cấp bằng cách sử dụng tùy chọn "striplevel" trong mục nhập SRC_URI cho bản vá
 
 <p align="center">
-  <img src="Images/Screenshot_26.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_26.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Licensing***
@@ -982,7 +982,7 @@ poweroff
     + Ví dụ giả sử phần mềm có tệp COPYING :
       + LIC_FILES_CHKSUM = "tệp://COPYING;md5=xxx"
 <p align="center">
-  <img src="Images/Screenshot_27.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_27.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Giai đoạn 4: Cấu hình (do_configure)***
@@ -1042,7 +1042,7 @@ do_install() {
 
 + Bước 5: bitbake myhello
 <p align="center">
-  <img src="Images/Screenshot_28.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_28.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Lệnh install***
@@ -1050,7 +1050,7 @@ do_install() {
   + Trong 1 lệnh install duy nhất ta có thể:
     + Thực hiện nhiều bước, vừa copy vừa thay đổi quyền file, vừa có thể remove debugging
 <p align="center">
-  <img src="Images/Screenshot_29.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_29.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Cách lấy checksum md5***
@@ -1059,7 +1059,7 @@ do_install() {
 + md5sum MIT
 + Khi này sẽ có đoạn mã
 <p align="center">
-  <img src="Images/Screenshot_30.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_30.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***WORKDIR***
@@ -1076,7 +1076,7 @@ do_install() {
   + PV: Phiên bản công thức
   + PR: Bản sửa đổi công thức
 <p align="center">
-  <img src="Images/Screenshot_31.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_31.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***OpenEmbedded Variables***
@@ -1132,7 +1132,7 @@ do_install() {
 + IMAGE_INSTALL += "myhello"
 + Sau đó  bitbake tho-image
 <p align="center">
-  <img src="Images/Screenshot_32.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_32.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Run qemu***
@@ -1143,7 +1143,7 @@ do_install() {
 + userprog   (sẽ ra hello thonv12)
 
 <p align="center">
-  <img src="Images/Screenshot_33.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_33.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Build logs file***
@@ -1163,7 +1163,7 @@ do_install() {
 + vim run.do_install
 
 <p align="center">
-  <img src="Images/Screenshot_34.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_34.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Print log***
@@ -1192,7 +1192,7 @@ bbplain "*************************************“
 ```
 
 <p align="center">
-  <img src="Images/Screenshot_35.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_35.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Debug Output***
@@ -1202,7 +1202,7 @@ bbplain "*************************************“
 + Cách sử dụng phổ biến nhất là –DDD
 > bitbake myhello -DDD
 <p align="center">
-  <img src="Images/Screenshot_36.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_36.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Recipe multi file***
@@ -1220,7 +1220,7 @@ runqemu nographic
 userprog
 ```
 <p align="center">
-  <img src="Images/Screenshot_38.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_38.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Nếu recipe mà có make file***
@@ -1233,7 +1233,7 @@ userprog
   + Cd images
   + Vim tho-image.bb  Sửa lại thành mymakefle
 <p align="center">
-  <img src="Images/Screenshot_39.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_39.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ```s
@@ -1269,13 +1269,13 @@ userprog
   + bitbake -c clean mymakefile
   + bitbake mymakefile
 <p align="center">
-  <img src="Images/Screenshot_41.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_41.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***CLEANBROKEN***
 + Khi CLEANBROKEN = 1 thì là đang chỉ định rằng Makefile của ta không có Clean, nên khi chạy thì openembedded sẽ không chạy make clean, còn make clean là hành động mặc định
 <p align="center">
-  <img src="Images/Screenshot_42.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_42.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***GIT-RECIPE***
@@ -1319,7 +1319,7 @@ userprog
 
 + Thêm mygit vào image
 <p align="center">
-  <img src="Images/Screenshot_45.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_45.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Nguồn git local***
@@ -1329,7 +1329,7 @@ userprog
   + Git clone https://github.com/VANTHO15/git_recipe.git
   + Git log  : sau đó lấy commit bỏ vào dưới
 <p align="center">
-  <img src="Images/Screenshot_46.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_46.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***private repositories***
@@ -1344,7 +1344,7 @@ userprog
 + "tag": Chỉ định thẻ để sử dụng cho quá trình thanh toán. Để giải quyết chính xác các thẻ, BitBake phải truy cập vào mạng
 + SRCREV không cần thiết trong trường hợp này
 <p align="center">
-  <img src="Images/Screenshot_47.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_47.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Bản vá lỗi***
@@ -1358,13 +1358,13 @@ userprog
 + Các bản vá phải luôn nằm trong thư mục con chứa công thức.
 + Yocto sẽ tự động áp dụng các bản vá này khi cần xây dựng công thức của bạn.
 <p align="center">
-  <img src="Images/Screenshot_48.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_48.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 + Thêm file patch vào
 + Bitbake mygit
 <p align="center">
-  <img src="Images/Screenshot_49.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_49.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***PACKAGES variable***
@@ -1381,16 +1381,16 @@ userprog
 + Nên sử dụng ${sysconfdir} thay vì /etc hoặc ${bindir} thay vì /usr/bin
 + Các biến PACKAGES và FILES_* cho biết cách các tệp được install bởi tác vụ do_install được đóng gói ở đâu
 <p align="center">
-  <img src="Images/Screenshot_50.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_50.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 <p align="center">
-  <img src="Images/Screenshot_51.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_51.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 + Cd source/poky
 + vim meta/conf/bitbake.conf   : ta sẽ thấy các biến như bindir, datadir …
 <p align="center">
-  <img src="Images/Screenshot_52.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_52.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Add README file***
@@ -1403,7 +1403,7 @@ userprog
 + bitbake tho-image
 + Runqemu nographic
 <p align="center">
-  <img src="Images/Screenshot_53.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_53.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***1 file ở nhiều PACKAGE***
@@ -1415,7 +1415,7 @@ userprog
 + (ta thấy myhello-dbg nằm phía trước myhello)
 
 <p align="center">
-  <img src="Images/Screenshot_54.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_54.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ***Create PACKAGE của ta***
@@ -1621,7 +1621,7 @@ trong local.conf sẽ chưa đường dẫn này (SSTATE_DIR)
   + bitbake myhello
   + bitbake mytho
 <p align="center">
-  <img src="Images/Screenshot_66.png" alt="hello" style="width:500px; height:auto;"/>   
+  <img src="Images/Screenshot_66.png" alt="hello" style="width:1000px; height:auto;"/>   
 </p>
 
 ## ✔️ Conclusion
