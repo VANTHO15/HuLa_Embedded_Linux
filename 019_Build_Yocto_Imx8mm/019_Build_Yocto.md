@@ -218,8 +218,8 @@ $ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib bu
 ***Flash Image SD card***
 + Sau khi build Image xong ta vào folder tmp/deploy/images/mys-8mmx sẽ thấy có 1 file đuôi là wic.bz2, ta chỉ cần giải nén file này và dd trực tiếp file này vào thẻ SD card là có thể boot board thành công, vì file này đã chứa tất cả các thành phần linux BSP rồi
 ```bash
-$ bunzip2 -dk -f myir-image-full-mys-8mmx-20231220092504.rootfs.wic.bz2
-$ sudo dd if=myir-image-full-mys-8mmx.wic of=/dev/sdb bs=1M
+$ bunzip2 -dk -f myir-image-full-mys-8mmx-20251008060345.rootfs.wic.bz2
+$ sudo dd if=myir-image-full-mys-8mmx-20251008060345.rootfs.wic of=/dev/sdb bs=1M
 ```
 
 ## ✔️ Conclusion
