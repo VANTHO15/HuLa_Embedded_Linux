@@ -1,12 +1,10 @@
-# 💚 Docker 💛
+# 💚 Lý thuyết Kernel 💛
 
 ## 👉 Introduction and Summary
 
 ### 1️⃣ Introduction
 
-+ Ở bài trước chúng ta đã biết về lý thuyết yocto và thực hành với yocto Scarthgap. Nếu các bạn chưa đọc thì xem link này nha [021_Yocto_Part2.md](../021_Yocto_Part2/021_Yocto_Part2.md). Ở bài này chúng ta sẽ tìm hiểu về docker nhé.
-
-+ Lý thuyết docker mình sẽ bỏ qua mọi người có thể đọc trên mạng. Ở bài này chủ yếu chúng ta tạo ra docker image từ docker file sau đó từ docker file tạo ra container. Lưu ý mỗi container là 1 máy Ubuntu. Ví dụ container 1 tạo ubuntu 18.08 còn container 2 tạo ra ubuntu 22.04.
++ Ở bài trước chúng ta đã biết về lý thuyết Docker và tạo 1 container để chạy được ubuntu 18.04. Nếu các bạn chưa đọc thì xem link này nha [022_Docker.md](../022_Docker/022_Docker.md). Ở bài này chúng ta sẽ tìm hiểu về kernrl nhé.
 
 ### 2️⃣ Summary
 
@@ -133,43 +131,14 @@ $ usermod -aG sudo ${USER}
 
 ### 4️⃣ Chạy các command
 1. Để file [Dockerfile](./docker_images/Dockerfile) vào thư mục làm việc sau đó chạy lệnh:
-```bash
 docker build -t u1804:latest .
-```
-
-hoặc
-
-```bash
-docker build --no-cache \
-  --build-arg "host_uid=$(id -u)" \
-  --build-arg "host_gid=$(id -g)" \
-  --build-arg "USERNAME=$USER" \
-  --build-arg "TZ_VALUE=$(cat /etc/timezone)" \
-  --tag rz_ubuntu-20.04 \
-  --file Dockerfile.rzg_ubuntu-20.04  .
-```
-
 
 2. Khởi tạo container từ image u1804:latest vừa build xong:
-```bash
 docker run -it \
   --name="u1804_$(date +%s)" \
   --volume="/home/hulatho/share_folder_VM":"/home/hulathodocker/share_folder_VM" \
   --workdir="/home/hulathodocker" \
   u1804
-```
-
-hoặc 
-
-```bash
-mkdir -p /home/$USER/yocto
-docker run -it \
-  --name=my_container_for_20.04 \
-  --volume="/home/$USER/yocto:/home/$USER/yocto" \
-  --workdir="/home/$USER" \
-  rz_ubuntu-20.04
-```
-
 
 + Có thể sử dụng: "apt list" Để kiểm tra các gói chúng ta cần cài ở dockerfile có đúng hay không?
 + lscpu: để xem thông số cpu trên máy docker container
