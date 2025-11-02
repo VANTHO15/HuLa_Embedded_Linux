@@ -434,7 +434,7 @@ Tất cả file .c và .h bỏ chung 1 folder, hãy viết câu lệnh để bui
 
 [12] Embedded Linux system development by Bootlin
 
-[13] Luu Phu An
+[13] Anh PhuLA
 
 [14] https://viblo.asia/p/linux-boot-process-a-z-1Je5E6XLKnL
 

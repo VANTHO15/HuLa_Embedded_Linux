@@ -552,7 +552,7 @@ int main()
 
 [4] https://bizflycloud.vn/tin-tuc/tim-hieu-ve-process-trong-linux-20210430234059408.htm 
 
-[5] Luu Phu An
+[5] Anh PhuLA
 
 [6] https://www.geeksforgeeks.org/linux-unix/processes-in-linuxunix/ 
 
