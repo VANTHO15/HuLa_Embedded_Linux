@@ -14,7 +14,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
     - [1. Introduction](#1️⃣-introduction)
     - [2. Summary](#2️⃣-summary)
 - [II. Contents](#👉-contents)
-    - [1. Giới thiệu](#1️⃣-giới-thiệu)
+    - [1. Linux kernel header](#1️⃣-linux-kernel-header)
     - [2. Kernal module basic](#2️⃣-kernel-module-basic)
     - [3. Thực hành](#3️⃣-thực-hành)
 - [III. Conclusion](#✔️-conclusion)
