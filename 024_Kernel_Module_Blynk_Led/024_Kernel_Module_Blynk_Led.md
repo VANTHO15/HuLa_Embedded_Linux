@@ -4,7 +4,7 @@
 
 ### 1️⃣ Introduction
 
-+ Ở bài trước chúng ta đã biết về lý thuyết Docker và tạo 1 container để chạy được ubuntu 18.04. Nếu các bạn chưa đọc thì xem link này nha [022_Docker.md](../022_Docker/022_Docker.md). Ở bài này chúng ta sẽ tìm hiểu về linux kernel module nhé. Ở bài này sẽ chưa cần đụng đến mạch đâu nhé.
++ Ở bài trước chúng ta đã biết về cách tạo 1 module kernel basic. Nếu các bạn chưa đọc thì xem link này nha [022_Docker.md](../022_Docker/022_Docker.md). Ở bài này chúng ta sẽ tìm hiểu về ioremap và blynk led trên module kernel. Ở bài này dùng đến mạch rồi á nha.
 
 ### 2️⃣ Summary
 
