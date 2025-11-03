@@ -122,12 +122,12 @@ MODULE_DESCRIPTION(DRIVER_DESC);    /* What does this module do */
 + File Makefile: Trong file này ta phải thêm đường dẫn trỏ tới folder driver mà ta mới tạo (hula)
 	> obj-$(CONFIG_LED_HULA) += hula/
 + File Kconfig: Trong file này ta phải thêm đường dẫn trỏ tới file Kconfig trong driver ta mới tạo
-	> source "driver/hula/Kconfig"
+	> source "drivers/hula/Kconfig"
 
 ```bash
 $ cd /home/hulatho/working_space/build-xwayland/tmp/work-shared/mys-8mmx/kernel-source/drivers/
 $ vim Makefile     : Thêm obj-$(CONFIG_LED_HULA) += hula/
-$ vim Kconfig      : Thêm source "driver/hula/Kconfig"
+$ vim Kconfig      : Thêm source "drivers/hula/Kconfig"
 ```
 
 ​<p align="center">
