@@ -42,7 +42,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 
 + Chúng ta vim file mys_iot_defconfig chúng ta sẽ thấy các biến được gán giá trị là y hay m. y tương ứng với Build-in kernel module còn m tương ứng với module, nghĩa là Build module (.ko)
 
-***Bước 2: Tạo driver ***
+***Bước 2: Tạo driver***
 + Khi này ta quay lại đường dẫn /home/hulatho/working_space/build-xwayland/tmp/work-shared/mys-8mmx/kernel-source/drivers/ và tạo 1 driver tên hula gồm 3 file hulaled.c, Kconfig và Makefile.
 
 ```bash
@@ -161,7 +161,7 @@ $ cat .config | grep HULA
 	+ kernel sẽ tìm kiếm các configuration trong file .config và build các module tương ứng với config đó.
 	+ Mỗi board đều có 1 file <device>_defconfig thường được nằm ở KERNEL_SOURCE/arch/$(ARCH)/configs. Như board IMX8MM của ta là file mys_iot_defconfig
 
-***Note thêm để giải thcish thôi***
+***Note thêm để giải thích thôi***
 + Kernel Source Cleaning
 ```bash
 $ make clean        : Delete generated file
