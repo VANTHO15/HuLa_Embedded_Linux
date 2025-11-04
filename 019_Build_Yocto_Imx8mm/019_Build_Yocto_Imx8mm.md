@@ -231,6 +231,46 @@ $ sudo dd if=myir-image-full-mys-8mmx-20251008060345.rootfs.wic of=/dev/sdb bs=1
 ## 📺 NOTE
 + Video build yocto MYIR IMX8MM : [Video Youtube](https://www.youtube.com/watch?v=VC0RBb2W9H0)
 
+```bash
+Host Comfiguration :
+--CPU: i7-6700 4-core 8 threads
+--Total memory: 32GB DDR4
+--Windows 7 64bit
+--USB3.1 SSD ( For Linux virtual machine)
+Virtual Machine:
+--Vmware player 15
+--Ubuntu 18.04 LTS / 20.04 LTS /Debian-10
+
+(1)Setting root user and password
+If the step has been done, omit it, please!
+# sudo passwd root
+(2)Run these 2 commands to update software and system
+# sudo apt-get update
+# sudo apt-get upgrade
+(3)Installing software packages for cross-compile linux BSP
+# sudo apt-get install flex bison gperf build-essential zlib1g-dev
+# sudo apt-get install lib32ncurses5-dev x11proto-core-dev
+# sudo apt-get install libx11-dev lib32z1-dev libgl1-mesa-dev
+# sudo apt-get install tofrodos python-markdown libxml2-utils xsltproc
+# sudo apt-get install uuid-dev:i386 liblzo2-dev:i386 gcc-multilib g++-multilib
+[commnent]
+For Debian-10 uuid-dev:i386 liblzo2-dev:i386---> uuid-dev liblzo2-dev
+# sudo apt-get install subversion openssh-server openssh-client uuid uuid-dev zlib1g-dev
+# sudo apt-get install liblz-dev lzop liblzo2-2 liblzo2-dev git-core curl
+# sudo apt-get install python3 python3-pip python3-pexpect python3-git python3-jinja2 pylint3
+# sudo apt-get install u-boot-tools mtd-utils android-tools-fsutils
+[commnent]
+For ubuntu 20.04 LTS, don’t need android-tools-fsutils. So remove it, please!
+# sudo apt-get install openjdk-8-jdk device-tree-compiler aptitude
+[commnent]
+For Debian-10 openjdk-8-jdk --- > default-jdk
+# sudo apt-get install libcurl4-openssl-dev nss-updatedb
+# sudo apt-get install chrpath texinfo gawk cpio diffstat
+# sudo apt-get install libncursesw5-dev libssl-dev libegl1-mesa libncurses5
+# sudo apt-get install net-tools python libsdl1.2-dev xterm socat
+# sudo apt-get install icedtea-netx-common icedtea-netx
+```
+
 + Cách tìm kí tự trong 1 folder
   > grep -nrwI "chuỗi_cần_tìm" /đường/dẫn/thư/mục
 

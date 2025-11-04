@@ -96,6 +96,12 @@ $ sudo unmount /dev/sdb1
     + Address Start: Địa chỉ bắt đầu ta muốn map 1-1 tới địa chỉ vật lý
     + Size: Kích thước 
 ```
+
+​<p align="center">
+  <img src="Images/Screenshot_2.png" alt="hello" style="width:500px; height:auto;"/>   
+</p>
+
+
 + Vậy giờ ta sẽ đi xác định pin để cắm led vào
     + Ta chọn pin GPIO1_IO9 được show trên header trên mạch. IO này tương đương với sô integer number là 9
 
