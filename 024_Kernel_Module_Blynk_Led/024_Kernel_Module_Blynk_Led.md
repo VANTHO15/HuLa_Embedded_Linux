@@ -234,7 +234,7 @@ $ lsmod | grep hello
 + Blynk được led
 
 ## 📺 NOTE
-+ N/A
++ /home/bv_rzvt/share_folder_VM/bin/imx-yocto-bsp/build-xwayland/tmp/work-shared/mys-8mmx/kernel-source/Makefile
 
 ## 📌 Reference
 
