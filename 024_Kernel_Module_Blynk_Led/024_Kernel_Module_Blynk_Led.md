@@ -126,7 +126,7 @@ obj-m := led.o
 
 + File Makefile
 ```Makefile
-# KERNELDIR ?= /home/thonv12/yocto_imx/build-xwayland/tmp/work/mys_8mmx-poky-linux/linux-imx/5.4-r0/build
+# KERNELDIR ?= /home/bv_rzvt/imx-yocto-bsp/build-xwayland/tmp/work/mys_8mmx-poky-linux/linux-imx/5.4-r0/build
 KERNELDIR ?= /home/hulatho/hula/build/
 
 all:

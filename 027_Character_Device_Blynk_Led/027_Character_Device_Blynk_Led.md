@@ -238,7 +238,7 @@ static int __init thonv_driver_init(void)
 
 	base_addr = ioremap(GPIO_1_ADDR_BASE, GPIO_1_ADDR_SIZE);
 	base_addr_clk = ioremap(CCM_CCGRn_ADDR_BASE, CCM_CCGRn_ADDR_SIZE);
-	base_addr_mux_gpio1_io9 = ioremap(IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO05_BASE, IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO05_SIZE);
+	base_addr_mux_gpio1_io9 = ioremap(IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO09_BASE, IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO09_SIZE);
 
 	*(base_addr_clk + GPIO1_ENABLE_CLOCK_OFFSET / 4) |= CLK;
 	*(base_addr_clk + GPIO1_SET_CLOCK_OFFSET / 4) |= CLK;
@@ -301,8 +301,8 @@ MODULE_DESCRIPTION("character driver led");
 #define GPIO_1_ADDR_SIZE	      (0x3020FFFF - GPIO_1_ADDR_BASE)
 #define CCM_CCGRn_ADDR_SIZE       (0x3038FFFF - CCM_CCGRn_ADDR_BASE)
 
-#define IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO05_BASE    0x3033003C
-#define IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO05_SIZE    (0x30330040 - 0x3033003C)
+#define IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO09_BASE    0x3033003C
+#define IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO09_SIZE    (0x30330040 - 0x3033003C)
 
 #define LED     (1 << 9)   /* GPIO_1_IO9 */
 #define CLK     (0x00003333)
