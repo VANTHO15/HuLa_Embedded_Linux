@@ -275,6 +275,9 @@ For Debian-10 openjdk-8-jdk --- > default-jdk
 + Cách tìm kí tự trong 1 folder
   > grep -nrwI "chuỗi_cần_tìm" /đường/dẫn/thư/mục
 
++ BB_NUMBER_THREADS = "20"
++ PARALLEL_MAKE = "-j 20"
+
 ## 📌 Reference
 
 [1] MYS-8MMX-V2 Product Manual-V2.0.pdf
