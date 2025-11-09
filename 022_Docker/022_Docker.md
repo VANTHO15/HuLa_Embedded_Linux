@@ -20,6 +20,7 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
     - [2. Install docker](#2️⃣-install-docker)
     - [3. Tạo docker file](#3️⃣-tạo-docker-file)
     - [4. Chạy các command](#4️⃣-chạy-các-command)
+    - [5. Portainer ](#5️⃣-portainer)
 - [III. Conclusion](#✔️-conclusion)
 - [IV. Exercise](#💯-exercise)
 - [V. NOTE](#📺-note)
@@ -404,6 +405,47 @@ docker tag my_custom_image:latest <your_dockerhub_username>/my_custom_image:late
 docker push <your_dockerhub_username>/my_custom_image:latest
 ```
 
+
+### 5️⃣ Portainer
+***Portainer là gì?***
++ Portainer là công cụ quản lý Docker Containter miễn phí với kích thước gọn nhẹ và giao diện quản lý trực quan, đơn giản để triển khai cũng như sử dụng, cho phép người dùng dễ dàng quản lý Docker host hoặc Swarm cluster.
++ Portainer được chia làm 2 phiên bản là Community Edition (CE) và Business Edition (BE). Bảng CE là phiên bản miễn phí nhưng những tính năng nó cung cấp hoàn toàn đủ để chúng ta có thể sử dụng
+
+***Cách cài đặt Portainer***
++ Để cài đặt và sử dụng Portainer, VPS của bạn phải được cài đặt Docker và Docker Compose. Ở những phiên bản sau này, Docker Compose đã được tích hợp sẵn vào trong Docker. Sử dụng câu lệnh sau để đảm bảo Docker và Docker Compose đã được cài đặt:
+```bash
+docker --version # Kiểm tra Docker đã được cài chưa
+docker compose --version # Kiểm tra Docker Compose đã được cài chưa
+```
+
++ Nếu VPS đã được cài đặt đầy đủ docker và docker compose, tiến hành tạo volume để Portainer Server lưu trữ dữ liệu
+```bash
+docker volume create portainer_data
+```
+
++ Tiến hành download và cài đặt Portainer Server container:
+```bash
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+```
+
++ Đợi vài phút để Docker pull Potainer image về máy và cài đặt. Sau khi cài đặt xong, mở trình duyệt truy cập vào địa chỉ sau để thiết lập Portainer
+```bash
+$ docker start portainer
+$ ifconfig
+$ http://<IP-Address>:9000
+```
+
++ Khi truy cập Portainer lần đầu, hệ thống sẽ yêu cầu tạo mật khẩu cho tài khoản admin. Nhập mật khẩu của bạn (tối thiểu 12 ký tự) sau đó nhấn **Create User**
+
++ Giao diện sau khi đã tạo user thành công:
+
+<p align="center">
+  <img src="Images/Screenshot_3.png" alt="hello" style="width:500px; height:auto;"/>   
+</p>
+
++ Nhấn vào nút **Get Started** để tiến hành kết nối Portainer Server với thiết bị nó đang khởi chạy
+
+
 ## ✔️ Conclusion
 Ở bài này chúng ta đã biết các kiến thức về docker và thực hành xung quanh docker. Tiếp theo chúng ta cùng đi tìm hiểu lý thuyết về linux kernel nhé.
 
@@ -428,3 +470,5 @@ docker push <your_dockerhub_username>/my_custom_image:latest
 [6] https://docs.docker.com/install/linux/docker-ce/ubuntu
 
 [7] https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+
+[8] https://docs.portainer.io/start/install-ce/server/docker/linux 

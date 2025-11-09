@@ -47,6 +47,8 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 /proc/modules Các mô-đun kernel nào đang được load tại thời điểm này.
 ```
 
++ Chúng ta dùng hàm seq_printf để ghi thông ti vào proc file và dùng hàm proc_create để tạo procfile
+
 ***Create proc filesystem***
 + Bản thân tệp proc không có tác dụng gì cả nên điều cần thiết là ta triển khai cái ta mong muốn khi đọc ghi từ file đó
 + Proc file chỉ print ra 1 single page output được define bởi PAGE_SIZE in kernel.
