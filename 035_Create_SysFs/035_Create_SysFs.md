@@ -437,7 +437,7 @@ clean:
 ```
 
 ## ✔️ Conclusion
-Ở bài này chúng ta đã biết tạo ra SysFs. Tiếp theo chúng ta sẽ tìm hiểu về Device Tree nhé.
+Ở bài này chúng ta đã biết tạo ra SysFs. Tiếp theo chúng ta sẽ tìm hiểu về sử dụng ioremap để blynk led trên sysfs nhé.
 
 
 ## 💯 Exercise

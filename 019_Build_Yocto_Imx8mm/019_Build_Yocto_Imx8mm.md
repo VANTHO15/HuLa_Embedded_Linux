@@ -278,6 +278,41 @@ For Debian-10 openjdk-8-jdk --- > default-jdk
 + BB_NUMBER_THREADS = "20"
 + PARALLEL_MAKE = "-j 20"
 
+***Build on Docker Container***
++ vim /home/bv_rzvt/imx-yocto-bsp/sources/poky/scripts/lib/wic/filemap.py
+```py
+def get_block_size(file_obj):
+    """
+    Returns block size for file object 'file_obj'. Errors are indicated by the
+    'IOError' exception.
+    """
+    # Get the block size of the host file-system for the image file by calling
+    # the FIGETBSZ ioctl (number 2).
+#    try:
+#        binary_data = fcntl.ioctl(file_obj, 2, struct.pack('I', 0))
+#    except OSError:
+#        raise IOError("Unable to determine block size")
+#    bsize = struct.unpack('I', binary_data)[0]
+#    if not bsize:
+#        import os
+#        stat = os.fstat(file_obj.fileno())
+#        if hasattr(stat, 'st_blksize'):
+#            bsize = stat.st_blksize
+#        else:
+#            raise IOError("Unable to determine block size")
+#    return bsize
+    try:
+        stat = os.fstat(file_obj.fileno())
+        if hasattr(stat, 'st_blksize') and stat.st_blksize > 0:
+            return stat.st_blksize
+        else:
+            # fallback mặc định nếu hệ thống không cung cấp st_blksize
+            return 4096
+    except OSError:
+        raise IOError("Unable to determine block size")
+```
+![alt text](image.png)
+
 ## 📌 Reference
 
 [1] MYS-8MMX-V2 Product Manual-V2.0.pdf
