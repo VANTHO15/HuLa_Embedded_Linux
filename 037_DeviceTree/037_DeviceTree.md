@@ -4,7 +4,7 @@
 
 ### 1️⃣ Introduction
 
-+ Ở bài trước chúng ta đã suwr dungj sysfs vaf ioremap ddeer blynk led. Nếu các bạn chưa đọc thì xem link này nha [036_SysFs_Led_Ioremap.md](../036_SysFs_Led_Ioremap/036_SysFs_Led_Ioremap.md). Ở bài này chúng ta sẽ tìm hiểu về device tree nhé.
++ Ở bài trước chúng ta đã sử dụng sysfs vaf ioremap ddeer blynk led. Nếu các bạn chưa đọc thì xem link này nha [036_SysFs_Led_Ioremap.md](../036_SysFs_Led_Ioremap/036_SysFs_Led_Ioremap.md). Ở bài này chúng ta sẽ tìm hiểu về device tree nhé.
 
 ### 2️⃣ Summary
 
@@ -406,7 +406,7 @@ memory@0 {
     #pinctrl-names = "default";
     #pinctrl-0 = <&pinctrl_gpio_blue>;
     status = "okay";
-    gpioctr-gpios = <&gpio5 4 GPIO_ACTIVE_LOW>;
+    gpioctr-gpios = <&gpio3 16 GPIO_ACTIVE_LOW>;
   };
 };
 ```
@@ -631,7 +631,7 @@ $ gpiotest /dev/myir_gpioctr0 off
 ```
 
 ## ✔️ Conclusion
-Ở bài này chúng ta đã biết về device tree. Tiếp theo chúng ta sẽ tìm hiểu về Device Tree nhé.
+Ở bài này chúng ta đã biết về device tree. Tiếp theo chúng ta sẽ thực hành thêm về Device Tree nhé.
 
 
 ## 💯 Exercise
