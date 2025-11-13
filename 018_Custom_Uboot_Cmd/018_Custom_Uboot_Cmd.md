@@ -113,6 +113,8 @@ $ hula_cmd hulatho
 
 + Đầu tiên trên board Myir IMX8MM có Two LEDs (User LED – Blue, System indicator – Green) và 1 button user như ảnh trên. Tuy nhiên ta tìm không thấy pin trên docs nên ta sẽ sử dụng pin GPIO1_IO9 (9) được show trên header. Ta sẽ sử dụng led và cắm vào pin đó.  
 
++ Ngoài ra ta có thể dùng luôn led blue (D27), nó là GPIO5_IO4 = (5-1)*32 + 4 = 132
+
 + Khi đã vào uboot trong boot board ta có thể thực hiện nháy led bằng thao tác với gpio command. Làm theo hình bên dưới
 
 + Tính theo integer thì GPIO1_IO9 sẽ tương ứng với số 9
