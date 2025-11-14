@@ -1521,6 +1521,248 @@ install:
 	scp $(MODULE).ko root@192.168.1.115:
 ```
 
+***Ví dụ reboot***
++ File reboot_mod.c
+```c
+#include <linux/kernel.h>
+#include <linux/module.h>
+#include <linux/init.h>
+#include <linux/cdev.h>
+#include <linux/fs.h>
+#include <linux/device.h>
+#include <linux/io.h>
+#include <linux/reboot.h>
+#include <linux/delay.h>
+#include <linux/uaccess.h>
+#include <linux/string.h>
+
+#define MAGIC_NO		100
+#define SET_SHUT_CMD		_IOW(MAGIC_NO, 0, char*)
+#define SET_SHUT_TIME		_IOW(MAGIC_NO, 1, int)
+
+MODULE_AUTHOR("TUNG<tungnt58@fsoft.com.vn>");
+MODULE_LICENSE("GPL");
+MODULE_VERSION("0.1");
+
+static struct class *class_name;
+static struct device *device_name;
+static struct cdev my_cdev;
+static dev_t dev;
+
+static int dev_open(struct inode *, struct file *);
+static int dev_close(struct inode *, struct file *);
+static long dev_ioctl(struct file *, unsigned int, unsigned long);
+
+
+static const struct file_operations fops = {
+	.open = dev_open,
+	.release = dev_close,
+	.unlocked_ioctl = dev_ioctl,
+};
+
+
+static int dev_open(struct inode *inodep, struct file *filep)
+{
+	pr_info("open is called\n");
+	return 0;
+}
+
+static int dev_close(struct inode *inodep, struct file *filep)
+{
+	pr_info("close is called\n");
+	return 0;
+}
+
+static long dev_ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
+{
+	void __user *argp = (void __user *)arg;
+	char __user *value = argp;
+	char buf[10];
+	int get_val;
+
+	switch (cmd) {
+	case SET_SHUT_CMD:
+		sprintf(buf, "%s", value);
+		pr_info("from ioctl: get from user: %s\n", buf);
+		if (!strcmp(buf, "now")) {
+			msleep(20);
+			kernel_restart(NULL);
+		} else
+			pr_info("get wrong from user\n");
+		break;
+
+	case SET_SHUT_TIME:
+		get_user(get_val, value);
+		pr_info("from ioctl 2: get from user: %d\n", get_val);
+		msleep(get_val*1000);
+		kernel_restart(NULL);
+		break;
+
+	default:
+		return -ENOTTY;
+	}
+
+	return 0;
+}
+
+static int __init exam_init(void)
+{
+	int ret;
+
+	ret = alloc_chrdev_region(&dev, 0, 1, "reboot");
+	if (ret) {
+		pr_info("Can not register major number\n");
+		goto fail_reg;
+	}
+	pr_info("Register successfully major no is %d\n", MAJOR(dev));
+
+	cdev_init(&my_cdev, &fops);
+	my_cdev.owner = THIS_MODULE;
+	my_cdev.dev = dev;
+
+	ret = cdev_add(&my_cdev, dev, 1);
+
+	if (ret < 0) {
+		pr_info("cdev_add error\n");
+		return ret;
+	}
+
+	class_name = class_create(THIS_MODULE, "reboot");
+	if (IS_ERR(class_name)) {
+		pr_info("create class failed\n");
+		goto fail_reg;
+	}
+	pr_info("create successfully class\n");
+
+	device_name = device_create(class_name, NULL, dev, NULL, "reboot");
+	if (IS_ERR(device_name)) {
+		pr_info("Create device failed\n");
+		goto dev_fail;
+	}
+	pr_info("create device success\n");
+	return 0;
+dev_fail:
+	cdev_del(&my_cdev);
+	class_destroy(class_name);
+fail_reg:
+	return -ENODEV;
+
+}
+
+static void __exit exam_exit(void)
+{
+	pr_info("goodbye\n");
+	cdev_del(&my_cdev);
+	device_destroy(class_name, dev);
+	class_destroy(class_name);
+	unregister_chrdev_region(dev, 1);
+}
+
+module_init(exam_init);
+module_exit(exam_exit);
+```
+
++ File reboot.c
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
+#include <string.h>
+
+#define FILENAME	"/dev/reboot"
+
+#define MAGIC_NO                100
+#define SET_SHUT_CMD            _IOW(MAGIC_NO, 0, char*)
+#define SET_SHUT_TIME           _IOW(MAGIC_NO, 1, int)
+
+void help(void)
+{
+	printf("\033[33m------------------------------------------------\n\n");
+	printf("- usage:\n\n");
+	printf("-\t reboot -n now\n\n");
+	printf("-\t reboot -t <time>\n\n");
+	printf("-\t ex: reboot -t 2\n\n");
+	printf("---------------------------------------------------\033[0m\n");
+
+}
+
+int main(int argc, char *argv[])
+{
+	int option;
+	char *cmd_send = NULL;
+	int val_send = 0;
+	int fd;
+
+	if (argc == 1) {
+		printf("\033[31m!!!Need add options:\033[0m\n");
+		printf("\t./reboot -h for help\n");
+		exit(-1);
+	}
+
+	while ((option = getopt(argc, argv, "hn:t:")) != -1) {
+		switch (option) {
+		case 'h':
+			help();
+			exit(-1);
+		case 'n':
+			cmd_send = optarg;
+			printf("value of cmd_send is %s\n", cmd_send);
+			break;
+		case 't':
+			val_send = atoi(optarg);
+			break;
+		default:
+			help();
+			exit(-1);
+		}
+	}
+
+	printf("value of val_send is %d", val_send);
+
+	fd = open(FILENAME, O_RDWR);
+
+	if (fd < 0) {
+		perror("open\n");
+		exit(-1);
+	}
+	/*Send command to kernel*/
+	if (cmd_send == NULL && val_send != 0) {
+		printf("send val_send to kernel\n");
+		ioctl(fd, SET_SHUT_TIME, &val_send);
+	} else {
+		printf("send cmd_send to kernel\n");
+		ioctl(fd, SET_SHUT_CMD, cmd_send);
+	}
+
+	close(fd);
+	return 0;
+}
+```
+
++ File Makefile
+```c
+CC=$(CROSS_COMPILE)gcc
+KERN_DIR= /home/thonv12/yocto_imx/build-xwayland/tmp/work/mys_8mmx-poky-linux/linux-imx/5.4-r0/build
+#ARCH=arm64
+
+#CC=gcc
+obj-m:=reboot_mod.o
+
+#obj-m:=hello.o
+all:
+	make -C $(KERN_DIR) M=$(PWD) modules
+#	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+	$(CC) reboot.c -o reboot
+clean:
+	make -C $(KERN_DIR) M=$(PWD) clean
+#	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+	rm reboot
+```
+
 ## ✔️ Conclusion
 Ở bài này chúng ta đã biết cách tạo IOCTL, áp dụng vào kernel driver và điều khiển được led. Tiếp theo chúng ta sẽ đến bài multi device nhé, nghĩa là 1 driver nhưng điều khiển nhiều device.
 

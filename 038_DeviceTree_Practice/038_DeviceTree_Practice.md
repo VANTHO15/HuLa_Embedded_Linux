@@ -138,6 +138,405 @@ clean:
     make -C $(KERN_DIR) M=`pwd` modules clean
 ```
 
+***Bài 2 Get infor from device tree***
++ File get_info.c
+```c
+#include <linux/kernel.h>
+#include <linux/module.h>
+#include <linux/init.h>
+#include <linux/err.h>
+#include <linux/platform_device.h>
+#include <linux/of.h>
+
+#define DEV_NAME "foo_dtb_demo"
+
+static int foo_probe(struct platform_device *pdev);
+static int foo_remove(struct platform_device *pdev);
+static int foo_suspend(struct platform_device *pdev, pm_message_t state);
+static int foo_resume(struct platform_device *pdev);
+
+static struct of_device_id foo_match_table[] = {
+	{
+		.compatible = "fsoft,foo_dtb_demo",
+	},
+	{},
+};
+MODULE_DEVICE_TABLE(of, foo_match_table);
+
+static struct platform_driver foo_driver = {
+	.probe   = foo_probe,
+	.remove  = foo_remove,
+	.suspend = foo_suspend,
+	.resume  = foo_resume,
+	.driver = {
+		.name = "fsoft,foo_dtb_demo",
+		.owner = THIS_MODULE,
+		.of_match_table = foo_match_table,
+	},
+};
+
+static int foo_probe(struct platform_device *pdev)
+{
+	int ret;
+	const char *str;
+	int val;
+	unsigned int arr_val[3];
+
+	printk(KERN_INFO DEV_NAME ": %s entry\n", __func__);
+
+	/*Get infomation from device tree*/
+	if (pdev->dev.of_node) {
+		/*Get string property*/
+		ret = of_property_read_string(pdev->dev.of_node, "string_property", &str);
+		if (ret) {
+			printk(KERN_INFO DEV_NAME ":cannot get string_property");
+		} else {
+			printk(KERN_INFO DEV_NAME ":string_property: %s\n", str);
+		}
+
+
+		/* get string list property*/
+		ret = of_property_read_string_index(pdev->dev.of_node, "string_list_property", 1 , &str);
+		if (ret) {
+			printk(KERN_INFO DEV_NAME ":cannot get property");
+		} else {
+			printk(KERN_INFO DEV_NAME ":string_list_property (index 1): %s\n", str);
+		}
+
+
+		/*Get byte data*/
+		ret = of_property_read_u32(pdev->dev.of_node, "u32_data", &val);
+		if (ret) {
+			printk(KERN_INFO DEV_NAME ":cannot get u32_data");
+		} else {
+			printk(KERN_INFO DEV_NAME ":u32_data: %d\n", val);
+		}
+
+
+		/*Get u32_data_array property*/
+		ret = of_property_read_u32_array(pdev->dev.of_node, "u32_data_array", &arr_val[0], 3);
+		if (ret) {
+			printk(KERN_INFO DEV_NAME ":cannot get u32_data_array");
+		} else {
+			printk(KERN_INFO DEV_NAME ":u32_data_array (index 2): %d\n", arr_val[2]);
+		}
+
+
+		/*Get string property*/
+		ret = of_property_read_u32(pdev->dev.of_node, "led_gpio", &val);
+		if (ret) {
+			printk(KERN_INFO DEV_NAME ":cannot get led_gpio");
+		} else {
+			printk(KERN_INFO DEV_NAME ":led_gpio: %d\n", val);
+		}
+
+		/*Get string property*/
+		ret = of_property_read_u32(pdev->dev.of_node, "led_freq", &val);
+		if (ret) {
+			printk(KERN_INFO DEV_NAME ":cannot get led_freq");
+		} else {
+			printk(KERN_INFO DEV_NAME ":led_freq: %d\n", val);
+		}
+	}
+
+	return ret;
+}
+
+static int foo_remove(struct platform_device *pdev)
+{
+	printk(KERN_INFO DEV_NAME ": %s entry\n", __func__);
+	return 0;
+}
+
+static int foo_suspend(struct platform_device *pdev, pm_message_t state)
+{
+
+	return 0;
+}
+
+static int foo_resume(struct platform_device *pdev)
+{
+	return 0;
+}
+
+
+static int __init foo_init(void)
+{
+	int ret;
+
+	/* register the platform driver */
+	ret = platform_driver_register(&foo_driver);
+	if (ret < 0) {
+		printk(KERN_INFO DEV_NAME ": unable to register platform driver\n");
+		goto err_platform_driver_register;
+	}
+
+	printk(KERN_INFO DEV_NAME ": driver initalized\n");
+	return 0;
+
+err_platform_driver_register:
+	return ret;
+}
+
+static void __exit foo_exit(void)
+{
+	platform_driver_unregister(&foo_driver);
+	printk(KERN_INFO DEV_NAME ": driver exited\n");
+}
+
+module_init(foo_init);
+module_exit(foo_exit);
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("HuLaTho");
+MODULE_DESCRIPTION("dtb binding demo");
+```
+
++ File device tree node
+```xml
+foo_device {
+	compatible = "fsoft,foo_dtb_demo"
+	status = "okay"
+
+        string_property = "A string";
+        string_list_property = "first string", "second string";
+        u32_data = <1234>;
+        u32_data_array = <1 2 3 4>; /* each number (cell) is a uint32 */
+
+        led_gpio = <23>;
+        led_freq = <100>; /*HZ*/
+    };
+};
+```
+
++ File Makefile
+```Makefile
+obj-m += get_info.o
+
+KERNELDIR = /home/bv_rzvt/hula/imx-yocto-bsp/build-xwayland/tmp/work/mys_8mmx-poky-linux/linux-imx/5.4-r0/build
+
+all:
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) M=$(PWD) modules
+clean:
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) M=$(PWD) clean
+```
+
+***Bài 3 Led Device Tree readl writel***
+
++ File hula.dtsi
+```xml
+led_module: led@44e07000 {
+		compatible = "led, module";
+		reg = <0x44e07000 0x1000>;
+		status = "okay";
+};
+```
+
++ File Makefile
+```Makefile
+obj-m += led_module.o
+
+KERNELDIR = /home/bv_rzvt/hula/imx-yocto-bsp/build-xwayland/tmp/work/mys_8mmx-poky-linux/linux-imx/5.4-r0/build
+
+all:
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) M=$(PWD) modules
+clean:
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) M=$(PWD) clean
+```
+
++ File led_module.c
+```c
+#include <linux/module.h>
+#include <linux/kernel.h>
+#include <linux/io.h>
+#include <linux/platform_device.h>
+#include "led_module.h"
+
+#define AUTHOR  "tho"
+#define DESC    "This module is led"
+
+static int led_probe(struct platform_device *pdev)
+{
+	struct resource *res;
+	uint32_t val;
+	uint32_t __iomem *base_addr;
+
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	if(!res)
+		return -ENOMEM;
+	
+	base_addr = ioremap(res->start, res->end - res->start);
+	if(!base_addr)
+		return -ENOMEM;
+	
+	val = readl(base_addr + GPIO_OE_OFFSET);
+	val &= ~(LED);
+	writel(val, base_addr + GPIO_OE_OFFSET);
+	
+	val = readl(base_addr + GPIO_SETDATAOUT_OFFSET);
+	val |= LED;
+	writel(val, base_addr + GPIO_SETDATAOUT_OFFSET);
+
+	platform_set_drvdata(pdev, base_addr);
+	
+	printk(KERN_INFO "tho: %s\t%d\n", __func__, __LINE__);
+	return 0;
+}
+
+static int led_remove(struct platform_device *pdev)
+{
+	uint32_t val;
+	uint32_t __iomem *base_addr = platform_get_drvdata(pdev);
+
+	val = readl(base_addr + GPIO_CLEARDATAOUT_OFFSET);
+	val |= LED;
+	writel(val, base_addr + GPIO_CLEARDATAOUT_OFFSET);
+
+	iounmap(base_addr);
+	return 0;
+}
+
+static struct of_device_id led_of_id[] = {
+	{.compatible = "led, module", },
+	{ }
+};
+
+static struct platform_driver led_driver = {
+	.probe = led_probe,
+	.remove = led_remove,
+	.driver = {
+		.name = "led, module",
+		.of_match_table = led_of_id,
+	},
+};
+
+module_platform_driver(led_driver);
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR(AUTHOR);
+MODULE_DESCRIPTION(DESC);
+```
+
++ File led_module.h
+```h
+#ifndef __LED_MODULE_H__
+#define __LED_MODULE_H__
+
+#define GPIO_ADDR_BASE  0x44E07000
+#define ADDR_SIZE       (0x44E07FFF - 0x44E07000)
+#define GPIO_SETDATAOUT_OFFSET          0x194
+#define GPIO_CLEARDATAOUT_OFFSET        0x190
+#define GPIO_OE_OFFSET                  0x134
+#define LED                             (1 << 31)
+
+#endif
+```
+
+***Bài 4 Led Device Tree ioremap***
++ File hula.dtsi
+```xml
+led_module: led@44e07000 {
+		compatible = "led, module";
+		reg = <0x44e07000 0x1000>;
+		status = "okay";
+};
+```
+
++ File Makefile
+```Makefile
+obj-m += mLED.o
+
+KERNELDIR = /home/bv_rzvt/hula/imx-yocto-bsp/build-xwayland/tmp/work/mys_8mmx-poky-linux/linux-imx/5.4-r0/build
+
+all:
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) M=$(PWD) modules
+clean:
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) M=$(PWD) clean
+```
+
++ FIle mLED.c
+```c
+#include <linux/module.h>
+#include <linux/kernel.h>
+#include <linux/io.h>
+#include <linux/platform_device.h>
+#include <linux/of.h>
+#include "mLED.h"
+
+#define DRIVER_AUTHOR "ThoNV12 xxxxxxxx@gmail.com"
+#define DRIVER_DESC   "LED blinking"
+
+static int led_probe(struct platform_device *pdev)
+{
+	struct resource *res;
+	uint32_t val;
+	uint32_t __iomem *base_addr;
+
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	if(!res)
+		return -ENOMEM;
+	
+	base_addr = ioremap(res->start, res->end - res->start);
+	if(!base_addr)
+		return -ENOMEM;
+	
+	*(base_addr + GPIO_OE_OFFSET / 4) &= ~GPIO_0_31;
+	*(base_addr + GPIO_SETDATAOUT_OFFSET / 4) |= GPIO_0_31;
+
+	platform_set_drvdata(pdev, base_addr);
+	
+	pr_info("ThoNV12: %s\t%d\n", __func__, __LINE__);
+	return 0;
+}
+
+static int led_remove(struct platform_device *pdev)
+{
+	uint32_t val;
+	uint32_t __iomem *base_addr = platform_get_drvdata(pdev);
+
+	*(base_addr + GPIO_CLEARDATAOUT_OFFSET / 4) |= GPIO_0_31; 
+
+	iounmap(base_addr);
+	return 0;
+}
+
+static const struct of_device_id led_of_id[] = {
+	{ .compatible = "led, module", },
+	{ /* sentinel */ }
+};
+
+static struct platform_driver led_driver = {
+	.probe = led_probe,
+	.remove = led_remove,
+	.driver = {
+		.name = "led, module",
+		.of_match_table = led_of_id,
+	},
+};
+module_platform_driver(led_driver);
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR(DRIVER_AUTHOR);
+MODULE_DESCRIPTION(DRIVER_DESC); 
+MODULE_VERSION("1.0"); 
+```
+
++ File mLED.h
+```h
+#ifndef __LED_MODULE_H__
+#define __LED_MODULE_H__
+
+#define GPIO_0_ADDR_BASE    0x44E07000
+#define GPIO_0_ADDR_SIZE	(0x44E07FFF - 0x44E07000)
+#define GPIO_SETDATAOUT_OFFSET		0x194
+#define GPIO_CLEARDATAOUT_OFFSET	0x190
+#define GPIO_OE_OFFSET			    0x134
+
+#define GPIO_0_31   (1 << 31)
+
+#endif
+```
+
 ## ✔️ Conclusion
 Ở bài này chúng ta đã biết về device tree. Tiếp theo chúng ta sẽ thực hành thêm về Device Tree nhé.
 

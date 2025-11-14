@@ -1549,6 +1549,381 @@ MODULE_AUTHOR("hulatho");
 MODULE_DESCRIPTION("character driver");
 ```
 
+***Ví dụ tham khảo***
+```c
+B1: Build charDev bang cach su dung lenh make.
+B2: Xem major trong log bang lenh dmesg
+B3: Chinh sua file loadcript.sh de phu hop voi major trong he thong
+B4: Build va chay chuong trinh test kiem tra ket qua
+```
+
++ FIle charDev.c
+```c
+#include <linux/module.h>
+#include <linux/kernel.h>
+#include <linux/fs.h> /*this is the file structure, file open read close */
+#include <linux/cdev.h> /* this is for character device, makes cdev avilable*/
+#include <linux/semaphore.h> /* this is for the semaphore*/
+#include <linux/uaccess.h> /*this is for copy_user vice vers*/
+
+int chardev_init(void);
+void chardev_exit(void);
+static int device_open(struct inode *, struct file *);
+static int device_close(struct inode *, struct file *);
+static ssize_t device_read(struct file *, char *, size_t, loff_t *);
+static ssize_t device_write(struct file *, const char *, size_t, loff_t *);
+static loff_t device_lseek(struct file *file, loff_t offset, int orig);
+
+/*new code*/
+#define BUFFER_SIZE 1024
+static char device_buffer[BUFFER_SIZE];
+struct semaphore sem;
+struct cdev *mcdev; 	/* this is the name of my char driver that i will be registering*/
+int major_number;       /* will store the major number extracted by dev_t*/
+int ret;                /* used to return values*/
+dev_t dev_num; 		/* will hold the major number that the kernel gives*/
+
+#define DEVICENAME "charDev"
+
+/* inode reffers to the actual file on disk*/
+static int device_open(struct inode *inode, struct file *filp) 
+{
+ 	if(down_interruptible(&sem) != 0) 
+ 	{
+        		printk(KERN_ALERT "charDev : the device has been opened by some other device, unable to open lock\n");
+        		return -1;
+    }
+    //buff_rptr = buff_wptr = device_buffer;
+    printk(KERN_INFO "charDev : device opened succesfully\n");
+   	return 0;
+}
+
+static ssize_t device_read(struct file *fp, char *buff, size_t length, loff_t *ppos) 
+{
+	int maxbytes; 		/*maximum bytes that can be read from ppos to BUFFER_SIZE*/
+   	int bytes_to_read; 	/* gives the number of bytes to read*/
+        int bytes_read;		/*number of bytes actually read*/
+        maxbytes = BUFFER_SIZE - *ppos;
+        
+        if(maxbytes > length) 
+   		bytes_to_read = length;
+   	else
+   	    bytes_to_read = maxbytes;
+   	if(bytes_to_read == 0)
+       	printk(KERN_INFO "charDev : Reached the end of the device\n");
+   	 
+	bytes_read = bytes_to_read - copy_to_user(buff, device_buffer + *ppos, bytes_to_read);
+   	printk(KERN_INFO "charDev : device has been read %d\n",bytes_read);
+    	
+   	*ppos += bytes_read;
+   	printk(KERN_INFO "charDev : device has been read\n");
+   	
+   	return bytes_read;
+}
+
+static ssize_t device_write(struct file *fp, const char *buff, size_t length, loff_t *ppos) 
+{
+   	int maxbytes; 		/*maximum bytes that can be read from ppos to BUFFER_SIZE*/
+   	int bytes_to_write; 	/* gives the number of bytes to write*/
+   	int bytes_writen;	/*number of bytes actually writen*/
+   	maxbytes = BUFFER_SIZE - *ppos;
+   	if(maxbytes > length) 
+    	bytes_to_write = length;
+   	else
+   		bytes_to_write = maxbytes;
+   
+   	bytes_writen = bytes_to_write - copy_from_user(device_buffer + *ppos, buff, bytes_to_write);
+
+   	printk(KERN_INFO "charDev : device has been written %d\n",bytes_writen);
+   	
+        *ppos += bytes_writen;
+   	printk(KERN_INFO "charDev : device has been written\n");
+   	
+        return bytes_writen;
+}
+
+static loff_t device_lseek(struct file *file, loff_t offset, int orig) 
+{
+    	loff_t new_pos = 0;
+    	printk(KERN_INFO "charDev : lseek function in work\n");
+    	switch(orig) 
+    	{
+        		case 0 : /*seek set*/
+            	new_pos = offset;
+            	break;
+        	case 1 : 	/*seek cur*/
+            	new_pos = file->f_pos + offset;
+            	break;
+        	case 2 : 	/*seek end*/
+           		 new_pos = BUFFER_SIZE - offset;
+            break;
+    	}
+    	if(new_pos > BUFFER_SIZE)
+        		new_pos = BUFFER_SIZE;
+    	if(new_pos < 0)
+        		new_pos = 0;
+    	file->f_pos = new_pos;
+    	return new_pos;
+}
+
+static int device_close(struct inode *inode, struct file *filp) 
+{
+    	up(&sem);
+    	printk(KERN_INFO "charDev : device has been closed\n");
+    	return ret;
+}
+
+struct file_operations fops = 
+{ /* these are the file operations provided by our driver */
+    	.owner = THIS_MODULE, 	   /*prevents unloading when operations are in use*/
+    	.open = device_open,       /*to open the device*/
+    	.write = device_write, 	   /*to write to the device*/
+    	.read = device_read,       /*to read the device*/
+    	.release = device_close,   /*to close the device*/
+    	.llseek = device_lseek
+};
+
+
+int chardev_init(void) 
+{
+   	 /* we will get the major number dynamically this is recommended please read ldd3*/
+   	 ret = alloc_chrdev_region(&dev_num,0,1,DEVICENAME);
+   	 if(ret < 0) {
+       	        printk(KERN_ALERT " charDev : failed to allocate major number\n");
+       	        return ret;
+        } else
+   		printk(KERN_INFO " charDev : mjor number allocated succesful\n");
+   	
+        major_number = MAJOR(dev_num);
+   	printk(KERN_INFO "charDev : major number of our device is %d\n",major_number);
+   	printk(KERN_INFO "charDev : to use mknod /dev/%s c %d 0\n",DEVICENAME,major_number);
+   	
+   	mcdev = cdev_alloc(); /*create, allocate and initialize our cdev structure*/
+   	mcdev->ops = &fops;   /*fops stand for our file operations*/
+   	mcdev->owner = THIS_MODULE;
+
+   	/*we have created and initialized our cdev structure now we need to add it to the kernel*/
+   	ret = cdev_add(mcdev,dev_num,1);
+
+   	if(ret < 0){
+   		printk(KERN_ALERT "charDev : device adding to the kerknel failed\n");
+       	        return ret;
+   	} else
+   	  	printk(KERN_INFO "charDev : device additin to the kernel succesful\n");
+    	
+        sema_init(&sem,1);  /* initial value to one*/
+
+   	return 0;
+}
+
+void chardev_exit(void)
+{
+        cdev_del(mcdev);    /*removing the structure that we added previously*/
+        printk(KERN_INFO " charDev : removed the mcdev from kernel\n");
+
+        unregister_chrdev_region(dev_num,1);
+   	printk(KERN_INFO  " charDev : unregistered the device numbers\n");
+   	printk(KERN_ALERT " charDev : character driver is exiting\n");
+}
+
+MODULE_AUTHOR("hula");
+MODULE_DESCRIPTION("A BASIC CHAR DRIVER");
+
+
+module_init(chardev_init);
+module_exit(chardev_exit);
+```
+
++ FIle Makefile
+```Makefile
+obj-m   := charDev.o
+
+# Option build for KIT
+export ARCH=arm64
+export export CROSS_COMPILE=aarch64-linux-gnu-
+
+#KERNELDIR ?= /lib/modules/$(shell uname -r)/build
+
+KERNELDIR ?= /home/thonv12/yocto_imx/build-xwayland/tmp/work/mys_8mmx-poky-linux/linux-imx/5.4-r0/build
+PWD       := $(shell pwd)
+
+all:
+        $(MAKE) -C $(KERNELDIR) M=$(PWD)
+clean:
+        rm -rf *.o *~ core .depend .*.cmd *.ko *.mod.c .tmp_versions *.symvers *.order
+```
+
++ File test_charDev_user_space.c
+```c
+#include <stdio.h>
+#include <fcntl.h>
+#include <string.h>
+#include <malloc.h>
+
+#define DEVICE "/dev/charDev"
+
+int debug = 1, fd = 0;
+// Test
+int ppos = 0;
+
+int write_device() 
+{
+        int write_length = 0;
+        ssize_t ret;
+        char *data = (char *)malloc(1024 * sizeof(char));
+        
+        printf("please enter the data to write into device\n");
+        scanf(" %[^\n]",data); /* a space added after"so that it reads white space, %[^\n] is 	addeed so that it takes input until new line*/
+        write_length = strlen(data);
+        if(debug)
+             printf("the length of dat written = %d\n",write_length);
+        ret = write(fd, data, write_length, &ppos);
+        if(ret == -1)
+            printf("writting failed\n");
+        else
+            printf("writting success\n");
+        if(debug)fflush(stdout);/*not to miss any log*/
+    	free(data);
+        return 0;
+}
+
+int read_device() {
+    int read_length = 0;
+    ssize_t ret;
+    char *data = (char *)malloc(1024 * sizeof(char));
+    
+    printf("enter the length of the buffer to read\n");
+    scanf("%d",&read_length);
+    
+    if(debug)
+        printf("the read length selected is %d\n",read_length,&ppos);
+    memset(data,0,sizeof(data));
+    data[0] = '\0';
+    ret = read(fd,data,read_length,&ppos);
+    printf("DEVICE_READ : %s\n",data);
+    if(ret == -1)
+        printf("reading failed\n");
+    else
+        printf("reading success\n");
+    if(debug)
+        fflush(stdout);/*not to miss any log*/
+    free(data);
+    return 0;
+}
+
+int lseek_device() 
+{
+        int lseek_offset = 0,seek_value = 0;
+        int counter = 0; /* to check if function called multiple times or loop*/
+        counter++;
+        printf("counter value = %d\n",counter);
+        printf("enter the seek offset\n");
+        scanf("%d",&lseek_offset);
+        if(debug) 
+            printf("seek_offset selected is %d\n",lseek_offset);
+        printf("1 for SEEK_SET, 2 for SEEK_CUR and 3 for SEEK_END\n");
+        scanf("%d", &seek_value);
+        printf("seek value = %d\n", seek_value);
+        switch(seek_value) {
+            case 1: lseek(fd,lseek_offset,SEEK_SET);
+                return 0;
+                break;  
+            case 2: lseek(fd,lseek_offset,SEEK_CUR);
+                return 0;
+                break;          
+            case 3: lseek(fd,lseek_offset,SEEK_END);
+                return 0;
+                break;  
+            default : 
+                printf("unknown  option selected, please enter right one\n");
+                break;  
+    }
+        if(debug)
+            fflush(stdout);/*not to miss any log*/
+        return 0;
+}
+
+int lseek_write() 
+{
+    lseek_device();
+    write_device();
+	return 0;
+}
+
+int lseek_read() 
+{
+    lseek_device();
+    read_device();
+	return 0;
+}
+
+int main()
+{
+    int value = 0;
+    if(access(DEVICE, F_OK) == -1) {
+        printf("module %s not loaded\n",DEVICE);
+        return 0;
+    }
+    else
+        printf("module %s loaded, will be used\n",DEVICE);
+
+        while(1)
+        {
+            printf("please enter:\n\
+                    \t 1 to write\n\
+                    \t 2 to read\n\
+                    \t 3 to lseek and write\n\
+                    \t 4 to lseek and read\n");
+        scanf("%d",&value);
+        switch(value) {
+            case 1 :printf("write option selected\n");
+                fd = open(DEVICE, O_RDWR);
+                write_device();
+                close(fd); /*closing the device*/
+                break;
+            case 2 :printf("read option selected\n"); 
+            /* dont know why but i am suppoesed to open it for writing and close it, i cant keep  open and read.
+            its not working, need to sort out why is that so */
+                fd = open(DEVICE, O_RDWR);
+                read_device();
+                close(fd); /*closing the device*/
+                break;
+            case 3 :printf("lseek  option selected\n");
+                fd = open(DEVICE, O_RDWR);
+                lseek_write();
+                close(fd); /*closing the device*/
+                break;  
+            case 4 :printf("lseek  option selected\n");
+                fd = open(DEVICE, O_RDWR);
+                lseek_read();   
+                close(fd); /*closing the device*/
+                break;
+                default : printf("unknown  option selected, please enter right one\n");
+            break;
+        }
+    }
+    return 0;
+}
+```
+
++ File loadcript.sh
+```sh
+#!/bin/sh
+
+sudo insmod charDev.ko
+# can thay doi major dua vao log de phu hop voi thiet bi
+sudo mknod /dev/charDev c 249 0
+sudo chmod 777 /dev/charDev
+```
+
++ File unLoadCript.sh
+```sh
+#!/bin/sh
+
+sudo rmmod charDev
+sudo rm /dev/charDev
+```
+
 ## ✔️ Conclusion
 Ở bài này chúng ta đã biết cách tạo ra 1 Character Device Driver file. Tiếp theo chúng ta sẽ áp dụng và có thể nháy led nhé.
 
