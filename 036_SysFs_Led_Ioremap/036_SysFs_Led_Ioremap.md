@@ -23,7 +23,9 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 ## 👉 Contents
 
 ### 1️⃣ Thực hành
-***Ta tạo ra 3 file là led.c led.h và Makefile***
+
+***Bài 1: Led IOREMAP Ta tạo ra 3 file là led.c led.h và Makefile***
+
 + File led.c
 ```c
 /******************************************************************************
@@ -262,7 +264,124 @@ all:
 	
 clean:
 	$(MAKE) -C $(KERNELDIR) M=$(PWD) clean
- 
+```
+
+***Bài 2: Button IOREMAP Ta tạo ra 3 file là button.c button.h và Makefile***
++ File button.c
+```c
+#include <linux/module.h>	 /* This module defines functions such as module_init/module_exit */
+#include <linux/gpio.h>		 /* For Legacy integer based GPIO */
+#include <linux/interrupt.h> /* For IRQ */
+#include <linux/delay.h>	 /* */
+#include "button.h"
+
+#define DRIVER_AUTHOR "thonv thonv@gmail.com"
+#define DRIVER_DESC "Control LED with button"
+
+static int irq;
+uint32_t __iomem *base_addr;
+volatile int32_t state;
+
+static irqreturn_t btn_pushed_irq_handler(int irq, void *dev_id)
+{
+	state = gpio_get_value(LED);
+	if (state == 0)
+	{
+		*(base_addr + GPIO_SETDATAOUT_OFFSET / 4) |= (1 << LED);
+		state = 1;
+	}
+	else
+	{
+		*(base_addr + GPIO_CLEARDATAOUT_OFFSET / 4) |= (1 << LED);
+		state = 0;
+	}
+	pr_info("BTN interrupt - LED state is: %d\n", state);
+	return IRQ_HANDLED;
+}
+
+static int __init btn_init(void)
+{
+	uint8_t retval;
+
+	/* Config LED as output mode*/
+	base_addr = ioremap(GPIO_0_ADDR_BASE, GPIO_0_ADDR_SIZE);
+	if (!base_addr)
+		return -ENOMEM;
+
+	*(base_addr + GPIO_OE_OFFSET / 4) &= ~(1 << LED);
+	*(base_addr + GPIO_SETDATAOUT_OFFSET / 4) |= (1 << LED);
+
+	/* Config BTN as input mode */
+	*(base_addr + GPIO_OE_OFFSET / 4) &= (1 << BTN);
+	*(base_addr + DEBOUNCEENABLE / 4) &= (1 << BTN);
+	*(base_addr + GPIO_DEBOUNCINGTIME / 4) &= DEBOUNCING_VALUE;
+
+	irq = gpio_to_irq(BTN);
+	retval = request_threaded_irq(irq, NULL,
+								  btn_pushed_irq_handler,
+								  IRQF_TRIGGER_LOW | IRQF_ONESHOT,
+								  "BTN-sample", NULL);
+
+	pr_info("Hello! Initizliaze successfully!\n");
+	return 0;
+}
+
+static void __exit btn_exit(void)
+{
+	*(base_addr + GPIO_CLEARDATAOUT_OFFSET / 4) |= (1 << LED);
+	free_irq(irq, NULL);
+	iounmap(base_addr);
+
+	pr_info("Good bye!!!\n");
+}
+
+module_init(btn_init);
+module_exit(btn_exit);
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR(DRIVER_AUTHOR);
+MODULE_DESCRIPTION(DRIVER_DESC);
+MODULE_VERSION("1.0");
+```
+
++ File button.h
+```h
+#ifndef __BUTTON_H__
+#define __BUTTON_H__
+
+/* GPIO address - size */
+#define GPIO_0_ADDR_BASE    0x44E07000
+#define GPIO_0_ADDR_SIZE	(0x44E07FFF - 0x44E07000)
+
+/* Registers */
+#define GPIO_OE_OFFSET			    0x134
+#define GPIO_DATAOUT                0x13C
+#define DEBOUNCEENABLE              0x150
+#define GPIO_DEBOUNCINGTIME         0x154
+#define GPIO_SETDATAOUT_OFFSET		0x194
+#define GPIO_CLEARDATAOUT_OFFSET	0x190
+
+/* GPIO Pin */
+#define BTN     14       // P9_26 <=> GPIO_0_26 BUTTON
+#define LED     31       // P9_1  <=> GPIO_0_31 LED
+#define DEBOUNCING_VALUE    255
+
+#endif  /*__BUTTON_H__ */
+```
+
++ File Makefile
+```Makefile
+EXTRA_CFLAGS = -Wall
+
+obj-m = button.o
+
+KERNELDIR ?= /home/thonv12/yocto_imx/build-xwayland/tmp/work/mys_8mmx-poky-linux/linux-imx/5.4-r0/build
+
+all:
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
+	
+clean:
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) clean
 ```
 
 ## ✔️ Conclusion

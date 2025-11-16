@@ -297,6 +297,7 @@ clean:
 ```
 
 ***Ví dụ 2: Button Integer***
+
 + File button_interrupt.c
 ```c
 #include <linux/init.h>

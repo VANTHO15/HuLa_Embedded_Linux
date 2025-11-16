@@ -14,7 +14,8 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
     - [1. Introduction](#1️⃣-introduction)
     - [2. Summary](#2️⃣-summary)
 - [II. Contents](#👉-contents)
-    - [1. Thực hành](#1️⃣-thực-hành)
+    - [1. Lý thuyết](#1️⃣-lý-thuyết)
+    - [2. Thực hành](#2️⃣-thực-hành)
 - [III. Conclusion](#✔️-conclusion)
 - [IV. Exercise](#💯-exercise)
 - [V. NOTE](#📺-note)
@@ -22,10 +23,60 @@ Nội dung của bài viết gồm có những phần sau nhé 📢📢📢:
 
 ## 👉 Contents
 
-### 1️⃣ Thực hành
+### 1️⃣ Lý thuyết
++ Nội dung của bài thực hành là xử lý các GPIO của phần cứng thông qua giao diện Sysfs
++ Thu thập và loại bỏ GPIO, con_id là "imx"
+
+​<p align="center">
+  <img src="Images/Screenshot_1.png" alt="hello" style="width:500px; height:auto;"/>   
+</p>
+
++ Thay vì dung mấy hàm bên trên thì ta dung hàm ở dưới vì liên quan đến quản lý resource 
+
+​<p align="center">
+  <img src="Images/Screenshot_2.png" alt="hello" style="width:1000px; height:auto;"/>   
+</p>
+
++ Con_id = imx
+
+​<p align="center">
+  <img src="Images/Screenshot_3.png" alt="hello" style="width:1000px; height:auto;"/>   
+</p>
+
++ Hàm dưới để lấy từng thằng 1 trong led-gpios
+
+​<p align="center">
+  <img src="Images/Screenshot_4.png" alt="hello" style="width:1000px; height:auto;"/>   
+</p>
+
+***GPIOD***
++ Trong đường dẫn include/linux/consumer.h 
+
+​<p align="center">
+  <img src="Images/Screenshot_5.png" alt="hello" style="width:1000px; height:auto;"/>   
+</p>
+
++ Configuring direction and flags 
+
+​<p align="center">
+  <img src="Images/Screenshot_6.png" alt="hello" style="width:1000px; height:auto;"/>   
+</p>
+
++ Get and set 
+
+​<p align="center">
+  <img src="Images/Screenshot_7.png" alt="hello" style="width:1000px; height:auto;"/>   
+</p>
+
++ Accessing GPIO value from atomic context 
+
+​<p align="center">
+  <img src="Images/Screenshot_8.png" alt="hello" style="width:1000px; height:auto;"/>   
+</p>
+
+### 2️⃣ Thực hành
 + File dtsi
 ```xml
-
 / {
     imx_gpio_devs {
 	  
@@ -353,6 +404,9 @@ all:
 clean:
     make -C $(KERN_DIR) M=`pwd` modules clean
 ```
+
+
++ cd /sys/class/imx_gpios
 
 ## ✔️ Conclusion
 Ở bài này chúng ta đã biết về sự kết hợp giữa Gpio SysFs và DeviceTree. Tiếp theo chúng ta sẽ tìm hiểu về DeviceTree Overlay nhé.
